@@ -1,0 +1,74 @@
+<!-- <p-lightbox type="content">
+    <a href='#'>Click</a>
+
+    <iframe width="100%" height="200" src="https://www.youtube.com/embed/BmolAqIlVFk" frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</p-lightbox> -->
+<div class="ContentWrap">
+    <div class="PackSection">
+        <h3>{{data.title}}</h3>
+        <ul>
+            <li>
+                <div class="PackSectionBox d-flex align-items-center">
+                    <h4>@{{profile.profile_url}}</h4>
+                    <span><img [src]="profile.profile_picture" /></span>
+                    <button class="btn btn-primary" (click)="downloadFileExample()">Downlload Zip</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <section class="view-download">
+
+        <div class="mb-3 UploadMedia ">
+            <h3>Preview Media</h3>
+            <div class="d-flex">
+                <div *ngIf="media.image" class="d-flex">
+                    <div class="MultipleImages" *ngFor="let img of media.image">
+
+                        <img height="200px" width="160px" (click)="open(postImages,media)" [src]="img">
+                    </div>
+                    <div class="d-flex" *ngIf="media.video">
+                        <div class="MultipleImages ThumbMultipleVideo" *ngFor="let img of media.video">
+
+                            <video controls height="100px" (click)="open(postImages,media)" width="200px">
+                                <source [src]="img">
+                            </video>
+                        </div>
+                    </div>
+                    <div *ngIf="submitted">
+                        <div class="text-danger" *ngIf="postRequired"> This field is
+                            required.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<!-- Display large Image -->
+<ng-template #postImages>
+    <div class="modal-header">
+        <h2>Media</h2>
+        <button class="close"><img src="assets/CloseBlue.svg" (click)="modalRef.hide()" alt="" /></button>
+    </div>
+    <div class="modal-body">
+        <carousel [interval]="false">
+            <div *ngIf="mediaImages.image">
+                <slide *ngFor="let img of mediaImages.image">
+                    <img [src]="img" alt="first slide" style="display: block; width: 100%;">
+                </slide>
+            </div>
+            <div *ngIf="mediaImages.video">
+                <slide *ngFor="let img of mediaImages.video">
+                    <video controls alt="first slide" style="display: block; width: 100%;">
+                        <source [src]="img">
+                    </video>
+                </slide>
+            </div>
+        </carousel>
+    </div>
+
+</ng-template>
+<!-- Display large Image -->

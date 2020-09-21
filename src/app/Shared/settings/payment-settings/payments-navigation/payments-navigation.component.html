@@ -1,0 +1,28 @@
+<div class="AcountContent">
+    <div class="AccountTitle">
+        <h2 class="d-flex"><span><img src="assets/BankingGrey.svg" alt="" /> </span> BANKING</h2>
+    </div>
+    <div class="bankingOption">
+        <ul class="d-flex">
+
+            <li *ngIf="isSubscriber || isCreator"><a [routerLink]="['add_card']">+ Add Card</a></li>
+            <li *ngIf="isApproved "><a [routerLink]="['add_card']">+ Add Card</a></li>
+
+                <!-- <li *ngIf="!isApproved && isCreator"
+                pTooltip="You must complete the Partner Agreement before adding your card information."
+                tooltipPosition="top"><a>+ Add Card</a></li> -->
+
+            <!-- <li *ngIf="isApproved && isCreator"><a [routerLink]="['add_bank']">+ Add Bank</a></li> -->
+            <!-- <li *ngIf="!isApproved"
+                pTooltip="You must complete the Partner Agreement before adding your bank information."
+                tooltipPosition="top"><a *ngIf="isCreator">+ Add Bank</a></li> -->
+
+            <li><a [routerLink]="['partner_agreement']" *ngIf="isCreator">Partner Agreement</a></li>
+            <!-- <li><a [routerLink]="['release_agreement']" *ngIf="isCreator">Release Agreement</a></li> -->
+        </ul>
+    </div>
+</div>
+
+<router-outlet>
+</router-outlet>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

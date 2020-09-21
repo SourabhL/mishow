@@ -1,0 +1,277 @@
+<div class="contentWrap">
+    <form class="row" [formGroup]="cardForm" (ngSubmit)="onSubmit(cardForm.valid)">
+        <div class="col-md-12">
+            <h2 class=" text-center mb-4">Add Card</h2>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <h3 class="mb-3">Billing Info</h3>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" formControlName="legal_name" class="form-control">
+                        <div class="ErrorMessageDIV" *ngIf="!cardForm.get('legal_name').valid && submitted">
+                            <div class="text-danger" *ngIf="cardForm.get('legal_name').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Address</label>
+                        <input type="text" formControlName="address" class="form-control">
+                        <div class="ErrorMessageDIV" *ngIf="!cardForm.get('address').valid && submitted">
+                            <div class="text-danger" *ngIf="cardForm.get('address').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" formControlName="city" class="form-control">
+                                <div class="ErrorMessageDIV" *ngIf="!cardForm.get('city').valid && submitted">
+                                    <div class="text-danger" *ngIf="cardForm.get('city').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ml-auto">
+                            <div class="form-group">
+                                <label>Zip Code</label>
+                                <input type="number" formControlName="zipcode" class="form-control">
+                                <div class="ErrorMessageDIV" *ngIf="!cardForm.get('zipcode').valid && submitted">
+                                    <div class="text-danger" *ngIf="cardForm.get('zipcode').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>State</label>
+                                <input class="form-control" type="text" formControlName="state">
+                                <div class="ErrorMessageDIV" *ngIf="!cardForm.get('state').valid && submitted">
+                                    <div class="text-danger" *ngIf="cardForm.get('state').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Country</label>
+                                <p-dropdown class="form-control RadiusNone BorderNoneSelectBox" [options]="countryList"
+                                    formControlName="country"></p-dropdown>
+                                <div class="ErrorMessageDIV" *ngIf="!cardForm.get('country').valid && submitted">
+                                    <div class="text-danger" *ngIf="cardForm.get('country').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 ml-auto">
+                    <h3 class="mb-3">Credit card info</h3>
+                    <div class="form-group">
+                        <label>Credit Card Number</label>
+                        <input type="text" formControlName="cardNumber" class="form-control">
+                        <div class="ErrorMessageDIV" *ngIf="!cardForm.get('cardNumber').valid && submitted">
+                            <div class="text-danger" *ngIf="cardForm.get('cardNumber').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+
+                        <div class="ErrorMessageDIV" *ngIf="!cardForm.get('cardNumber').valid">
+                            <div class="text-danger" *ngIf="cardForm.get('cardNumber').errors['pattern']">
+                                Please enter valid card number
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Cardholder Name</label>
+                        <input class="form-control" type="text" formControlName="cardName">
+                        <div class="ErrorMessageDIV" *ngIf="!cardForm.get('cardName').valid && submitted">
+                            <div class="text-danger" *ngIf="cardForm.get('cardName').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Expire Date</label>
+                        <p-calendar class="form-control" view="month" dateFormat="mm/yy" [yearNavigator]="true"
+                            formControlName="expirydate" yearRange="{{minYear}}:{{maxYear}}" [readonlyInput]="true">
+                        </p-calendar>
+                        <div class="ErrorMessageDIV" *ngIf="!cardForm.get('expirydate').valid && submitted">
+                            <div class="text-danger" *ngIf="cardForm.get('expirydate').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="password" formControlName="cvv" class="form-control">
+                        <div class="ErrorMessageDIV" *ngIf="!cardForm.get('cvv').valid && submitted">
+                            <div class="text-danger" *ngIf="cardForm.get('cvv').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-md-12 text-center">
+                <button class="btn btn-primary" type="submit" [disabled]="showSpinner">Add Card <i *ngIf="showSpinner"
+                        class="fa fa-spinner fa-spin"></i> </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- <div class="modify-you SubcriptionSetting">
+    <form class="row" [formGroup]="cardForm" (ngSubmit)="onSubmit(cardForm.valid)">
+        <div class="col-md-6">
+            <h4>Billing Info</h4>
+
+            <div class="form-group mb-3">
+                <label>Full name</label>
+                <input type="text" formControlName="legal_name">
+                <div *ngIf="!cardForm.get('legal_name').valid && submitted">
+                    <div class="text-danger" *ngIf="cardForm.get('legal_name').errors['required']">
+                        This field is required.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <label>Address</label>
+                <input type="text" formControlName="address">
+                <div *ngIf="!cardForm.get('address').valid && submitted">
+                    <div class="text-danger" *ngIf="cardForm.get('address').errors['required']">
+                        This field is required.
+                    </div>
+                </div>
+            </div>
+
+            <div class="row  mb-3">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label>City</label>
+                        <input type="text" formControlName="city">
+                        <div *ngIf="!cardForm.get('city').valid && submitted">
+                            <div class="text-danger" *ngIf="cardForm.get('city').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>Zipcode</label>
+                        <input type="number" formControlName="zipcode">
+                        <div *ngIf="!cardForm.get('zipcode').valid && submitted">
+                            <div class="text-danger" *ngIf="cardForm.get('zipcode').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+                <label>State</label>
+                <input type="text" formControlName="state">
+                <div *ngIf="!cardForm.get('state').valid && submitted">
+                    <div class="text-danger" *ngIf="cardForm.get('state').errors['required']">
+                        This field is required.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <label>Country</label>
+                <p-dropdown [options]="countryList" formControlName="country"></p-dropdown>
+                <div *ngIf="!cardForm.get('country').valid && submitted">
+                    <div class="text-danger" *ngIf="cardForm.get('country').errors['required']">
+                        This field is required.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <h4>Credit Card Info</h4>
+            <div class="row  mb-3">
+                <div class="col-md-12">
+                    <label>Card Number</label>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <input type="text" formControlName="cardNumber">
+                        <div *ngIf="!cardForm.get('cardNumber').valid && submitted">
+                            <div class="text-danger" *ngIf="cardForm.get('cardNumber').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+
+                        <div *ngIf="!cardForm.get('cardNumber').valid">
+                            <div class="text-danger" *ngIf="cardForm.get('cardNumber').errors['pattern']">
+                                Please enter valid card number
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text">
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <label>Cardholder Name</label>
+                <input type="text" formControlName="cardName">
+                <div *ngIf="!cardForm.get('cardName').valid && submitted">
+                    <div class="text-danger" *ngIf="cardForm.get('cardName').errors['required']">
+                        This field is required.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group mb-3">
+                <label>Expire Date</label>
+                <p-calendar view="month" dateFormat="mm/yy" [yearNavigator]="true" formControlName="expirydate"
+                    yearRange="{{minYear}}:{{maxYear}}" [readonlyInput]="true"></p-calendar>
+                <div *ngIf="!cardForm.get('expirydate').valid && submitted">
+                    <div class="text-danger" *ngIf="cardForm.get('expirydate').errors['required']">
+                        This field is required.
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="form-group">
+                        <label>CVV</label>
+                        <input type="password" formControlName="cvv">
+                        <div *ngIf="!cardForm.get('cvv').valid && submitted">
+                            <div class="text-danger" *ngIf="cardForm.get('cvv').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group text-center">
+                <button class="btn btn-primary" type="submit" [disabled]="showSpinner">Submit <i *ngIf="showSpinner"
+                        class="fa fa-spinner fa-spin"></i> </button>
+            </div>
+        </div>
+    </form>
+</div> -->

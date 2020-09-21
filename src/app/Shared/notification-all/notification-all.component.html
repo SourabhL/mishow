@@ -1,0 +1,222 @@
+<div class="ContentWrap">
+    <div class="container">
+        <div class="row" *ngIf="isCreator">
+            <div class="col-md-12">
+                <h2 class="mb-5">Notification</h2>
+            </div>
+            <div class="col-md-3 NotificationLink">
+                <ul>
+                    <li class="NotificationAll"><a (click)="creatorType('all')"><span></span>ALL <small
+                                *ngIf="allTotal > 0" class="CountNotification">{{allTotal}}</small></a></li>
+                    <li class="NotificationLiked"><a (click)="creatorType('like')"><span></span>LIKED <small
+                                *ngIf="likeTotal > 0" class="CountNotification">{{likeTotal}}</small></a></li>
+                    <li class="NotificationTipped"><a (click)="creatorType('tip')"><span></span>PURCHASES <small
+                                *ngIf="tipTotal > 0" class="CountNotification">{{tipTotal}}</small></a></li>
+                    <li class="NotificationSubscribed"><a (click)="creatorType('subscribe')"><span></span>SUBSCRIBED
+                            <small *ngIf="subscribeTotal > 0" class="CountNotification">{{subscribeTotal}}</small></a>
+                    </li>
+                    <li class="NotificationComments"><a (click)="creatorType('comment')"><span></span>COMMENTS <small
+                                *ngIf="commentTotal > 0" class="CountNotification">{{commentTotal}}</small></a></li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <div class="NotificationList">
+                    <ul>
+                        <div *ngIf="isAll">
+                            <li *ngFor="let all of allData">
+                                <div class="NotificationListBox d-flex" (click)="navigate(all.uuid,all.hyperlink)">
+                                    <div class="NotificationListIMG"><span><img [src]="all.profile_picture"></span>
+                                    </div>
+                                    <div class="NotificationListBody">
+                                        <h3><strong>{{all.from_info.display_name}}</strong>
+                                            <a>@{{all.from_info.profile_url}}</a></h3>
+                                        <p>{{all.message}}</p>
+                                    </div>
+                                    <div class="NotificationListNow">
+                                        <a></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+
+                        <div *ngIf="isSubscribe">
+                            <li *ngFor="let all of  SubscribeData">
+                                <div class="NotificationListBox d-flex" (click)="navigate(all.uuid,all.hyperlink)">
+                                    <div class="NotificationListIMG"><span><img [src]="all.profile_picture"></span>
+                                    </div>
+                                    <div class="NotificationListBody">
+                                        <h3><strong>{{all.from_info.display_name}}</strong>
+                                            <a>@{{all.from_info.profile_url}}</a></h3>
+                                        <p>{{all.message}}</p>
+                                    </div>
+                                    <div class="NotificationListNow">
+                                        <a></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+
+                        <div *ngIf="isTip">
+                            <li *ngFor="let all of tipData">
+                                <div class="NotificationListBox d-flex" (click)="navigate(all.uuid,all.hyperlink)">
+                                    <div class="NotificationListIMG"><span><img [src]="all.profile_picture"></span>
+                                    </div>
+                                    <div class="NotificationListBody">
+                                        <h3><strong>{{all.from_info.display_name}}</strong>
+                                            <a>@{{all.from_info.profile_url}}</a></h3>
+                                        <p>{{all.message}}</p>
+                                    </div>
+                                    <div class="NotificationListNow">
+                                        <a></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+
+
+                        <div *ngIf="isComment">
+                            <li *ngFor="let all of commentData">
+                                <div class="NotificationListBox d-flex" (click)="navigate(all.uuid,all.hyperlink)">
+                                    <div class="NotificationListIMG"><span><img [src]="all.profile_picture"></span>
+                                    </div>
+                                    <div class="NotificationListBody">
+                                        <h3><strong>{{all.from_info.display_name}}</strong>
+                                            <a>@{{all.from_info.profile_url}}</a></h3>
+                                        <p>{{all.message}}</p>
+                                    </div>
+                                    <div class="NotificationListNow">
+                                        <a></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+
+                        <div *ngIf="isLike">
+                            <li *ngFor="let all of likeData">
+                                <div class="NotificationListBox d-flex" (click)="navigate(all.uuid,all.hyperlink)">
+                                    <div class="NotificationListIMG"><span><img [src]="all.profile_picture"></span>
+                                    </div>
+                                    <div class="NotificationListBody">
+                                        <h3><strong>{{all.from_info.display_name}}</strong>
+                                            <a>@{{all.from_info.profile_url}}</a></h3>
+                                        <p>{{all.message}}</p>
+                                    </div>
+                                    <div class="NotificationListNow">
+                                        <a></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+
+                        <div *ngIf="isNodata">
+                            <h5>{{msg}}</h5>
+                        </div>
+
+                    </ul>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <div class="row" *ngIf="isSubscriber">
+            <div class="col-md-12">
+                <h2 class="mb-5">Notification</h2>
+            </div>
+            <div class="col-md-3 NotificationLink">
+                <ul>
+                    <li class="NotificationPost"><a (click)="type('post')"><span></span>New Post <small
+                                *ngIf="postTotal > 0" class="CountNotification">{{postTotal}}</small> </a></li>
+                    <li class="NotificationPack"><a (click)="type('pack')"><span></span>New Pack <small
+                                *ngIf="packTotal > 0" class="CountNotification">{{packTotal}}</small> </a></li>
+                    <li class="NotificationProduct"><a (click)="type('product')"><span></span>New Product <small
+                                *ngIf="productTotal > 0" class="CountNotification">{{productTotal}}</small> </a></li>
+                    <li class="NotificationExclusive"><a (click)="type('exclusive')"><span></span>New Exclusive <small
+                                *ngIf="exclusiveTotal > '0'" class="CountNotification">{{exclusiveTotal}}</small> </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <div class="NotificationList">
+                    <ul>
+                        <div *ngIf="isPost">
+                            <li *ngFor="let all of postdata">
+                                <div class="NotificationListBox d-flex" (click)="navigate(all.uuid,all.hyperlink)">
+                                    <div class="NotificationListIMG"><span><img [src]="all.profile_picture"></span>
+                                    </div>
+                                    <div class="NotificationListBody">
+                                        <h3><strong>{{all.from_info.display_name}}</strong>
+                                            <a>@{{all.from_info.profile_url}}</a></h3>
+                                        <p>{{all.message}}</p>
+                                    </div>
+                                    <div class="NotificationListNow">
+                                        <a></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+
+                        <div *ngIf="isProduct">
+                            <li *ngFor="let all of productdata">
+                                <div class="NotificationListBox d-flex" (click)="navigate(all.uuid,all.hyperlink)">
+                                    <div class="NotificationListIMG"><span><img [src]="all.profile_picture"></span>
+                                    </div>
+                                    <div class="NotificationListBody">
+                                        <h3><strong>{{all.from_info.display_name}}</strong>
+                                            <a>@{{all.from_info.profile_url}}</a></h3>
+                                        <p>{{all.message}}</p>
+                                    </div>
+                                    <div class="NotificationListNow">
+                                        <a></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+
+                        <div *ngIf="isExclusive">
+                            <li *ngFor="let all of exclusivedata">
+                                <div class="NotificationListBox d-flex" (click)="navigate(all.uuid,all.hyperlink)">
+                                    <div class="NotificationListIMG"><span><img [src]="all.profile_picture"></span>
+                                    </div>
+                                    <div class="NotificationListBody">
+                                        <h3><strong>{{all.from_info.display_name}}</strong>
+                                            <a>@{{all.from_info.profile_url}}</a></h3>
+                                        <p>{{all.message}}</p>
+                                    </div>
+                                    <div class="NotificationListNow">
+                                        <a></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+
+                        <div *ngIf="isPack">
+                            <li *ngFor="let all of packdata">
+                                <div class="NotificationListBox d-flex" (click)="navigate(all.uuid,all.hyperlink)">
+                                    <div class="NotificationListIMG"><span><img [src]="all.profile_picture"></span>
+                                    </div>
+                                    <div class="NotificationListBody">
+                                        <h3><strong>{{all.from_info.display_name}}</strong>
+                                            <a>@{{all.from_info.profile_url}}</a></h3>
+                                        <p>{{all.message}}</p>
+                                    </div>
+                                    <div class="NotificationListNow">
+                                        <a></a>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+
+                        <div *ngIf="isNodata">
+                            <h5>{{msg}}</h5>
+                        </div>
+                    </ul>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

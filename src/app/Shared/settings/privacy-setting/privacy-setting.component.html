@@ -1,0 +1,117 @@
+<form [formGroup]="privacysettingForm">
+    <div class="AcountContent">
+        <div class="AccountTitle">
+            <h2 class="d-flex"><span><img src="assets/lockGrey.svg" alt="" /> </span> Privacy</h2>
+        </div>
+        <div class="row PrivacyOption">
+            <div class="col-md-5 mb-5">
+                <div class="SwitchDIV">
+                    <p-inputSwitch formControlName="private_profile" [(ngModel)]="privacySetting.private_profile"
+                        (onChange)="onChange('private_profile',$event)">
+                    </p-inputSwitch>
+                </div>
+
+                <h3>Private Profile</h3>
+                <p>Your profile will not <br /> appear in browse or in subscriber lists.</p>
+            </div>
+            <div class="col-md-5 offset-md-2 mb-5">
+                <div class="SwitchDIV">
+                    <p-inputSwitch formControlName="show_subscriptions"
+                        (onChange)="onChange('show_subscriptions',$event)"
+                        [(ngModel)]="privacySetting.show_subscriptions">
+                    </p-inputSwitch>
+                </div>
+
+                <h3>Show My Subscriptions</h3>
+                <p>Allow users to see who you're subscribed to.</p>
+            </div>
+            <div class="col-md-5 mb-5">
+                <div class="SwitchDIV">
+                    <p-inputSwitch formControlName="show_subscribers" (onChange)="onChange('show_subscribers',$event)"
+                        [(ngModel)]="privacySetting.show_subscribers">
+                    </p-inputSwitch>
+                </div>
+
+                <h3>Show Subscribers</h3>
+                <p>Allow users to see your list of active subscribers.</p>
+            </div>
+
+
+
+            <!-- <div class="col-md-5 offset-md-2 mb-5" *ngIf="isCreator">
+                <div class="SwitchDIV">
+                    <p-inputSwitch formControlName="hotlink"></p-inputSwitch>
+                </div>
+                <h3>Hotlink Images</h3>
+                <p>Enables option to copy image URL on your posts.</p>
+            </div>
+        </div>
+        <div class="UseThisOption mb-4" *ngIf="isCreator">
+            <p>Set a maximum content tier for sharing. Hotlink option will only appear up to this maximum content tier.</p>
+        </div>
+        <div class="MaximumTier" *ngIf="isCreator">
+            <h3>Maximum content tier</h3>
+            <p>1</p>
+        </div> -->
+        </div>
+    </div>
+</form>
+
+<!-- <div class="modify-you">
+    <form [formGroup]="privacysettingForm">
+        <div class="form-group">
+            <div class="d-flex">
+                <p-inputSwitch formControlName="private_profile" [(ngModel)]="privacySetting.private_profile"
+                    (onChange)="onChange('private_profile',$event)">
+                </p-inputSwitch>
+                <div class="private_profile-content">
+                    <h4>Private Profile</h4>
+                    <p>If enabled, your profile link will not appear in browse or in the list of subscriptions for other
+                        user.</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <div class="d-flex">
+                <p-inputSwitch formControlName="show_subscriptions" (onChange)="onChange('show_subscriptions',$event)"
+                    [(ngModel)]="privacySetting.show_subscriptions">
+                </p-inputSwitch>
+                <div class="private_profile-content">
+                    <h4>Show Subscriptions</h4>
+                    <p>Allow user to see who you are subscribed to in your subscriptions list.</p>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="d-flex">
+                <p-inputSwitch formControlName="show_subscribers" (onChange)="onChange('show_subscribers',$event)"
+                    [(ngModel)]="privacySetting.show_subscribers">
+                </p-inputSwitch>
+                <div class="private_profile-content">
+                    <h4>Show Subscribers</h4>
+                    <p>Allow user to see who you is subscribed to you.</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group" *ngIf="isCreator">
+            <div class="d-flex">
+                <p-inputSwitch formControlName="hotlink"></p-inputSwitch>
+                <div class="private_profile-content">
+                    <h4>Hotlink Images</h4>
+                    <p>Enables any image you post to be linked on other website.</p>
+                    <p>Use this option for increase marketing of your content. Use the drop down to select a maximum
+                        tier to
+                        minimize sharing of your more exclusive content.</p>
+                    <p style="font-size: 12px;">Maximum Content Tier</p>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <p-dropdown formControlName="tier" [options]="tireList"></p-dropdown>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div> -->

@@ -1,0 +1,278 @@
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<div class="AcountContent ">
+    <h6 class="mb-5" *ngIf="!showMessage && !isApproved">Complete the partner agreement application for account
+        approval. Once
+        approved, you will be
+        notified of your
+        commision rate.</h6>
+    <form *ngIf="!showMessage" [formGroup]="agreementForm" (ngSubmit)="onSubmit(agreementForm.valid)">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group ">
+                    <label>Full Legal Name</label>
+                    <input class="form-control" type="text" placeholder="Full Name" *ngIf="isApproved" disabled
+                        formControlName="legalName" [(ngModel)]="legalName" (change)="onChange('legalName')">
+                    <input class="form-control" type="text" placeholder="Full Name" *ngIf="!isApproved"
+                        formControlName="legalName" [(ngModel)]="legalName" (change)="onChange('legalName')">
+                    <div *ngIf="!agreementForm.get('legalName').valid && submitted">
+                        <div class="text-danger" *ngIf="agreementForm.get('legalName').errors['required']">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Address</label>
+                    <input class="form-control" type="text" placeholder="Street" formControlName="street"
+                        [(ngModel)]="street" (change)="onChange('street')">
+                    <div *ngIf="!agreementForm.get('street').valid && submitted">
+                        <div class="text-danger" *ngIf="agreementForm.get('street').errors['required']">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="City" formControlName="city" [(ngModel)]="city"
+                        (change)="onChange('city')">
+                    <div *ngIf="!agreementForm.get('city').valid && submitted">
+                        <div class="text-danger" *ngIf="agreementForm.get('city').errors['required']">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="State" formControlName="state"
+                        [(ngModel)]="state" (change)="onChange('state')">
+                    <div *ngIf="!agreementForm.get('legalName').valid && submitted">
+                        <div class="text-danger" *ngIf="agreementForm.get('legalName').errors['required']">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input class="form-control" type="text" placeholder="Zip" formControlName="zipcode"
+                        [(ngModel)]="zip" (change)="onChange('zip')">
+                    <div *ngIf="!agreementForm.get('zipcode').valid && submitted">
+                        <div class="text-danger" *ngIf="agreementForm.get('zipcode').errors['required']">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <input class="form-control" type="text" placeholder="Country" formControlName="country"
+                        [(ngModel)]="country" (change)="onChange('country')">
+                    <div *ngIf="!agreementForm.get('country').valid && submitted">
+                        <div class="text-danger" *ngIf="agreementForm.get('country').errors['required']">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Telephone</label>
+                    <input class="form-control" type="text" formControlName="telephone" placeholder="Telephone Number"
+                        [(ngModel)]="telephone" (change)="onChange('telephone')">
+                    <div *ngIf="!agreementForm.get('telephone').valid && submitted">
+                        <div class="text-danger" *ngIf="agreementForm.get('telephone').errors['required']">
+                            This field is required.
+                        </div>
+                    </div>
+
+                    <div *ngIf="!agreementForm.get('telephone').valid">
+                        <div class="text-danger" *ngIf="agreementForm.get('telephone').errors['pattern']">
+                            Please enter valid telephone number.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <p-calendar class="form-control" formControlName="birth_date_creator" [style]="{'width':'100%'}"
+                        [disabled]="isApproved" [inputStyle]="{'width':'100%'}" placeholder="Birth Date"
+                        [yearNavigator]="true" yearRange="1960:2002" formControlName="DOB" [(ngModel)]="dob"
+                        (onSelect)="onChange('dob')">
+                    </p-calendar>
+
+                    <div *ngIf="!agreementForm.get('DOB').valid && submitted">
+                        <div class="text-danger" *ngIf="agreementForm.get('DOB').errors['required']">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Navtive language</label>
+                    <p-dropdown class="form-control RadiusNone BorderNoneSelectBox" [options]="languages"
+                        formControlName="language" [(ngModel)]="language" [disabled]="isApproved"
+                        (onChange)="onChange('language')"></p-dropdown>
+                    <div *ngIf="!agreementForm.get('language').valid && submitted">
+                        <div class="text-danger" *ngIf="agreementForm.get('language').errors['required']">
+                            This field is required.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 mb-5">
+                <div class="d-flex PostingNudity">
+                    <p-checkbox [disabled]="isApproved" binary="true" formControlName="adultContent"
+                        [(ngModel)]="adultcontent" (onChange)="onChange('adultContent')"></p-checkbox>
+                    <p> I attest that I will not use this service to sell adult content or products.</p>
+                </div>
+            </div>
+            <div class="col-md-12 mb-5">
+                <h6>Social Media Accounts</h6>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Twitter</label>
+                    <input class="form-control" type="text" [disabled]="isApproved" *ngIf="isApproved" disabled
+                        formControlName="twitter" [(ngModel)]="twitter" (change)="onChange('twitter')">
+                    <input class="form-control" type="text" [disabled]="isApproved" *ngIf="!isApproved"
+                        formControlName="twitter" [(ngModel)]="twitter" (change)="onChange('twitter')">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Instagram</label>
+                    <input class="form-control" [disabled]="isApproved" type="text" *ngIf="isApproved" disabled
+                        formControlName="instagram" [(ngModel)]="instagram" (change)="onChange('instagram')">
+                    <input class="form-control" [disabled]="isApproved" type="text" *ngIf="!isApproved"
+                        formControlName="instagram" [(ngModel)]="instagram" (change)="onChange('instagram')">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>YouTube</label>
+                    <input class="form-control" [disabled]="isApproved" type="text" *ngIf="isApproved" disabled
+                        formControlName="youtube" [(ngModel)]="youtube" (change)="onChange('youtube')">
+                    <input class="form-control" [disabled]="isApproved" type="text" *ngIf="!isApproved"
+                        formControlName="youtube" [(ngModel)]="youtube" (change)="onChange('youtube')">
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+        <h6 class="mb-3">Upload ID for verification</h6>
+        <p>You must upload a picture of your government ID (Close up-front and Back), and a picture of you holding ID.
+            You and your ID must be clearly end legible or it will be rejected.</p>
+
+        <div class="row VerificationBox">
+            <div class="col-md-4 text-center mb-2">
+                <div *ngIf="proof3 ">
+                    <img [src]="proof3" height="180px" width="250px">
+                    <p class="mt-1 text-center">Filename : {{proof3.split('/Web/')[1]}}</p>
+                    <button *ngIf="!isApproved" type="button" class=" btn btn-primary mb-3"
+                        (click)="click('1')">Upload</button>
+                </div>
+                <div class="col-md-12 " *ngIf="!proof3 || isShowId1">
+                    <ngx-dropzone (change)="onSelect($event)">
+                        <ngx-dropzone-label>Upload Image here!</ngx-dropzone-label>
+                        <ngx-dropzone-image-preview *ngFor="let f of IDwithUser" ngProjectAs="ngx-dropzone-preview"
+                            [file]="f" [removable]="true" (removed)="onRemove(f)">
+                        </ngx-dropzone-image-preview>
+                    </ngx-dropzone>
+                    <p class="mt-1 text-center" *ngIf="isUserFile">Filename : {{IDwithUser[0].name}}</p>
+                    <div class="text-danger" *ngIf="isUserProof && submitted">
+                        This field is required.
+                    </div>
+                    <div class="text-danger" *ngIf="userIDLength">
+                        Only one image is accepted.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center mb-2">
+                <div *ngIf="proof1">
+                    <img [src]="proof1" width="250px" height="180px">
+                    <p class="mt-1 text-center">Filename : {{proof1.split('/Web/')[1]}}</p>
+                    <button *ngIf="!isApproved" type="button" class="mb-3 btn btn-primary"
+                        (click)="click('2')">Upload</button>
+                </div>
+                <div class="col-md-12" *ngIf="!proof1 || isShowId2">
+                    <ngx-dropzone (change)="onSelect1($event)">
+                        <ngx-dropzone-label>Upload Image here!</ngx-dropzone-label>
+                        <ngx-dropzone-image-preview *ngFor="let f of IDFront" ngProjectAs="ngx-dropzone-preview"
+                            [file]="f" [removable]="true" (removed)="onRemove1(f)">
+                        </ngx-dropzone-image-preview>
+                    </ngx-dropzone>
+                    <p class="mt-1 text-center" *ngIf="isFrontFIle">Filename : {{IDFront[0].name}}</p>
+                    <div class="text-danger" *ngIf="isIDFront && submitted">
+                        This field is required.
+                    </div>
+                    <div class="text-danger" *ngIf="frontLength">
+                        Only one image is accepted.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center mb-2">
+                <div *ngIf="proof2">
+                    <img [src]="proof2" width="250px" height="180px">
+                    <p class="mt-1 text-center">Filename : {{proof2.split('/Web/')[1]}}</p>
+                    <button *ngIf="!isApproved" type="button" class="btn btn-primary mb-3"
+                        (click)="click('3')">Upload</button>
+                </div>
+                <div class="col-md-12" *ngIf="!proof2 || isShowId3">
+                    <ngx-dropzone (change)="onSelect2($event)">
+                        <ngx-dropzone-label>Upload Image here!</ngx-dropzone-label>
+                        <ngx-dropzone-image-preview *ngFor="let f of IDBack" ngProjectAs="ngx-dropzone-preview"
+                            [file]="f" [removable]="true" (removed)="onRemove2(f)">
+                        </ngx-dropzone-image-preview>
+                    </ngx-dropzone>
+                    <p class="mt-1 text-center" *ngIf="isBackFile">Filename : {{IDBack[0].name}}</p>
+                    <div class="text-danger" *ngIf="isIDBack && submitted">
+                        This field is required.
+                    </div>
+                    <div class="text-danger" *ngIf="backLength">
+                        Only one image is accepted.
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 d-flex PostingNudity mb-3">
+                <p-checkbox binary="true" formControlName="terms" [(ngModel)]="checked" [disabled]="isEdit"
+                    (onChange)="onTerms($event)"></p-checkbox>
+                <p> I agree to the terms of the Partner Agreement. <small>Your information is sent and stored using
+                        AES-256 encryption.</small></p>
+                <div *ngIf="!agreementForm.get('terms').valid && submitted">
+                    <div class="mt-1 ml-4 w-100  text-danger" *ngIf="agreementForm.get('terms').errors['required']">
+                        This field is required.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="loadPDF mb-3">
+            <!-- <ngx-extended-pdf-viewer [src]="'assets/p1.pdf'" [render-text]="true" useBrowserLocale="true"
+                height="600px">
+            </ngx-extended-pdf-viewer> -->
+
+            <!-- <pdf-viewer src="assets/p1.pdf" [render-text]="true" style="height: 400px;"></pdf-viewer> -->
+        </div>
+        <div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="showSpinner">Submit <i *ngIf="showSpinner"
+                    class="fa fa-spinner fa-spin"></i></button>
+        </div>
+    </form>
+
+    <p *ngIf="showMessage">Your Partner Agreement application has been submitted. Please allow 24-48 hours for
+        approval. You will receive e-mail
+        notification once the status has been updated.</p>
+
+
+</div>

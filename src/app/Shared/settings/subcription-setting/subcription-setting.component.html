@@ -1,0 +1,106 @@
+<form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit(subscriptionForm.valid)">
+    <div class="AcountContent">
+        <div class="AccountTitle d-flex">
+            <h2 class="d-flex"><span><img src="/assets/award.svg" alt="" /> </span> SUBSCRIPTION TIERS</h2>
+            <div class="AddToer" *ngIf="allowAdd" (click)="addTier()"><a>+ Add Tier</a></div>
+
+        </div>
+        <!-- <div class="ModifySubscription">
+            <p>Modify your subscription tier pricing and benefits</p>
+        </div> -->
+        <div class="Subscription">
+            <div class="row">
+                <div class="col-md-12" *ngFor="let free of freetierdetail">
+                    <div class="col-md-6 m-auto " *ngIf="free.tier_price === 0">
+                        <div class="d-flex FreeTier">
+                            <p>Free Tier</p>
+                            <div class="Switch">
+                                <p-inputSwitch [(ngModel)]="free.tier_enabled" (onChange)="onFreeChange(free)"
+                                    formControlName="freeTier">
+                                </p-inputSwitch>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div *ngIf="!isApproved">
+                    <p>
+                        You must complete the Partner Agreement before adding tier information.
+                    </p>
+                </div>
+
+                <div class="col-md-12 " *ngIf="isApproved" formArrayName="tierArray">
+                    <div class="TierLoop d-flex flex-wrap">
+                        <div formGroupName="{{i}}" *ngFor="let tier of tierData; let i=index" class=" col-md-4">
+
+                            <h2 class="d-flex"> Tier {{i + 1}}
+                                <button type="button" class="close ml-auto" (click)="removeTier(i,tier.tier_id)"><img
+                                        src="assets/CloseBlue.svg" alt="" /></button>
+                            </h2>
+                            <div class="TierSwitch d-flex align-items-center ">
+                                <div class="form-group mb-0">
+                                    <input type="text" formControlName="tier_name" class="form-control"
+                                        placeholder="Tier Name" (change)="onChange(tier,'name')"
+                                        [(ngModel)]="tier.tier_name">
+                                </div>
+                                <div class="text-danger"
+                                    *ngIf="!subscriptionForm.controls['tierArray'].controls[i].controls['tier_name'].valid && submitted">
+                                    <span
+                                        *ngIf="subscriptionForm.controls['tierArray'].controls[i].controls['tier_name'].errors['required'] || form.controls['AdHocCommunication'].controls[i].controls['AdHoc_communicationname'].errors['whitespace']"
+                                        class="text-danger">
+                                        This field is required.
+                                    </span>
+                                </div>
+
+
+                                <div class="Switch">
+                                    <p-inputSwitch [(ngModel)]="tier.tier_enabled" (onChange)="onChange(tier,'enable')"
+                                        formControlName="tier_enabled">
+                                    </p-inputSwitch>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Monthly Subscription Price</label>
+                                <input type="number" min="3" (change)="onChange(tier,'price')"
+                                    [(ngModel)]="tier.tier_price" formControlName="tier_price" class="form-control">
+                            </div>
+                            <div class="text-danger"
+                                *ngIf="!subscriptionForm.controls['tierArray'].controls[i].controls['tier_price'].valid && submitted">
+                                <span
+                                    *ngIf="subscriptionForm.controls['tierArray'].controls[i].controls['tier_price'].errors['required'] || form.controls['AdHocCommunication'].controls[i].controls['AdHoc_communicationname'].errors['whitespace']"
+                                    class="text-danger">
+                                    This field is required.
+                                </span>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tier Benefits</label>
+                                <textarea (change)="onChange(tier,'description')" [(ngModel)]="tier.tier_description"
+                                    formControlName="tier_description" class="form-control"></textarea>
+                            </div>
+
+                            <div class="text-danger"
+                                *ngIf="!subscriptionForm.controls['tierArray'].controls[i].controls['tier_description'].valid && submitted">
+                                <span
+                                    *ngIf="subscriptionForm.controls['tierArray'].controls[i].controls['tier_description'].errors['required'] || form.controls['AdHocCommunication'].controls[i].controls['AdHoc_communicationname'].errors['whitespace']"
+                                    class="text-danger">
+                                    This field is required.
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary" type="submit" [disabled]="showSpinner">Submit <i *ngIf="showSpinner"
+                        class="fa fa-spinner fa-spin"></i> </button>
+            </div>
+        </div>
+
+    </div>
+</form>

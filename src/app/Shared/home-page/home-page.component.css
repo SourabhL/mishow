@@ -1,0 +1,10 @@
+/* .smile-list img {
+    cursor: pointer;
+} */
+img{
+     cursor: pointer;
+}
+
+.test{
+    opacity: 0;
+}

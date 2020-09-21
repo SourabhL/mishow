@@ -1,0 +1,234 @@
+<!-- <div class="WalletBalance ">
+    <p>Wallet Balance</p>
+    <h6 class="d-flex"><span><img src="assets/wallet.svg" alt="" /></span> <strong>$9501.01</strong></h6>
+    <a href="" class="btn btn-primary">Withdraw Money</a>
+</div> -->
+<!-- *ngIf="isAgreement" -->
+<div class="ReadyStart mb-4" *ngIf="isAgreement && isCreator">
+    <h3>Ready to start earning? Complete the Partner Agreement and once you're approved, you can begin
+        accepting payments. Approval takes less than 48 hours.</h3>
+</div>
+<div class="BaksOptions">
+    <div class="row">
+        <div class="col-md-5 mb-5" *ngFor="let card of savedCard">
+            <div class="d-flex align-items-center" *ngIf="card.show">
+                <span><img src="assets/{{card.type}}.svg" alt="" /> </span>
+                <h5>Card Name <br /> Expiration Date</h5>
+                <h6>{{card.cardNumber}} <br /> {{card.expiration}}</h6>
+
+                <button class="close ml-auto" (click)="deleteCard(card)"><img src="assets/CloseBlue.svg"
+                        alt="" /></button>
+            </div>
+        </div>
+        <!-- <div class="offset-md-2 col-md-5 mb-5">
+            <div class="d-flex">
+                <span><img src="assets/MasterCard.svg" alt="" /> </span>
+                <h5>Card Name <br /> Expiration <br /> Date</h5>
+                <h6>98756*****2015 <br /> 6\2025</h6>
+            </div>
+        </div> -->
+        <!-- <div class="col-md-5 mb-5">
+            <div class="d-flex">
+                <span><img src="assets/CreditCard.svg" alt="" /> </span>
+                <h5>Credit Card
+                    <strong>Add Debit or Credit</strong></h5>
+            </div>
+        </div>
+        <div class="offset-md-2 col-md-5 mb-5">
+            <div class="d-flex">
+                <span><img src="assets/bankTransfer.svg" alt="" /> </span>
+                <h5>Bank transfer
+                    <strong>Online Bank transfer</strong></h5>
+            </div>
+        </div> -->
+    </div>
+</div>
+
+<div class="LatestTransctions">
+    <h3>Latest Transactions</h3>
+    <div class="LatestTransctionsTable">
+        <p-tabView>
+            <p-tabPanel header="Payments" *ngIf="isCreator">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Fee</th>
+                            <th>Net</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr *ngIf="paymentList.length == 0">
+                            <td colspan="5">
+                                <h5>There are no transactions.</h5>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let list of paymentList"
+                            (click)="showtransaction('payment',templateTransacation,list.data)">
+
+                            <td>{{list.date}}</td>
+                            <td>{{list.description}}</td>
+                            <td>{{list.amount}}</td>
+                            <td>{{list.fee}}</td>
+                            <td>{{list.net}}</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div class="ViewAll" *ngIf="isPaymentLimit"><a (click)="LoadMore('payments')">View More</a></div>
+            </p-tabPanel>
+
+            <p-tabPanel header="Payouts" *ngIf="isCreator">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="payoutList.length == 0">
+                            <td colspan="5">
+                                <h5>There are no transactions.</h5>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let list of payoutList"
+                            (click)="showtransaction('payout',templateTransacation,list.data)">
+
+                            <td>{{list.date}}</td>
+                            <td>{{list.description}}</td>
+                            <td>{{list.amount}}</td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div class="ViewAll" *ngIf="isPayoutLimit"><a (click)="LoadMore('payout')">View More</a></div>
+            </p-tabPanel>
+
+            <p-tabPanel header="Purchase">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngIf="purchaseList.length == 0">
+                            <td colspan="5">
+                                <h5>There are no transactions.</h5>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let list of purchaseList"
+                            (click)="showtransaction('purchase',templateTransacation, list.data)">
+
+                            <td>{{list.date}}</td>
+                            <td>{{list.description}}</td>
+                            <td>{{list.amount}}</td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div class="ViewAll" *ngIf="isPurchaseLimit"><a (click)="LoadMore('purchase')">View More</a></div>
+            </p-tabPanel>
+        </p-tabView>
+
+
+    </div>
+</div>
+
+<ng-template #templateTransacation>
+    <div class="TransactionsPopup">
+        <div class="modal-header">
+            <!-- <h2>Card Details</h2> -->
+            <button class="close"><img src="assets/CloseBlue.svg" (click)="modalRef.hide()" alt="" /></button>
+        </div>
+        <div>
+            <div class="d-flex TransactionsHead">
+                <div class="TransactionsL">
+                    <h3>Details</h3>
+                    <p>Transactions ID : {{transactionDetails.transId}}</p>
+                </div>
+                <div class="TransactionsR">
+                    <p>@{{transactionDetails.asset.username}}</p>
+                    <h5>{{transactionDetails.asset.type}}</h5>
+                    <p>{{transactionDetails.created_at}}</p>
+                </div>
+            </div>
+            <div class="ADdnote">
+                <button class="btn bdr-primary btn-sm" (click)="openNotes(templateNote,transactionDetails.transId)">Add
+                    Note</button>
+            </div>
+            <div class="FromSystem">
+                <ul>
+                    <li>
+                        <h3>From : System on {{transactionDetails.created_at}}</h3>
+                        <p>
+                            <span>{{message}}</span>{{detailMessage}}
+                        </p>
+                    </li>
+                    <li *ngFor="let nt of transactionDetails.notes">
+                        <div *ngIf="transactionDetails.asset.type === 'product'">
+                            <h3>From : {{nt.username}} on {{nt.created_at}}</h3>
+                            <p *ngIf="nt.address">
+                                {{nt.address}}
+                            </p>
+
+                            <p *ngIf="nt.socialMedia">
+                                {{nt.socialMedia}}
+                            </p>
+
+                            <p *ngIf="nt.notes">
+                                {{nt.notes}}
+                            </p>
+
+                        </div>
+                    </li>
+
+
+
+                    <p *ngIf="showLink">
+                        <a (click)="viewContent(transactionDetails.asset.type,transactionDetails.asset.asset_id)"
+                            style="cursor: pointer;">{{linkMessage}}</a>
+                    </p>
+                </ul>
+            </div>
+            <div class="text-center">
+                <button class="btn btn-primary btn-sm">Done</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #templateNote>
+    <div class="TransactionsPopup">
+        <div class="modal-header">
+            <!-- <h2>Card Details</h2> -->
+            <button class="close"><img src="assets/CloseBlue.svg" (click)="modalRef.hide()" alt="" /></button>
+        </div>
+        <div>
+
+            <div class="offset-md-2 col-md-5">
+                <div class="form-group">
+                    <label>Notes</label>
+                    <input type="text" (blur)="getNotes()" [(ngModel)]="noteModule" class="form-control">
+                </div>
+            </div>
+
+
+            <div class="text-center">
+                <button class="btn btn-primary btn-sm" (click)="addNotes(type,templateTransacation)">Submit</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

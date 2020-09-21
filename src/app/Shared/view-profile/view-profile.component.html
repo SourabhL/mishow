@@ -1,0 +1,1977 @@
+<div class="ContentWrap">
+    <section class="ProfileHeader ">
+        <div class="ProfileFull-Img" *ngIf="isTimeline">
+            <span><img [src]="timelineImage" alt="" /></span>
+        </div>
+        <div class="ProfileFull-Img" *ngIf="!isTimeline">
+            <span><img src="assets/profile-img.jpg" alt="" /></span>
+        </div>
+        <div class="container" *ngIf="isCreator && checkShow">
+            <div class="TipSubscribd d-flex">
+                <!-- <a (click)="onTips(templateTips,'Tips')"><span>$</span> <strong>Tip</strong></a> -->
+                <a (click)="onSubscribe(templateSubscribe)" *ngIf="!isActive"><span><img src="assets/UserCheckWhite.svg"
+                            alt="" /></span>
+                    <strong>Subscribe</strong></a>
+
+                <a (click)="onSubscribe(templateSubscribe)" *ngIf="isActive"><span><img src="assets/UserCheckWhite.svg"
+                            alt="" /></span>
+                    <strong>Subscribed</strong></a>
+
+                <a (click)="unsubscribe()" *ngIf="isActive"><span><img height="40px" width="40px"
+                            src="assets/unfollow.svg" alt="" /></span>
+                </a>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="ProfileContent">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="UserProfileInfo d-flex">
+                        <div class="UserProfilePicture">
+                            <span>
+                                <img [src]="profilePicture">
+                            </span>
+                        </div>
+                        <div class="UserProfileBody">
+                            <h3>{{displayName}}</h3>
+                            <h4>@{{userName}}</h4>
+                            <h5 class="d-flex"><span><img src="assets/LocationPin.svg" alt="" /> </span>
+                                <strong>{{location}}</strong></h5>
+                            <div class="Verified d-flex" *ngIf="isCreator && isVerified"><span><img
+                                        src="assets/verified.svg" alt="" /></span><strong>Verified</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="UserProfileLink">
+                        <ul>
+                            <li *ngIf="isCreator"><a><span><img src="assets/PostsIcon.svg"></span>
+                                    <strong>{{postLength}}
+                                        Posts</strong></a>
+                            </li>
+
+                            <li *ngIf="isCreator"><a><span><img src="assets/PhotosIcon.svg"></span>
+                                    <strong>{{totalImageCount}}
+                                        Photos</strong></a>
+                            </li>
+                            <li *ngIf="isCreator"><a><span><img src="assets/VideoIcon.svg"></span>
+                                    <strong>{{totalVideoCount}}
+                                        Videos</strong></a></li>
+                            <li style="cursor: pointer;" (click)="showSubscribers('subscriber')" *ngIf="isCreator">
+                                <a><span><img src="assets/SubscribersIconGrey.svg"></span>
+                                    <strong>{{totalSubsciber}}
+                                        Subscribers</strong></a></li>
+                            <li style="cursor: pointer;" (click)="showSubscribers('following')"><a><span><img
+                                            src="assets/following.svg"></span>
+                                    <strong>{{totalFollowing}}
+                                        Following</strong></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="ColorOption mt-5" *ngIf="isTag">
+                        <ul class="d-flex border-bottom-0">
+                            <li *ngFor="let t of tags"><span class="DanceColor"></span> <strong>{{t[0]}}</strong></li>
+                            <!-- <li><span class="FunnyColor"></span> <strong>#Funny</strong></li>
+                            <li><span class="MovieColor"></span> <strong>#Movie</strong></li>
+                            <li><span class="DramaColor"></span> <strong>#Drama</strong></li>
+                            <li><span class="RomanceColor"></span> <strong>#Romance</strong></li> -->
+                        </ul>
+                    </div>
+                    <div class="AboutMe">
+                        <div class="AboutMeTitle d-flex">
+                            <h2>About Me</h2>
+                            <span><img src="assets/minus.svg" alt=""></span>
+                        </div>
+                        <p>{{about}} <a><strong>Show More
+                                    Info</strong> <span><img src="assets/DownArrowBlue.svg" alt="" />
+                                </span></a>
+                        </p>
+
+                        <div class="AboutImages" *ngIf="isCreator"><span>
+                                <div class="col-12" *ngIf="!isClose && isVideo">
+                                    <div class="video-boxs">
+                                        <video controls width="320" height="240">
+                                            <source [src]="profileVideo">
+                                        </video>
+                                    </div>
+                                    <!-- <div class="hidevideo">
+                                        <i (click)="onClose()" class="fa fa-arrow-circle-o-up"></i>
+                                    </div> -->
+                                </div>
+                            </span></div>
+                    </div>
+
+                    <div class="RecentMyPost" *ngIf="isCreator">
+                        <div class="RecentMyPostTitle">
+                            <h2>My Recent Posts</h2>
+                        </div>
+
+
+                        <div *ngIf="allData && havePost">
+
+                            <div *ngIf="allData.posts">
+                                <div *ngFor="let post of allData.posts;let i = index">
+                                    <div class="RecentMyPostBody">
+                                        <div class="RecentMyPostHead d-flex">
+                                            <div class="RecentMyPostHeadLeft">
+                                                <span>
+                                                    <img [src]="profilePicture">
+                                                </span>
+                                                <h3>{{displayName}}</h3>
+                                                <strong>@{{userName}}</strong>
+                                            </div>
+                                            <div class="RecentMyPostHeadRight">
+                                                <div class="PostDate"><span><img src="assets/PostsIcon.svg"
+                                                            alt="" /></span> {{post.publish_date}}
+                                                </div>
+                                                <!-- <div class="DLC d-flex">
+                                                <strong>DLC</strong> <span>$ 10</span>
+                                            </div> -->
+                                            </div>
+                                        </div>
+
+                                        <div class="PostImage">
+                                            <div class="slider">
+
+                                                <carousel [interval]="false">
+                                                    <div *ngIf="post.medias.image">
+                                                        <slide *ngFor="let img of post.medias.image">
+                                                            <img [src]="img" (click)="open(postImages,post.medias)"
+                                                                alt="first slide" style="display: block; width: 100%;">
+                                                        </slide>
+                                                    </div>
+                                                    <div *ngIf="post.medias.video">
+                                                        <slide *ngFor="let img of post.medias.video">
+                                                            <video controls (click)="open(postImages,post.medias)"
+                                                                alt="first slide" style="display: block; width: 100%;">
+                                                                <source [src]="img">
+                                                            </video>
+                                                        </slide>
+                                                    </div>
+                                                </carousel>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="PostOption">
+                                            <ul class="d-flex">
+                                                <!-- <li class="d-flex LikeCounter"><span><img src="../../..assets/likeIcon.svg"
+                                                            alt="" />
+                                                    </span>
+                                                    <strong>20</strong></li> -->
+                                                <li class="d-flex CommentCounter" (click)="LoadComments(post)"
+                                                    *ngIf=" post.comments ">
+                                                    <span><img src="assets/CommentIconBlue.svg" alt="" />
+                                                    </span>
+                                                    <strong
+                                                        *ngIf="post.total_comments > 0">{{post.total_comments}}</strong>
+                                                </li>
+
+                                                <li class="d-flex CommentCounter" *ngIf="!post.comments">
+                                                    <span><img src="assets/CommentIconGreFill.svg" alt="" />
+                                                    </span>
+                                                </li>
+
+
+                                                <div class="btn-group EmojiLoveDIV" dropdown>
+
+                                                    <span dropdownToggle class="dropdown-toggle">
+
+                                                        <img height="23px" width="23px" *ngIf="post.is60"
+                                                            src="assets/Poop.png" alt="" />
+                                                        <img height="23px" width="23px" *ngIf="post.is70"
+                                                            src="assets/emoji.png" alt="" />
+                                                        <img height="23px" width="23px" *ngIf="post.is80"
+                                                            src="assets/smily.png" alt="" />
+                                                        <img height="23px" width="23px" *ngIf="post.is90"
+                                                            src="assets/EmojiLove.svg" alt="" />
+                                                        <img height="23px" width="23px" *ngIf="post.is100"
+                                                            src="assets/fire.png" alt="" />
+                                                        <img height="23px" width="23px" *ngIf="post.totalVotes == '0'"
+                                                            src="assets/smily.png" alt="" />
+                                                    </span>
+                                                    <strong *ngIf="post.totalVotes > '0'">{{post.totalVotes}}</strong>
+
+
+                                                    <ul id="dropdown-basic" *dropdownMenu
+                                                        class="smile-list  dropdown-menu  dropdown-menu-center"
+                                                        role="menu">
+                                                        <div class="d-flex" *ngFor="let vote of post.votes">
+                                                            <li>
+                                                                <div class="EmojiLoveDIV-LI">
+                                                                    <img (click)="Voting('10',post)"
+                                                                        src="assets/fire.png" alt="" id="10">
+                                                                    <span *ngIf="vote.ten > 0 ">{{vote.ten}}</span>
+                                                                </div>
+                                                            </li>
+
+                                                            <li>
+                                                                <div class="EmojiLoveDIV-LI">
+                                                                    <img (click)="Voting('9',post)"
+                                                                        src="assets/heart.png" alt="" id="9">
+                                                                    <span *ngIf="vote.nine > 0">{{vote.nine}}</span>
+                                                                </div>
+                                                            </li>
+
+                                                            <li>
+                                                                <div class="EmojiLoveDIV-LI"><img
+                                                                        (click)="Voting('8',post)"
+                                                                        src="assets/smily.png" alt="" id="8">
+                                                                    <span *ngIf="vote.eight > 0">{{vote.eight}}</span>
+                                                                </div>
+                                                            </li>
+
+                                                            <li>
+                                                                <div class="EmojiLoveDIV-LI"><img
+                                                                        (click)="Voting('7',post)"
+                                                                        src="assets/emoji.png" alt="" id="7">
+                                                                    <span *ngIf="vote.seven > 0">{{vote.seven}}</span>
+                                                                </div>
+                                                            </li>
+
+                                                            <li>
+                                                                <div class="EmojiLoveDIV-LI"><img
+                                                                        (click)="Voting('6',post)" src="assets/Poop.png"
+                                                                        alt="" id="6">
+                                                                    <span *ngIf="vote.six > 0">{{vote.six}}</span>
+                                                                </div>
+                                                            </li>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                                <li class="ellipsisDropdown DropNone">
+                                                    <div class="btn-group " dropdown>
+                                                        <span dropdownToggle class="dropdown-toggle"><img
+                                                                src="assets/eclipse.svg" alt="" /></span>
+                                                        <ul id="dropdown-basic" *dropdownMenu
+                                                            class="smile-list  FeePostDropdown dropdown-menu  dropdown-menu-right"
+                                                            role="menu">
+                                                            <p class="CopyLinkElement" id="text-content{{i}}"
+                                                                name="text-content">
+                                                                {{post.link}}</p>
+                                                            <li>
+                                                                <!-- (click)="copyLink('post',post.post_id)" -->
+                                                                <div class="d-flex">
+
+                                                                    <ngx-copy-to-clipboard target="#text-content{{i}}"
+                                                                        [action]="cut" [success]="onSuccess"
+                                                                        [error]="onError"><img src="assets/CopyPast.svg"
+                                                                            alt="" id="10"> Copy Post
+                                                                        link
+                                                                    </ngx-copy-to-clipboard>
+                                                                    <!-- <p>Copy Post link</p> -->
+                                                                </div>
+                                                            </li>
+                                                            <!-- <li>
+                                                                <div class="d-flex">
+                                                                    <img src="assets/CopyPast.svg" alt="" id="10">
+                                                                    <p>Copy Post link</p>
+                                                                </div>
+                                                            </li> -->
+
+                                                            <li>
+                                                                <div class="d-flex" (click)="report()">
+                                                                    <img src="assets/Report.svg" alt="" id="10">
+                                                                    <p>Report</p>
+                                                                </div>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+                                                </li>
+
+
+                                            </ul>
+                                        </div>
+
+                                        <div class="ColorOption" *ngIf="post.tag">
+                                            <ul class="feed-list d-flex mr-2">
+
+                                                <li *ngFor="let hash of post.tags"><span
+                                                        class="DanceColor"></span><strong>{{hash}}</strong></li>
+
+                                            </ul>
+                                        </div>
+
+                                        <div class="mb-4" [ngxSummernoteView]="post.description"></div>
+                                        <div class="TypeComment d-flex mb-3" *ngIf="post.comments">
+                                            <div class="TypeCommentIMG"><span><img [src]="profileImage"></span></div>
+                                            <div class="TypeCommentBox ml-auto">
+                                                <textarea class="form-control" placeholder="Add Comment..."
+                                                    (blur)="onComment($event)"></textarea>
+                                                <a (click)="AddComment('comment',post)"><img src="assets/plane.svg"
+                                                        alt="" /></a>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- new -->
+                                        <div class="MultiComment " *ngIf="post.total_comments > 0">
+                                            <div class="d-flex" *ngFor="let cmt of post.commentArr">
+                                                <div *ngFor="let profile of cmt.profile">
+                                                    <div pTooltip="{{profile.display_name}}  at {{cmt.created_date }}"
+                                                        tooltipPosition="top" class="MultiCommentIMG">
+                                                        <span *ngIf="subscriberUserID !== cmt.user_id"
+                                                            (click)="viewProfile(profile.profile_url)"><img
+                                                                class="img-responsive user-photo"
+                                                                [src]="profile.profile_picture"></span>
+                                                        <span *ngIf="subscriberUserID === cmt.user_id"><img
+                                                                class="img-responsive user-photo"
+                                                                [src]="profile.profile_picture"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="MultiCommentBody ml-auto">
+                                                    <div class="PostedComment" *ngIf="!cmt.isModify; else editmode">
+                                                        <p><button *ngIf="cmt.amount > 0"
+                                                                class="btn btn-primary">{{cmt.amount}}</button>{{cmt.comment}}
+                                                        </p>
+                                                    </div>
+                                                    <ng-template #editmode>
+                                                        <div class="TypeCommentBox ml-auto w-100 mb-3"
+                                                            *ngIf="cmt.isModify ">
+                                                            <textarea class="form-control"
+                                                                (blur)="onComment($event)">{{cmt.comment}}</textarea>
+                                                            <a *ngIf="subscriberUserID == cmt.user_id"
+                                                                (click)="AddComment('modify',cmt.comment_uid)"><img
+                                                                    src="assets/plane.svg" alt="" /></a>
+                                                        </div>
+                                                    </ng-template>
+
+                                                    <div class="CommentOption">
+                                                        <ul class="d-flex">
+                                                            <li>
+                                                                <div class="d-flex LikedIcon "
+                                                                    (click)="likeComment(cmt)"
+                                                                    *ngIf="!cmt.you_liked  && !cmt.isLike ">
+                                                                    <span></span>
+                                                                    <strong
+                                                                        *ngIf="cmt.total_likes > '0'">{{cmt.total_likes}}</strong>
+                                                                </div>
+                                                                <div class="d-flex LikedIcon active"
+                                                                    (click)="unlikeComment(cmt)"
+                                                                    *ngIf="cmt.isLike || cmt.you_liked ">
+                                                                    <span></span>
+                                                                    <strong
+                                                                        *ngIf="cmt.total_likes > '0'">{{cmt.total_likes}}</strong>
+                                                                </div>
+                                                            </li>
+                                                            <!-- <li (click)="onTips(templateTips,'comment',cmt)"><a><img
+                                                                        src="assets/Currency.svg" alt="" /></a></li> -->
+                                                            <li (click)="reply(cmt)"><a><img src="assets/backArrow.svg"
+                                                                        alt="" /></a>
+                                                            </li>
+                                                            <li class="ellipsisDropdown DropNone"
+                                                                *ngIf="subscriberUserID === cmt.user_id">
+                                                                <div class="btn-group " dropdown>
+                                                                    <span dropdownToggle class="dropdown-toggle"><img
+                                                                            src="assets/eclipse.svg" alt="" /></span>
+                                                                    <ul id="dropdown-basic" *dropdownMenu
+                                                                        class="smile-list  dropdown-menu  dropdown-menu-right"
+                                                                        role="menu">
+
+
+                                                                        <li (click)="updateComment(cmt)">
+                                                                            <div class="d-flex">
+                                                                                <img src="assets/edit-tools.svg" alt=""
+                                                                                    id="10">
+                                                                                <p>Edit</p>
+                                                                            </div>
+                                                                        </li>
+
+                                                                        <li (click)="deleteComment('comment',cmt)">
+                                                                            <div class=" d-flex">
+                                                                                <img src="assets/interface.svg" alt=""
+                                                                                    id="10">
+                                                                                <p>Delete</p>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="TypeComment d-flex mb-3" *ngIf="cmt.replaytoComment ">
+                                                        <div class="TypeCommentIMG"><span><img
+                                                                    [src]="profileImage"></span>
+                                                        </div>
+                                                        <div class="TypeCommentBox ml-auto">
+                                                            <textarea class="form-control" placeholder="Add Comment..."
+                                                                (blur)="onComment($event)"></textarea>
+                                                            <a (click)="AddComment('reply',post)"><img
+                                                                    src="assets/plane.svg" alt="" /></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="SubComments" *ngIf="cmt.reply">
+                                                        <div class="MultiComment d-flex"
+                                                            *ngFor="let reply of cmt.reply">
+                                                            <div *ngFor="let profile of reply.profile">
+                                                                <div pTooltip="{{profile.display_name}}  at {{reply.created_date }}"
+                                                                    tooltipPosition="top" class="MultiCommentIMG">
+
+                                                                    <span *ngIf="subscriberUserID !== profile.user_id"
+                                                                        (click)="viewProfile(profile.profile_url)"><img
+                                                                            class="img-responsive user-photo"
+                                                                            [src]="profile.profile_picture"></span>
+                                                                    <span
+                                                                        *ngIf="subscriberUserID === profile.user_id"><img
+                                                                            class="img-responsive user-photo"
+                                                                            [src]="profile.profile_picture"></span>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="MultiCommentBody">
+                                                                <div class="PostedComment"
+                                                                    *ngIf="!reply.isModify ; else editmode ">
+                                                                    <p>{{reply.comment}} </p>
+                                                                </div>
+                                                                <ng-template #editmode>
+                                                                    <div class="TypeCommentBox ml-auto w-100 mb-3"
+                                                                        *ngIf="reply.isModify ">
+
+                                                                        <textarea class="form-control"
+                                                                            (blur)="onComment($event)">{{reply.comment}}</textarea>
+                                                                        <a
+                                                                            (click)="AddComment('modify',reply.comment_uid)"><img
+                                                                                src="assets/plane.svg" alt="" /></a>
+
+                                                                    </div>
+                                                                </ng-template>
+
+
+                                                                <div class="CommentOption">
+                                                                    <ul class="d-flex">
+                                                                        <li>
+                                                                            <div class="d-flex LikedIcon "
+                                                                                (click)="likeComment(reply)"
+                                                                                *ngIf="!reply.you_liked  && !reply.isLike ">
+                                                                                <span></span>
+                                                                                <strong
+                                                                                    *ngIf="reply.total_likes > '0'">{{reply.total_likes}}</strong>
+                                                                            </div>
+                                                                            <div class="d-flex LikedIcon active"
+                                                                                (click)="unlikeComment(reply)"
+                                                                                *ngIf="reply.isLike || reply.you_liked ">
+                                                                                <span></span>
+                                                                                <strong
+                                                                                    *ngIf="reply.total_likes > '0'">{{reply.total_likes}}</strong>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li class="ellipsisDropdown DropNone"
+                                                                            *ngIf="subscriberUserID === reply.user_id">
+                                                                            <div class="btn-group " dropdown>
+                                                                                <span dropdownToggle
+                                                                                    class="dropdown-toggle"><img
+                                                                                        src="assets/eclipse.svg"
+                                                                                        alt="" /></span>
+                                                                                <ul id="dropdown-basic" *dropdownMenu
+                                                                                    class="smile-list  dropdown-menu  dropdown-menu-right"
+                                                                                    role="menu">
+
+
+                                                                                    <li (click)="updateComment(reply)">
+                                                                                        <div class="d-flex">
+                                                                                            <img src="assets/edit-tools.svg"
+                                                                                                alt="" id="10">
+                                                                                            <p>Edit</p>
+                                                                                        </div>
+                                                                                    </li>
+
+                                                                                    <li
+                                                                                        (click)="deleteComment('reply',cmt,reply)">
+                                                                                        <div class=" d-flex">
+                                                                                            <img src="assets/interface.svg"
+                                                                                                alt="" id="10">
+                                                                                            <p>Delete</p>
+                                                                                        </div>
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ml-auto" *ngIf="post.total_comments > 5 && post.commentArr">
+                                            <p (click)="loadMore(post)">Load More</p>
+                                        </div>
+                                        <!-- new -->
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="allData.packs">
+                                <div *ngFor="let pack of allData.packs;let i = index">
+                                    <div class="RecentMyPostBody">
+                                        <div class="RecentMyPostHead d-flex">
+                                            <div class="RecentMyPostHeadLeft">
+                                                <span>
+                                                    <img [src]="profilePicture">
+                                                </span>
+                                                <h3>{{displayName}}</h3>
+                                                <strong>@{{userName}}</strong>
+                                            </div>
+                                            <div class="RecentMyPostHeadRight">
+                                                <div class="PostDate"><span><img src="assets/PostsIcon.svg"
+                                                            alt="" /></span>
+                                                    {{pack.publish_date}}
+                                                </div>
+                                                <div *ngIf="pack.purchase == null" class="DLC d-flex"
+                                                    (click)="Buy('pack',pack,templateBuy)">
+                                                    <strong>DLC</strong> <span> ${{pack.price}}</span>
+                                                </div>
+                                                <div *ngIf="pack.purchase"
+                                                    pTooltip="Purchased on {{pack.purchase.created_at}}"
+                                                    tooltipPosition="top" class="DLC d-flex"
+                                                    (click)="viewPack(pack.pack_id)">
+                                                    <strong>DLC</strong> <span>$ {{pack.price}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="PostImage">
+                                            <div class="slider">
+
+                                                <carousel [interval]="false">
+                                                    <div *ngIf="pack.medias.image">
+                                                        <slide *ngFor="let img of pack.medias.image">
+                                                            <img [src]="img" (click)="openPack(postImages,pack)"
+                                                                alt="first slide" style="display: block; width: 100%;">
+                                                        </slide>
+                                                    </div>
+                                                    <div *ngIf="pack.medias.video">
+                                                        <slide *ngFor="let img of pack.medias.video">
+                                                            <video controls (click)="openPack(postImages,pack)"
+                                                                alt="first slide" style="display: block; width: 100%;">
+                                                                <source [src]="img">
+                                                            </video>
+                                                        </slide>
+                                                    </div>
+                                                </carousel>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="PostOption">
+                                            <ul class="d-flex">
+
+                                                <li class="ellipsisDropdown DropNone ml-auto">
+                                                    <div class="btn-group " dropdown>
+                                                        <span dropdownToggle class="dropdown-toggle"><img
+                                                                src="assets/eclipse.svg" alt="" /></span>
+                                                        <ul id="dropdown-basic" *dropdownMenu
+                                                            class="smile-list FeePostDropdown dropdown-menu  dropdown-menu-right"
+                                                            role="menu">
+                                                            <p class="CopyLinkElement" id="text-content{{i}}"
+                                                                name="text-content">
+                                                                {{pack.link}}</p>
+                                                            <li>
+                                                                <!-- (click)="copyLink('post',post.post_id)" -->
+                                                                <div class="d-flex">
+
+                                                                    <ngx-copy-to-clipboard target="#text-content{{i}}"
+                                                                        [action]="cut" [success]="onSuccess"
+                                                                        [error]="onError"><img src="assets/CopyPast.svg"
+                                                                            alt="" id="10"> Copy Post
+                                                                        link
+                                                                    </ngx-copy-to-clipboard>
+                                                                    <!-- <p>Copy Post link</p> -->
+                                                                </div>
+                                                            </li>
+                                                            <!-- <li>
+                                                                <div class="d-flex">
+                                                                    <img src="assets/CopyPast.svg" alt="" id="10">
+                                                                    <p>Copy Post link</p>
+                                                                </div>
+                                                            </li> -->
+
+                                                            <li>
+                                                                <div class="d-flex" (click)="report()">
+                                                                    <img src="assets/Report.svg" alt="" id="10">
+                                                                    <p>Report</p>
+                                                                </div>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="ColorOption">
+
+                                            <div class="mb-4" [ngxSummernoteView]="pack.description"></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="allData.products">
+                                <div *ngFor="let prod of allData.products;let i = index">
+                                    <div class="RecentMyPostBody">
+                                        <div class="RecentMyPostHead d-flex">
+                                            <div class="RecentMyPostHeadLeft">
+                                                <span>
+                                                    <img [src]="profilePicture">
+                                                </span>
+                                                <h3>{{displayName}}</h3>
+                                                <strong>@{{userName}}</strong>
+                                            </div>
+                                            <div class="RecentMyPostHeadRight">
+                                                <div class="PostDate"><span><img src="assets/PostsIcon.svg"
+                                                            alt="" /></span>
+                                                    {{prod.created_at}}
+                                                </div>
+                                                <div *ngIf="prod.quantity_available > 0">
+                                                    <div *ngIf="prod.purchase == null" class="DLC d-flex"
+                                                        (click)="Buy('product',prod,templateBuy)">
+                                                        <strong>Product</strong> <span>$ {{prod.price}}</span>
+                                                    </div>
+                                                    <div *ngIf="prod.purchase"
+                                                        pTooltip="Purchased on {{prod.purchase.created_at}}"
+                                                        tooltipPosition="top" class="DLC d-flex"
+                                                        (click)="Buy('product',prod,templateBuy)">
+                                                        <strong>Product</strong> <span> ${{prod.price}}</span>
+                                                    </div>
+                                                </div>
+
+                                                <div *ngIf="prod.quantity_available === 0">
+                                                    <div class="DLC d-flex">
+                                                        <strong>Sold out</strong>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="PostImage">
+                                            <div class="slider">
+
+                                                <carousel [interval]="false">
+                                                    <div *ngIf="prod.medias.image">
+                                                        <slide *ngFor="let img of prod.medias.image">
+                                                            <img [src]="img" (click)="open(postImages,prod.medias)"
+                                                                alt="first slide" style="display: block; width: 100%;">
+                                                        </slide>
+                                                    </div>
+                                                    <div *ngIf="prod.medias.video">
+                                                        <slide *ngFor="let img of prod.medias.video">
+                                                            <video controls (click)="open(postImages,prod.medias)"
+                                                                alt="first slide" style="display: block; width: 100%;">
+                                                                <source [src]="img">
+                                                            </video>
+                                                        </slide>
+                                                    </div>
+                                                </carousel>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="PostOption">
+                                            <ul class="d-flex">
+
+                                                <li class="ellipsisDropdown DropNone ml-auto">
+                                                    <div class="btn-group " dropdown>
+                                                        <span dropdownToggle class="dropdown-toggle"><img
+                                                                src="assets/eclipse.svg" alt="" /></span>
+                                                        <ul id="dropdown-basic" *dropdownMenu
+                                                            class="smile-list  dropdown-menu  dropdown-menu-right"
+                                                            role="menu">
+                                                            <!-- <li>
+                                                                <div class="d-flex">
+                                                                    <img src="assets/SharePost.svg" alt="" id="10">
+                                                                    <p>Shared Post</p>
+                                                                </div>
+                                                            </li> -->
+                                                            <p class="CopyLinkElement" id="text-content{{i}}"
+                                                                name="text-content">
+                                                                {{prod.link}}</p>
+                                                            <li>
+                                                                <!-- (click)="copyLink('post',post.post_id)" -->
+                                                                <div class="d-flex">
+
+                                                                    <ngx-copy-to-clipboard target="#text-content{{i}}"
+                                                                        [action]="cut" [success]="onSuccess"
+                                                                        [error]="onError"><img src="assets/CopyPast.svg"
+                                                                            alt="" id="10"> Copy Post
+                                                                        link
+                                                                    </ngx-copy-to-clipboard>
+                                                                    <!-- <p>Copy Post link</p> -->
+                                                                </div>
+                                                            </li>
+
+                                                            <li>
+                                                                <div class="d-flex" (click)="report()">
+                                                                    <img src="assets/Report.svg" alt="" id="10">
+                                                                    <p>Report</p>
+                                                                </div>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="ColorOption" *ngIf="prod.tag">
+                                            <ul class="feed-list  d-flex mr-2">
+
+                                                <li *ngFor="let hash of prod.product_tags"><span
+                                                        class="DanceColor"></span><strong>{{hash}}</strong></li>
+
+
+                                            </ul>
+                                            <!-- <ul class="d-flex">
+
+                                                <li><span class="DanceColor"></span> <strong>#Dance</strong></li>
+                                                <li><span class="FunnyColor"></span> <strong>#Funny</strong></li>
+                                                <li><span class="MovieColor"></span> <strong>#Movie</strong></li>
+                                                <li><span class="DramaColor"></span> <strong>#Drama</strong></li>
+                                                <li><span class="RomanceColor"></span> <strong>#Romance</strong></li>
+                                            </ul> -->
+                                        </div>
+
+                                        <div class="mb-4" [ngxSummernoteView]="prod.product_description"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div *ngIf="allData.exclusives">
+
+                                <div *ngFor="let exclusive of allData.exclusives;let i = index">
+                                    <div class="RecentMyPostBody" *ngIf="exclusive.exclusive_status !== 'CANCELLED'">
+                                        <div class="RecentMyPostHead d-flex">
+                                            <div class="RecentMyPostHeadLeft">
+                                                <span>
+                                                    <img [src]="profilePicture">
+                                                </span>
+                                                <h3>{{displayName}}</h3>
+                                                <strong>@{{userName}}</strong>
+                                            </div>
+                                            <div class="RecentMyPostHeadRight">
+                                                <div class="PostDate"><span><img src="assets/PostsIcon.svg"
+                                                            alt="" /></span>
+                                                    {{exclusive.created_on}}
+                                                </div>
+                                                <div *ngIf="exclusive.isContribute">
+                                                    <div *ngIf="exclusive.purchase == null  " class="DLC d-flex"
+                                                        (click)="Buy('exclusive',exclusive,templateBuy)">
+                                                        <strong>Exclusive</strong> <span>
+                                                            ${{exclusive.min_contribution}}</span>
+                                                    </div>
+                                                    <div *ngIf="exclusive.purchase"
+                                                        pTooltip="Contributed {{exclusive.purchase.payment_info.amount}} on {{exclusive.purchase.created_at}}"
+                                                        tooltipPosition="top" class="DLC d-flex"
+                                                        (click)="Buy('exclusive',exclusive,templateBuy)">
+                                                        <strong>Exclusive</strong> <span>$
+                                                            {{exclusive.min_contribution}}</span>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+
+                                        <div class="PostImage">
+                                            <div class="slider">
+
+                                                <carousel [interval]="false">
+                                                    <div *ngIf="exclusive.medias.image">
+                                                        <slide *ngFor="let img of exclusive.medias.image">
+                                                            <img [src]="img" (click)="open(postImages,exclusive.medias)"
+                                                                alt="first slide" style="display: block; width: 100%;">
+                                                        </slide>
+                                                    </div>
+                                                    <div *ngIf="exclusive.medias.video">
+                                                        <slide *ngFor="let img of exclusive.medias.video">
+                                                            <video controls (click)="open(postImages,exclusive.medias)"
+                                                                alt="first slide" style="display: block; width: 100%;">
+                                                                <source [src]="img">
+                                                            </video>
+                                                        </slide>
+                                                    </div>
+                                                </carousel>
+                                                <div class=" progrebssbar">
+                                                    <p-progressBar [value]="exclusive.goal_achieved_percent">
+                                                    </p-progressBar>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="PostOption">
+                                            <ul class="d-flex">
+
+                                                <li class="ellipsisDropdown DropNone ml-auto">
+                                                    <div class="btn-group " dropdown>
+                                                        <span dropdownToggle class="dropdown-toggle"><img
+                                                                src="assets/eclipse.svg" alt="" /></span>
+                                                        <ul id="dropdown-basic" *dropdownMenu
+                                                            class="smile-list  dropdown-menu  dropdown-menu-right"
+                                                            role="menu">
+                                                            <!-- <li>
+                                                                <div class="d-flex">
+                                                                    <img src="assets/SharePost.svg" alt="" id="10">
+                                                                    <p>Shared Post</p>
+                                                                </div>
+                                                            </li> -->
+
+                                                            <p class="CopyLinkElement" id="text-content{{i}}"
+                                                                name="text-content">
+                                                                {{exclusive.link}}
+
+                                                            </p>
+                                                            <li>
+
+                                                                <div class="d-flex">
+
+                                                                    <ngx-copy-to-clipboard target="#text-content{{i}}"
+                                                                        [action]="cut" [success]="onSuccess"
+                                                                        [error]="onError"><img src="assets/CopyPast.svg"
+                                                                            alt="" id="10"> Copy Post
+                                                                        link
+                                                                    </ngx-copy-to-clipboard>
+                                                                    <!-- <p>Copy Post link</p> -->
+                                                                </div>
+                                                            </li>
+
+                                                            <li>
+                                                                <div class="d-flex" (click)="report()">
+                                                                    <img src="assets/Report.svg" alt="" id="10">
+                                                                    <p>Report</p>
+                                                                </div>
+                                                            </li>
+
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="ColorOption">
+
+                                            <div class="mb-4" [ngxSummernoteView]="exclusive.description"></div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="!havePost">
+                            <h3>No Posts yet.</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="col-md-3">
+                    <div class="SuggestionsDiv">
+                        <div class="SuggestionsTitle d-flex">
+                            <h2>Suggestions</h2>
+                            <span><img src="assets/FreeSymbol.svg" alt="" /></span>
+                        </div>
+                        <ul class="SuggestionsUl">
+                            <li>
+                                <div class="SuggestionBox d-flex">
+                                    <div class="SuggestionPicture"><span></span></div>
+                                    <div class="SuggestionName">
+                                        <h3>Sonia Patric</h3>
+                                        <a href="">@sofiahayat</a>
+                                    </div>
+                                    <div class="SuggestionViewProfile">
+                                        <a href="">View Profile</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="SuggestionBox d-flex">
+                                    <div class="SuggestionPicture"><span></span></div>
+                                    <div class="SuggestionName">
+                                        <h3>Sonia Patric</h3>
+                                        <a href="">@sofiahayat</a>
+                                    </div>
+                                    <div class="SuggestionViewProfile">
+                                        <a href="">View Profile</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="SuggestionViewMore"><a href="">View More</a></div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- old UI -->
+
+
+<ng-template #templateCard>
+    <div>
+        <div class="modal-header" *ngIf="isCardDetails">
+            <h2>Card Details</h2>
+            <button class="close"><img src="assets/CloseBlue.svg" (click)="close()" alt="" /></button>
+        </div>
+        <div class="modal-body">
+            <div class="NetmountWrap" *ngIf="isCardDetails">
+                <div class="SaveCard">
+                    <div class="NetAmount">
+
+                        <div>
+                            <table class="table">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Purchase</th>
+                                    <!-- <th width="120">Qty</th> -->
+                                </tr>
+                                <tr>
+                                    <td>{{payDescription}}</td>
+                                    <td>{{payAmount}}</td>
+                                    <td>{{payType}}</td>
+                                    <!-- <td>
+                                        <div class="qty">
+                                            <button class="button plus" (click)="plus()" [disabled]="isAvailQuantity">+</button>
+                                            <input type="text" disabled min="1" id="qty" class="form-control" [(ngModel)]="quantity">
+                                            <button class="button minus" (click)="minus()">-</button>
+                                        </div>
+                                    </td> -->
+                                </tr>
+                            </table>
+
+
+                        </div>
+                        <!-- <h3>Net amount : <strong>{{payAmount}}</strong></h3> -->
+                    </div>
+
+                    <div class="TotalSubTotal d-flex" *ngIf="isTaxShow">
+                        <div>
+                            <p>Subtotal</p>
+
+                            <p><strong>{{basicTotal}}</strong></p>
+
+                        </div>
+                        <div>
+                            <p>Taxes and fees</p>
+                            <p><strong>{{taxesAmount}}</strong></p>
+                        </div>
+
+                        <div>
+                            <p>Total</p>
+
+                            <p><strong>{{finalTotal}}</strong></p>
+                        </div>
+
+                    </div>
+                    <div class="row mb-5">
+                        <div class="col-md-12">
+                            <h4>Your Saved Card</h4>
+                        </div>
+
+
+
+                        <div *ngFor="let cards of savedCard" class="col-md-4">
+                            <div *ngIf="cards.show">
+                                <div class="SaveCardInfo d-flex">
+                                    <img *ngIf="cards.type" src="assets/{{cards.type}}.svg" />
+                                    <img *ngIf="!cards.type" src="assets/BankingDark.svg" />
+                                    <div class="form-control"> {{cards.cardNumber}}</div>
+                                </div>
+                            </div>
+
+
+                            <div class="d-flex" *ngIf="cards.show">
+                                <button class="btn mr-1 btn-primary mr-2 "
+                                    (click)="card(cards.paymentProfileID,'oldcard',templateInfo)">Pay
+                                </button>
+                                <!-- <button class="btn btn-danger" (click)="deleteCard(cards)">Delete
+                                    </button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="col-md-5 ml-auto ">
+                    <button class="btn mr-0 btn-secondary w-100" (click)="displayForm()">Add new Card</button>
+                </div> -->
+
+            </div>
+
+            <!-- card -->
+
+            <div class="col-md-12 mt-5" *ngIf="showCard">
+                <form class="row" [formGroup]="newCard"
+                    (ngSubmit)="onNewcardSubmit(newCard.valid,'newcard',templateInfo)">
+                    <div class="col-md-6">
+                        <h4>Billing Info</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Full name</label>
+                                    <input class="form-control" type="text" formControlName="newLegalName">
+                                    <div class="ErrorMessageDIV"
+                                        *ngIf="!newCard.get('newLegalName').valid && submitted">
+                                        <div class="text-danger" *ngIf="newCard.get('newLegalName').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input class="form-control" type="text" formControlName="newAddress">
+                                    <div class="ErrorMessageDIV" *ngIf="!newCard.get('newAddress').valid && submitted">
+                                        <div class="text-danger" *ngIf="newCard.get('newAddress').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <input class="form-control" type="text" formControlName="newCity">
+                                            <div class="ErrorMessageDIV"
+                                                *ngIf="!newCard.get('newCity').valid && submitted">
+                                                <div class="text-danger"
+                                                    *ngIf="newCard.get('newCity').errors['required']">
+                                                    This field is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Zipcode</label>
+                                            <input class="form-control" type="number" formControlName="newZipcode">
+                                            <div class="ErrorMessageDIV"
+                                                *ngIf="!newCard.get('newZipcode').valid && submitted">
+                                                <div class="text-danger"
+                                                    *ngIf="newCard.get('newZipcode').errors['required']">
+                                                    This field is required.
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>State</label>
+                                                <input class="form-control" type="text" formControlName="newState">
+                                                <div class="ErrorMessageDIV"
+                                                    *ngIf="!newCard.get('newState').valid && submitted">
+                                                    <div class="text-danger"
+                                                        *ngIf="newCard.get('newState').errors['required']">
+                                                        This field is required.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Country</label>
+                                                <p-dropdown class="form-control RadiusNone BorderNoneSelectBox"
+                                                    [options]="countryList" formControlName="newCountry"></p-dropdown>
+                                                <div class="ErrorMessageDIV"
+                                                    *ngIf="!newCard.get('newCountry').valid && submitted">
+                                                    <div class="text-danger"
+                                                        *ngIf="newCard.get('newCountry').errors['required']">
+                                                        This field is required.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Credit Card Info</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Card Number</label>
+                                    <input class="form-control" type="text" formControlName="newCardNumber">
+                                    <div class="ErrorMessageDIV"
+                                        *ngIf="!newCard.get('newCardNumber').valid && submitted">
+                                        <div class="text-danger"
+                                            *ngIf="newCard.get('newCardNumber').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+
+                                    <div class="ErrorMessageDIV" *ngIf="!newCard.get('newCardNumber').valid">
+                                        <div class="text-danger" *ngIf="newCard.get('newCardNumber').errors['pattern']">
+                                            Please enter valid card number
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Cardholder Name</label>
+                                    <input class="form-control" type="text" formControlName="newCardName">
+                                    <div class="ErrorMessageDIV" *ngIf="!newCard.get('newCardName').valid && submitted">
+                                        <div class="text-danger" *ngIf="newCard.get('newCardName').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Expire Date</label>
+                                    <p-calendar class="form-control" view="month" dateFormat="mm/yy"
+                                        [yearNavigator]="true" formControlName="newExpirydate"
+                                        yearRange="{{minYear}}:{{maxYear}}" [readonlyInput]="true">
+                                    </p-calendar>
+                                    <div class="ErrorMessageDIV"
+                                        *ngIf="!newCard.get('newExpirydate').valid && submitted">
+                                        <div class="text-danger"
+                                            *ngIf="newCard.get('newExpirydate').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>CVV</label>
+                                    <input class="form-control" type="password" formControlName="newCvv">
+                                    <div class="ErrorMessageDIV" *ngIf="!newCard.get('newCvv').valid && submitted">
+                                        <div class="text-danger" *ngIf="newCard.get('newCvv').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group d-flex ">
+                                    <p-checkbox class="mr-2" binary="true" formControlName="defaultCard"
+                                        [(ngModel)]="setDefault">
+                                    </p-checkbox>
+                                    <p>Make this card as default</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center mb-5">
+                        <button class="btn btn-primary" type="submit" [disabled]="showSpinnerNew">Submit <i
+                                *ngIf="showSpinnerNew" class="fa fa-spinner fa-spin"></i> </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- card -->
+    </div>
+
+    <div *ngIf="!isCardDetails">
+        <div class="modal-header">
+            <h2>Add Card</h2>
+            <button class="close"><img src="assets/CloseBlue.svg" (click)="close()" alt="" /></button>
+        </div>
+        <div class="modal-body">
+            <div class="NetAmount">
+                <!-- <h3>Net amount : <strong>{{payAmount}}</strong></h3> -->
+            </div>
+
+            <div class="TotalSubTotal d-flex">
+                <div>
+                    <p>Subtotal</p>
+
+                    <p><strong>{{basicTotal}}</strong></p>
+
+                </div>
+                <div>
+                    <p>Taxes and fees</p>
+                    <p><strong>{{taxesAmount}}</strong></p>
+                </div>
+
+                <div>
+                    <p>Total</p>
+
+                    <p><strong>{{finalTotal}}</strong></p>
+                </div>
+
+            </div>
+
+            <form class="row" [formGroup]="cardForm" (ngSubmit)="onSubmit(cardForm.valid,'firstpay',templateInfo)">
+                <div class="col-md-6">
+                    <h4>Billing Info</h4>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Full name</label>
+                                <input class="form-control" type="text" formControlName="legal_name">
+                                <div class="ErrorMessageDIV" *ngIf="!cardForm.get('legal_name').valid && submitted">
+                                    <div class="text-danger" *ngIf="cardForm.get('legal_name').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Address</label>
+                                <input class="form-control" type="text" formControlName="address">
+                                <div class="ErrorMessageDIV" *ngIf="!cardForm.get('address').valid && submitted">
+                                    <div class="text-danger" *ngIf="cardForm.get('address').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>City</label>
+                                        <input class="form-control" type="text" formControlName="city">
+                                        <div class="ErrorMessageDIV" *ngIf="!cardForm.get('city').valid && submitted">
+                                            <div class="text-danger" *ngIf="cardForm.get('city').errors['required']">
+                                                This field is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Zipcode</label>
+                                        <input class="form-control" type="number" formControlName="zipcode">
+                                        <div class="ErrorMessageDIV"
+                                            *ngIf="!cardForm.get('zipcode').valid && submitted">
+                                            <div class="text-danger" *ngIf="cardForm.get('zipcode').errors['required']">
+                                                This field is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>State</label>
+                                        <input class="form-control" type="text" formControlName="state"
+                                            (blur)="taxCount()">
+                                        <div class="ErrorMessageDIV" *ngIf="!cardForm.get('state').valid && submitted">
+                                            <div class="text-danger" *ngIf="cardForm.get('state').errors['required']">
+                                                This field is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Country</label>
+
+                                        <p-dropdown class="form-control RadiusNone BorderNoneSelectBox"
+                                            [options]="countryList" formControlName="country">
+                                        </p-dropdown>
+                                        <div class="ErrorMessageDIV"
+                                            *ngIf="!cardForm.get('country').valid && submitted">
+                                            <div class="text-danger" *ngIf="cardForm.get('country').errors['required']">
+                                                This field is required.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h4>Credit Card Info</h4>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Card Number</label>
+                                <input class="form-control" type="text" formControlName="cardNumber">
+                                <div class="ErrorMessageDIV" *ngIf="!cardForm.get('cardNumber').valid && submitted">
+                                    <div class="text-danger" *ngIf="cardForm.get('cardNumber').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+                                <div class="ErrorMessageDIV" *ngIf="!cardForm.get('cardNumber').valid">
+                                    <div class="text-danger" *ngIf="cardForm.get('cardNumber').errors['pattern']">
+                                        Please enter valid card number
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Cardholder Name</label>
+                                <input class="form-control" type="text" formControlName="cardName">
+                                <div class="ErrorMessageDIV" *ngIf="!cardForm.get('cardName').valid && submitted">
+                                    <div class="text-danger" *ngIf="cardForm.get('cardName').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Expire Date</label>
+                                <p-calendar class="form-control" view="month" dateFormat="mm/yy" [yearNavigator]="true"
+                                    formControlName="expirydate" yearRange="{{minYear}}:{{maxYear}}"
+                                    [readonlyInput]="true">
+                                </p-calendar>
+                                <div class="ErrorMessageDIV" *ngIf="!cardForm.get('expirydate').valid && submitted">
+                                    <div class="text-danger" *ngIf="cardForm.get('expirydate').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>CVV</label>
+                                <input class="form-control" type="password" formControlName="cvv">
+                                <div class="ErrorMessageDIV" *ngIf="!cardForm.get('cvv').valid && submitted">
+                                    <div class="text-danger" *ngIf="cardForm.get('cvv').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 text-center mb-5">
+                    <button class="btn btn-primary" type="submit" [disabled]="showSpinner">Submit <i *ngIf="showSpinner"
+                            class="fa fa-spinner fa-spin"></i> </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="PaymentLogos">
+        <ul class="d-flex">
+            <li><img src="assets/Visa.svg"></li>
+            <li><img src="assets/MasterCard.svg"></li>
+            <li><img src="assets/Maestro.svg"></li>
+            <li><img src="assets/JCB.svg"></li>
+            <li><img src="assets/Discover.svg"></li>
+        </ul>
+        <p>MS Media LLC, 611 Gateway Blvd, Suite 120, South San Francisco, California 94080</p>
+    </div>
+</ng-template>
+
+<!-- Modal for Tips -->
+<ng-template #templateTips>
+
+    <button class="close"><img src="assets/CloseBlue.svg" (click)="close()" alt="" /></button>
+    <div class="PopupProfile">
+        <span><img [src]="profilePicture"></span>
+        <strong>{{displayName}}</strong>
+    </div>
+    <div class="TipAmount">
+        <h4>Purchase an award</h4>
+    </div>
+    <div class="d-flex Fixed-Tips">
+        <p-checkbox name="groupname" (onChange)="onTipChange(5)" value="5" label="$5"></p-checkbox>
+        <p-checkbox name="groupname" (onChange)="onTipChange(10)" value="10" label="$10"></p-checkbox>
+        <p-checkbox name="groupname" (onChange)="onTipChange(15)" value="15" label="$15"></p-checkbox>
+        <p-checkbox name="groupname" (onChange)="onTipChange(20)" value="20" label="$20"></p-checkbox>
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" (blur)="onCustomeTip($event)" placeholder="Add custom tip">
+    </div>
+    <div class="text-danger" *ngIf="isTipValue">
+        Please select amount of tip.
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary w-100" (click)="onTip('tip',templateCard)" [disabled]="showSpinner">TIP
+            <i *ngIf="showSpinner" class="fa fa-spinner fa-spin"></i></button>
+    </div>
+
+</ng-template>
+
+
+<!-- Modal for Subscribe -->
+
+<ng-template #templateSubscribe>
+    <div class="Subscribepopup">
+        <div class="SubscribeTitle d-flex">
+            <h2>Subscribe</h2>
+            <button type="button" class="close ml-auto" aria-label="Close" (click)="close()">
+                <span aria-hidden="true"><img src="assets/CloseBlue.svg" alt="" /></span>
+            </button>
+        </div>
+        <div class="SubscribeBody">
+            <ul class="d-flex">
+                <div *ngFor="let tier of subscribeData;let i =index">
+                    <div *ngIf="(isAdd) || (tier.tier_price > 0 && isEdit)">
+                        <li>
+                            <div class="SubscribeBodyBox">
+
+                                <h2 *ngIf="tier.tier_price > 0"><span>{{i+1}}</span>{{tier.tier_name}}</h2>
+                                <h2 *ngIf="tier.tier_price === 0 && isAdd"><span>{{i+1}}</span>Free Tier</h2>
+
+                                <div class="SubscribePrice">
+
+                                    $ {{tier.tier_price}} <span>/m</span>
+                                </div>
+
+
+                                <div class="SubscribeBodyBoxBenifit" *ngIf="tier.tier_price > 0">
+
+                                    <h3>Subscription Benifit</h3>
+                                    <p>{{tier.tier_description}}</p>
+                                </div>
+
+                                <div class="SubscribeBodyBoxBenifit" *ngIf="isAdd && tier.tier_price === 0"></div>
+
+                                <button class="btn btn-primary" *ngIf="isAdd && tier.tier_price === 0"
+                                    (click)="openPurchase(tier,templateCard)">Subscribe for
+                                    Free</button>
+
+                                <button class="btn btn-primary" *ngIf="isAdd && tier.tier_price > 0"
+                                    (click)="openPurchase(tier,templateCard)">Purchase</button>
+
+                                <div *ngIf="isEdit">
+                                    <button class="btn btn-primary" *ngIf="tierValue === tier.tier_id "
+                                        (click)="onUpdate(tier,templateCard)">Current
+                                        Subcription</button>
+                                    <button class="btn btn-primary" *ngIf="tierValue !== tier.tier_id"
+                                        (click)="onUpdate(tier,templateCard)">Change
+                                        Subscription</button>
+                                </div>
+
+                            </div>
+                        </li>
+                    </div>
+                </div>
+            </ul>
+        </div>
+    </div>
+</ng-template>
+
+<!-- Display large Image -->
+<ng-template #postImages>
+    <div class="modal-header">
+        <h2>Media</h2>
+        <button class="close"><img src="assets/CloseBlue.svg" (click)="close()" alt="" /></button>
+    </div>
+    <div class="modal-body">
+        <carousel [interval]="false">
+            <div *ngIf="mediaImages.image">
+                <slide *ngFor="let img of mediaImages.image">
+                    <img (click)="hotlink(postId,img)" [src]="img" alt="first slide"
+                        style="display: block; width: 100%;">
+                </slide>
+            </div>
+            <div *ngIf="mediaImages.video">
+                <slide *ngFor="let img of mediaImages.video">
+                    <video controls (click)="hotlink(postId,img)" alt="first slide"
+                        style="display: block; width: 100%;">
+                        <source [src]="img">
+                    </video>
+                </slide>
+            </div>
+        </carousel>
+    </div>
+
+</ng-template>
+<!-- Display large Image -->
+
+<!-- purchase pack, product and exclusive -->
+<ng-template #templateBuy>
+    <div class="modal-header">
+        <h2>Confirm Purchase*</h2>
+        <button class="close"><img src="assets/CloseBlue.svg" (click)="close()" alt="" /></button>
+    </div>
+    <div class="modal-body">
+
+        <div *ngIf="isExclusivePurchase">
+            <div class="form-group">
+                <label>Total Contribution</label>
+                <p-dropdown class="form-control RadiusNone BorderNoneSelectBox" [options]="contributionsList"
+                    (onChange)="OnContributionChange($event)"></p-dropdown>
+                <div class="text-danger" *ngIf="isValue">
+                    Please select amount of contribution.
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="isProductPurchase">
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Purchase</th>
+                    <th width="120">Qty</th>
+                </tr>
+                <tr>
+                    <td>{{title}}</td>
+                    <td>{{productCost}}</td>
+                    <td>Product</td>
+                    <td>
+                        <div class="qty">
+                            <button class="button plus" (click)="plus()" [disabled]="isAvailQuantity">+</button>
+                            <input type="text" disabled min="1" id="qty" class="form-control" [(ngModel)]="quantity">
+                            <button class="button minus" (click)="minus()">-</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+
+
+        </div>
+
+        <div *ngIf="isPackPurchase">
+            <div class="NetAmount">
+                <h3>Pack Cost : <strong>{{packCost}}</strong></h3>
+            </div>
+        </div>
+
+        <div class="TotalSubTotal d-flex">
+            <div>
+                <p>Subtotal</p>
+
+                <p><strong>{{basicTotal}}</strong></p>
+
+            </div>
+            <div>
+                <p>Taxes and fees</p>
+                <p><strong>{{taxesAmount}}</strong></p>
+            </div>
+
+            <div>
+                <p>Total</p>
+
+                <p><strong>{{finalTotal}}</strong></p>
+            </div>
+
+        </div>
+        <div>
+
+            <div class="NetmountWrap" *ngIf="isCardDetails">
+                <div class="SaveCard">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Your Saved Card</h4>
+                        </div>
+
+                        <div *ngFor="let cards of savedCard" class="col-md-4">
+                            <div *ngIf="cards.show">
+                                <div class="SaveCardInfo d-flex">
+                                    <img src="assets/{{cards.type}}.svg" />
+                                    <div class="form-control"> {{cards.cardNumber}}</div>
+                                </div>
+                            </div>
+                            <div class="d-flex" *ngIf="cards.show">
+                                <button class="btn mr-1 btn-primary mr-2 "
+                                    (click)="card(cards.paymentProfileID,'oldcard',templateInfo)">Pay
+                                </button>
+
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- <div class="col-md-5 ml-auto">
+                    <button class="btn mr-0 btn-secondary w-100" (click)="displayForm()">Add new Card</button>
+                </div> -->
+
+            </div>
+
+
+
+            <!-- card -->
+
+            <div class="col-md-12 mt-5" *ngIf="showCard">
+                <form class="row" [formGroup]="newCard"
+                    (ngSubmit)="onNewcardSubmit(newCard.valid,'newcard',templateInfo)">
+                    <div class="col-md-6">
+                        <h4>Billing Info</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Full name</label>
+                                    <input class="form-control" type="text" formControlName="newLegalName">
+                                    <div class="ErrorMessageDIV"
+                                        *ngIf="!newCard.get('newLegalName').valid && submitted">
+                                        <div class="text-danger" *ngIf="newCard.get('newLegalName').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input class="form-control" type="text" formControlName="newAddress">
+                                    <div class="ErrorMessageDIV" *ngIf="!newCard.get('newAddress').valid && submitted">
+                                        <div class="text-danger" *ngIf="newCard.get('newAddress').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <input class="form-control" type="text" formControlName="newCity">
+                                            <div class="ErrorMessageDIV"
+                                                *ngIf="!newCard.get('newCity').valid && submitted">
+                                                <div class="text-danger"
+                                                    *ngIf="newCard.get('newCity').errors['required']">
+                                                    This field is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Zipcode</label>
+                                            <input class="form-control" type="number" formControlName="newZipcode">
+                                            <div class="ErrorMessageDIV"
+                                                *ngIf="!newCard.get('newZipcode').valid && submitted">
+                                                <div class="text-danger"
+                                                    *ngIf="newCard.get('newZipcode').errors['required']">
+                                                    This field is required.
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>State</label>
+                                                <input class="form-control" type="text" formControlName="newState">
+                                                <div class="ErrorMessageDIV"
+                                                    *ngIf="!newCard.get('newState').valid && submitted">
+                                                    <div class="text-danger"
+                                                        *ngIf="newCard.get('newState').errors['required']">
+                                                        This field is required.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Country</label>
+                                                <p-dropdown class="form-control RadiusNone BorderNoneSelectBox"
+                                                    [options]="countryList" formControlName="newCountry"></p-dropdown>
+                                                <div class="ErrorMessageDIV"
+                                                    *ngIf="!newCard.get('newCountry').valid && submitted">
+                                                    <div class="text-danger"
+                                                        *ngIf="newCard.get('newCountry').errors['required']">
+                                                        This field is required.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Credit Card Info</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Card Number</label>
+                                    <input class="form-control" type="text" formControlName="newCardNumber">
+                                    <div class="ErrorMessageDIV"
+                                        *ngIf="!newCard.get('newCardNumber').valid && submitted">
+                                        <div class="text-danger"
+                                            *ngIf="newCard.get('newCardNumber').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+
+                                    <div class="ErrorMessageDIV" *ngIf="!newCard.get('newCardNumber').valid">
+                                        <div class="text-danger" *ngIf="newCard.get('newCardNumber').errors['pattern']">
+                                            Please enter valid card number
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Cardholder Name</label>
+                                    <input class="form-control" type="text" formControlName="newCardName">
+                                    <div class="ErrorMessageDIV" *ngIf="!newCard.get('newCardName').valid && submitted">
+                                        <div class="text-danger" *ngIf="newCard.get('newCardName').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Expire Date</label>
+                                    <p-calendar class="form-control" view="month" dateFormat="mm/yy"
+                                        [yearNavigator]="true" formControlName="newExpirydate"
+                                        yearRange="{{minYear}}:{{maxYear}}" [readonlyInput]="true">
+                                    </p-calendar>
+                                    <div class="ErrorMessageDIV"
+                                        *ngIf="!newCard.get('newExpirydate').valid && submitted">
+                                        <div class="text-danger"
+                                            *ngIf="newCard.get('newExpirydate').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>CVV</label>
+                                    <input class="form-control" type="password" formControlName="newCvv">
+                                    <div class="ErrorMessageDIV" *ngIf="!newCard.get('newCvv').valid && submitted">
+                                        <div class="text-danger" *ngIf="newCard.get('newCvv').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group d-flex ">
+                                    <p-checkbox class="mr-2" binary="true" formControlName="defaultCard"
+                                        [(ngModel)]="setDefault">
+                                    </p-checkbox>
+                                    <p>Make this card as default</p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center mb-5">
+                        <button class="btn btn-primary" type="submit" [disabled]="showSpinnerNew">Submit <i
+                                *ngIf="showSpinnerNew" class="fa fa-spinner fa-spin"></i> </button>
+                    </div>
+                </form>
+            </div>
+            <!-- card -->
+        </div>
+
+        <div *ngIf="!isCardDetails">
+            <!-- <div class="modal-header mb-4">
+                <h4 class="text-primary">Add Card</h4>
+                <button class="close"><img src="assets/CloseBlue.svg" (click)="modalRef.hide()" alt="" /></button>
+            </div> -->
+            <div class="col-md-12">
+                <form class="row" [formGroup]="cardForm" (ngSubmit)="onSubmit(cardForm.valid,'firstpay',templateInfo)">
+                    <div class="col-md-6">
+                        <h4>Billing Info</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Full name</label>
+                                    <input class="form-control" type="text" formControlName="legal_name">
+                                    <div class="ErrorMessageDIV" *ngIf="!cardForm.get('legal_name').valid && submitted">
+                                        <div class="text-danger" *ngIf="cardForm.get('legal_name').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    <input class="form-control" type="text" formControlName="address">
+                                    <div class="ErrorMessageDIV" *ngIf="!cardForm.get('address').valid && submitted">
+                                        <div class="text-danger" *ngIf="cardForm.get('address').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            <input class="form-control" type="text" formControlName="city">
+                                            <div class="ErrorMessageDIV"
+                                                *ngIf="!cardForm.get('city').valid && submitted">
+                                                <div class="text-danger"
+                                                    *ngIf="cardForm.get('city').errors['required']">
+                                                    This field is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Zipcode</label>
+                                            <input class="form-control" type="number" formControlName="zipcode">
+                                            <div class="ErrorMessageDIV"
+                                                *ngIf="!cardForm.get('zipcode').valid && submitted">
+                                                <div class="text-danger"
+                                                    *ngIf="cardForm.get('zipcode').errors['required']">
+                                                    This field is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>State</label>
+                                            <input class="form-control" type="text" formControlName="state">
+                                            <div class="ErrorMessageDIV"
+                                                *ngIf="!cardForm.get('state').valid && submitted">
+                                                <div class="text-danger"
+                                                    *ngIf="cardForm.get('state').errors['required']">
+                                                    This field is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Country</label>
+
+                                            <p-dropdown class="form-control RadiusNone BorderNoneSelectBox"
+                                                [options]="countryList" formControlName="country">
+                                            </p-dropdown>
+                                            <div class="ErrorMessageDIV"
+                                                *ngIf="!cardForm.get('country').valid && submitted">
+                                                <div class="text-danger"
+                                                    *ngIf="cardForm.get('country').errors['required']">
+                                                    This field is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Credit Card Info</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Card Number</label>
+                                    <input class="form-control" type="text" formControlName="cardNumber">
+                                    <div class="ErrorMessageDIV" *ngIf="!cardForm.get('cardNumber').valid && submitted">
+                                        <div class="text-danger" *ngIf="cardForm.get('cardNumber').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                    <div class="ErrorMessageDIV" *ngIf="!cardForm.get('cardNumber').valid">
+                                        <div class="text-danger" *ngIf="cardForm.get('cardNumber').errors['pattern']">
+                                            Please enter valid card number
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Cardholder Name</label>
+                                    <input class="form-control" type="text" formControlName="cardName">
+                                    <div class="ErrorMessageDIV" *ngIf="!cardForm.get('cardName').valid && submitted">
+                                        <div class="text-danger" *ngIf="cardForm.get('cardName').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Expire Date</label>
+                                    <p-calendar class="form-control" view="month" dateFormat="mm/yy"
+                                        [yearNavigator]="true" formControlName="expirydate"
+                                        yearRange="{{minYear}}:{{maxYear}}" [readonlyInput]="true">
+                                    </p-calendar>
+                                    <div class="ErrorMessageDIV" *ngIf="!cardForm.get('expirydate').valid && submitted">
+                                        <div class="text-danger" *ngIf="cardForm.get('expirydate').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>CVV</label>
+                                    <input class="form-control" type="password" formControlName="cvv">
+                                    <div class="ErrorMessageDIV" *ngIf="!cardForm.get('cvv').valid && submitted">
+                                        <div class="text-danger" *ngIf="cardForm.get('cvv').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center mb-5">
+                        <button class="btn btn-primary" type="submit" [disabled]="showSpinner">Submit <i
+                                *ngIf="showSpinner" class="fa fa-spinner fa-spin"></i> </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="PaymentLogos">
+        <ul class="d-flex">
+            <li><img src="assets/Visa.svg"></li>
+            <li><img src="assets/MasterCard.svg"></li>
+            <li><img src="assets/Maestro.svg"></li>
+            <li><img src="assets/JCB.svg"></li>
+            <li><img src="assets/Discover.svg"></li>
+        </ul>
+        <p>MS Media LLC, 611 Gateway Blvd, Suite 120, South San Francisco, California 94080</p>
+    </div>
+</ng-template>
+<!-- purchase pack, product and exclusive -->
+
+<!-- modal for required information -->
+<ng-template #templateInfo>
+    <div class="modal-header" *ngIf="isCardDetails">
+        <h2>Required Information</h2>
+        <button class="close"><img src="assets/CloseBlue.svg" (click)="close()" alt="" /></button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label> {{infoRequired}}<span style="color: red;">*</span></label>
+                    <input type="text" [(ngModel)]="information" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <button class="btn btn-primary w-100" (click)="buyProduct()" [disabled]="showSpinner">Submit
+                <i *ngIf="showSpinner" class="fa fa-spinner fa-spin"></i></button>
+        </div>
+    </div>
+</ng-template>
+<!-- modal for tier -->
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

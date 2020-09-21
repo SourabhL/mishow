@@ -1,0 +1,1667 @@
+<section class="ProfileHeader ContentWrap">
+    <div class="ProfileFull-Img" *ngIf="isTimeline">
+        <span><img [src]="timelineImage" alt="" /></span>
+    </div>
+    <div class="ProfileFull-Img" *ngIf="!isTimeline">
+        <span><img src="assets/profile-img.jpg" alt="" /></span>
+    </div>
+    <!-- <div class="container">
+        <div class="TipSubscribd d-flex">
+            <a href=""><span>$</span> <strong>Tip</strong></a>
+            <a href=""><span><img src="../../..assets/UserCheckWhite.svg" alt="" /></span>
+                <strong>Subscribed</strong></a>
+        </div>
+    </div> -->
+</section>
+
+<section class="ProfileContent">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="UserProfileInfo d-flex">
+                    <div class="UserProfilePicture">
+                        <span>
+                            <img [src]="profilePicture">
+                        </span>
+                    </div>
+                    <!-- <div class="UserProfileBody ">
+                        <h3>{{displayName}}</h3>
+                        <h4>@{{userName}}</h4>
+                        <h5 class="d-flex"><span><img src="assets/LocationPin.svg" alt="" /> </span>
+                            <strong>{{location}}</strong></h5>
+                        <div class="Verified d-flex" *ngIf="isVerified"><span><img src="assets/verified.svg"
+                                    alt="" /></span><strong>Verified</strong></div>
+                    </div> -->
+                </div>
+                <div class="UserProfileLink">
+                    <ul>
+                        <li><a><span><img src="assets/PostsIcon.svg"></span> <strong>{{postLength}}
+                                    Posts</strong></a>
+                        </li>
+                        <!-- <li><a href=""><span><img src="../../..assets/likeIcon.svg"></span> <strong>2008
+                                    Likes</strong></a></li> -->
+                        <li><a><span><img src="assets/PhotosIcon.svg"></span>
+                                <strong>{{totalImageCount}}
+                                    Photos</strong></a>
+                        </li>
+                        <li><a><span><img src="assets/VideoIcon.svg"></span>
+                                <strong>{{totalVideoCount}}
+                                    Videos</strong></a></li>
+                        <li *ngIf="totalSubsciber > 0" (click)="showSubscriber('subscriber')"><a><span><img
+                                        src="assets/SubscribersIconGrey.svg"></span>
+                                <strong>{{totalSubsciber}}
+                                    Subscribers</strong></a></li>
+                        <li *ngIf="totalSubsciber == 0"><a><span><img src="assets/SubscribersIconGrey.svg"></span>
+                                <strong>{{totalSubsciber}}
+                                    Subscribers</strong></a></li>
+                        <li *ngIf="totalFollowing > 0" (click)="showSubscriber('following')"><a><span><img
+                                        src="assets/following.svg"></span>
+                                <strong>{{totalFollowing}}
+                                    Following</strong></a></li>
+                        <li *ngIf="totalFollowing == 0"><a><span><img src="assets/following.svg"></span>
+                                <strong>{{totalFollowing}}
+                                    Following</strong></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="SubscribersDiv d-flex">
+                    <div class="UserProfileBody ">
+                        <h3>{{displayName}}</h3>
+                        <h4>@{{userName}}</h4>
+                        <h5 class="d-flex"><span><img src="assets/LocationPin.svg" alt="" /> </span>
+                            <strong>{{location}}</strong></h5>
+                        <div class="Verified d-flex" *ngIf="isVerified"><span><img src="assets/verified.svg"
+                                    alt="" /></span><strong>Verified</strong></div>
+                    </div>
+                    <!-- <div class="SubscribersInfo" (click)="showSubscriber()">
+                        <span><img src="../../..assets/SubscribersIcon.svg" alt="" /></span>
+                        <strong>{{totalSubsciber}} Subscribers</strong>
+                    </div> -->
+
+                    <!-- <div class="SubscribersInfo" (click)="showSubscriber()">
+                        <span><img src="../../..assets/SubscribersIcon.svg" alt="" /></span>
+                        <strong>{{totalSubsciber}} Following</strong>
+                    </div> -->
+                    <div class="Subscriberseclipse ellipsisDropdown DropNone">
+                        <div class="btn-group " dropdown>
+                            <span dropdownToggle class="dropdown-toggle"><img src="assets/eclipse.svg" alt="" /></span>
+                            <ul id="dropdown-basic" *dropdownMenu class="smile-list  dropdown-menu  dropdown-menu-right"
+                                role="menu">
+
+
+                                <li (click)="editProfile(template)">
+                                    <div class="d-flex">
+                                        <img src="assets/edit-tools.svg" alt="" id="10">
+                                        <p>Edit Profile</p>
+                                    </div>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="ColorOption" *ngIf="isTag">
+                    <ul class="d-flex border-bottom-0">
+                        <li *ngFor="let t of tags"><span class="DanceColor "></span> <strong>{{t[0]}}</strong></li>
+                        <!-- <li><span class="FunnyColor"></span> <strong>#Funny</strong></li>
+                        <li><span class="MovieColor"></span> <strong>#Movie</strong></li>
+                        <li><span class="DramaColor"></span> <strong>#Drama</strong></li>
+                        <li><span class="RomanceColor"></span> <strong>#Romance</strong></li> -->
+                    </ul>
+                </div>
+                <div class="AboutMe">
+                    <div class="AboutMeTitle d-flex">
+                        <h2>About Me</h2>
+                        <span><img src="assets/minus.svg" alt=""></span>
+                    </div>
+                    <p>{{about}} <a href=""><strong>Show More
+                                Info</strong> <span><img src="assets/DownArrowBlue.svg" alt="" /> </span></a>
+                    </p>
+
+                    <div class="AboutImages">
+                        <div class="col-12" *ngIf="!isClose && isVideo">
+                            <div class="video-boxs">
+                                <video controls class="videoAbout">
+                                    <source [src]="profileVideo">
+                                </video>
+                            </div>
+                            <!-- <div class="hidevideo">
+                                    <i (click)="onClose()" class="fa fa-arrow-circle-o-up"></i>
+                                </div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="RecentMyPost">
+                    <div class="RecentMyPostTitle">
+                        <div class="d-flex">
+                            <h2>My Recent Posts</h2>
+                            {{allData.length}}
+                            <div *ngIf="havePost" class="ml-auto btn-group  ellipsisDropdown DropNone" dropdown>
+                                <span dropdownToggle class="dropdown-toggle">
+                                    <strong>Filter</strong>
+                                    <img src="assets/Filter.svg" alt="" />
+                                </span>
+
+                                <!-- new -->
+                                <ul id="dropdown-basic" *dropdownMenu
+                                    class="smile-list  dropdown-menu  dropdown-menu-right" role="menu">
+                                    <li (click)="Filter('post')">
+                                        <div class="d-flex">
+                                            <img src="assets/post.svg" alt="" id="10">
+                                            <p>Post</p>
+                                        </div>
+                                    </li>
+
+
+                                    <li (click)="Filter('pack')">
+                                        <div class="d-flex">
+                                            <img src="assets/pack.svg" alt="" id="10">
+                                            <p>Pack</p>
+                                        </div>
+                                    </li>
+
+                                    <li (click)="Filter('product')">
+                                        <div class="d-flex">
+                                            <img src="assets/product.svg" alt="" id="10">
+                                            <p>Product</p>
+                                        </div>
+                                    </li>
+                                    <li (click)="Filter('exclusive')">
+                                        <div class=" d-flex">
+                                            <img src="assets/exclusive.svg" alt="" id="10">
+                                            <p>Exclusive</p>
+                                        </div>
+                                    </li>
+                                    <li (click)="Filter('all')">
+                                        <div class="d-flex">
+                                            <img src="assets/All.svg" alt="" id="10">
+                                            <p>ALL</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <!-- new -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="!havePost">
+                        <h4>No posts available to display.</h4>
+                    </div>
+
+                    <div *ngIf="allData && havePost">
+
+                        <div *ngIf="allData.posts">
+                            <div *ngFor="let post of allData.posts;let i = index">
+                                <div class="RecentMyPostBody" *ngIf="post.isDelete">
+                                    <div class="RecentMyPostHead d-flex">
+                                        <div class="RecentMyPostHeadLeft">
+                                            <span>
+                                                <img [src]="profilePicture">
+                                            </span>
+                                            <h3>{{displayName}}</h3>
+                                            <strong>@{{userName}}</strong>
+                                        </div>
+                                        <div class="RecentMyPostHeadRight">
+                                            <div class="PostDate"><span><img src="assets/PostsIcon.svg" alt="" />
+                                                </span>
+                                                {{post.publish_date}}
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="PostImage">
+                                        <div class="slider">
+
+                                            <carousel [interval]="false">
+                                                <div *ngIf="post.medias.image">
+                                                    <slide *ngFor="let img of post.medias.image">
+                                                        <img [src]="img" (click)="open(postImages,post.medias)"
+                                                            alt="first slide" style="display: block; width: 100%;">
+                                                    </slide>
+                                                </div>
+                                                <div *ngIf="post.medias.video">
+                                                    <slide *ngFor="let img of post.medias.video">
+                                                        <video controls (click)="open(postImages,post.medias)"
+                                                            alt="first slide" style="display: block; width: 100%;">
+                                                            <source [src]="img">
+                                                        </video>
+                                                    </slide>
+                                                </div>
+                                            </carousel>
+                                        </div>
+
+                                    </div>
+                                    <div class="PostOption">
+                                        <ul class="d-flex">
+                                            <!-- <li class="d-flex LikeCounter"><span><img src="../../..assets/likeIcon.svg"
+                                                        alt="" />
+                                                </span>
+                                                <strong>20</strong></li> -->
+                                            <li class="d-flex CommentCounter" (click)="LoadComments(post)"
+                                                *ngIf="post.comments ">
+                                                <span><img src="assets/CommentIconBlue.svg" alt="" />
+                                                </span>
+                                                <strong
+                                                    *ngIf="post.total_comments >  0">{{post.total_comments}}</strong>
+                                            </li>
+
+                                            <li class="d-flex CommentCounter" *ngIf="!post.comments ">
+                                                <span><img src="assets/CommentIconGreFill.svg" alt="" />
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <div class="btn-group EmojiLoveDIV" dropdown>
+                                                    <span dropdownToggle class="dropdown-toggle">
+                                                        <img height="23px" width="23px" *ngIf="post.is60"
+                                                            src="assets/Poop.png" alt="" />
+                                                        <img height="23px" width="23px" *ngIf="post.is70"
+                                                            src="assets/emoji.png" alt="" />
+                                                        <img height="23px" width="23px" *ngIf="post.is80"
+                                                            src="assets/smily.png" alt="" />
+                                                        <img height="23px" width="23px" *ngIf="post.is90"
+                                                            src="assets/EmojiLove.svg" alt="" />
+                                                        <img height="23px" width="23px" *ngIf="post.is100"
+                                                            src="assets/fire.png" alt="" />
+                                                        <img height="23px" width="23px" *ngIf="post.totalVotes == '0'"
+                                                            src="assets/smily.png" alt="" />
+                                                    </span>
+                                                    <strong *ngIf="post.totalVotes > '0'">{{post.totalVotes}}</strong>
+                                                    <ul id="dropdown-basic" *dropdownMenu
+                                                        class="smile-list  dropdown-menu  dropdown-menu-center"
+                                                        role="menu">
+                                                        <div class="d-flex" *ngFor="let vote of post.votes">
+                                                            <li>
+                                                                <div class="EmojiLoveDIV-LI">
+                                                                    <img (click)="Voting('10',post.post_id)"
+                                                                        src="assets/fire.png" alt="" id="10">
+                                                                    <span *ngIf="vote.ten > 0 ">{{vote.ten}}</span>
+                                                                </div>
+                                                            </li>
+
+                                                            <li>
+                                                                <div class="EmojiLoveDIV-LI">
+                                                                    <img (click)="Voting('9',post.post_id)"
+                                                                        src="assets/heart.png" alt="" id="9">
+                                                                    <span *ngIf="vote.nine > 0">{{vote.nine}}</span>
+                                                                </div>
+                                                            </li>
+
+                                                            <li>
+                                                                <div class="EmojiLoveDIV-LI"><img
+                                                                        (click)="Voting('8',post.post_id)"
+                                                                        src="assets/smily.png" alt="" id="8">
+                                                                    <span *ngIf="vote.eight > 0">{{vote.eight}}</span>
+
+
+                                                                </div>
+                                                            </li>
+
+                                                            <li>
+                                                                <div class="EmojiLoveDIV-LI"><img
+                                                                        (click)="Voting('7',post.post_id)"
+                                                                        src="assets/emoji.png" alt="" id="7">
+                                                                    <span *ngIf="vote.seven > 0">{{vote.seven}}</span>
+                                                                </div>
+                                                            </li>
+
+                                                            <li>
+                                                                <div class="EmojiLoveDIV-LI"><img
+                                                                        (click)="Voting('6',post.post_id)"
+                                                                        src="assets/Poop.png" alt="" id="6">
+                                                                    <span *ngIf="vote.six > 0">{{vote.six}}</span>
+                                                                </div>
+
+                                                            </li>
+                                                        </div>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <!-- <li class="d-flex AwardsCounter"><span><img
+                                                        src="../../..assets/daimond.svg" alt="" />
+                                                </span>
+                                                <strong>Awards : 5</strong></li> -->
+                                            <li class="ellipsisDropdown DropNone">
+                                                <div class="btn-group " dropdown>
+                                                    <span dropdownToggle class="dropdown-toggle"><img
+                                                            src="assets/eclipse.svg" alt="" /></span>
+                                                    <ul id="dropdown-basic" *dropdownMenu
+                                                        class="smile-list  dropdown-menu  dropdown-menu-right"
+                                                        role="menu">
+
+                                                        <li (click)="update('post',post.post_id)" *ngIf="post.isUpdate">
+                                                            <div class="d-flex">
+                                                                <img src="assets/edit-tools.svg" alt="" id="10">
+                                                                <p>Edit</p>
+                                                            </div>
+                                                        </li>
+
+                                                        <li (click)="delete('post',post)">
+                                                            <div class=" d-flex">
+                                                                <img src="assets/interface.svg" alt="" id="10">
+                                                                <p>Delete</p>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="ColorOption">
+                                        <ul class="feed-list d-flex" *ngIf="post.tag">
+                                            <li *ngFor="let hash of post.tags"><span
+                                                    class="DanceColor"></span><strong>{{hash}}</strong></li>
+                                        </ul>
+                                        <!-- <ul class="d-flex">
+
+                                            <li><span class="DanceColor"></span> <strong>#Dance</strong></li>
+                                            <li><span class="FunnyColor"></span> <strong>#Funny</strong></li>
+                                            <li><span class="MovieColor"></span> <strong>#Movie</strong></li>
+                                            <li><span class="DramaColor"></span> <strong>#Drama</strong></li>
+                                            <li><span class="RomanceColor"></span> <strong>#Romance</strong></li>
+                                        </ul> -->
+
+                                    </div>
+                                    <!-- <div class="mb-4" [ngxSummernote]="config" id="editor"
+                                        [(ngModel)]="post.description">
+                                    </div> -->
+
+                                    <div class="mb-4" class="noteDescription" [ngxSummernoteView]="post.description">
+                                    </div>
+
+                                    <div class="TypeComment d-flex mb-3" *ngIf="post.comments">
+                                        <div class="TypeCommentIMG"><span><img [src]="profilePicture"></span></div>
+                                        <div class="TypeCommentBox ml-auto">
+                                            <textarea class="form-control" placeholder="Add Comment..."
+                                                (blur)="onComment($event)"></textarea>
+                                            <a (click)="AddComment('comment',post.post_id)"><img src="assets/plane.svg"
+                                                    alt="" /></a>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- new -->
+                                    <div class="MultiComment " *ngIf="post.total_comments > 0">
+                                        <div class="d-flex" *ngFor="let cmt of post.commentArr">
+                                            <div *ngFor="let profile of cmt.profile">
+                                                <div pTooltip="{{profile.display_name}}  on {{cmt.created_date }}"
+                                                    tooltipPosition="top" class="MultiCommentIMG">
+                                                    <span *ngIf="userId === reply.user_id"><img
+                                                            class="img-responsive user-photo"
+                                                            [src]="profile.profile_picture"></span>
+
+                                                    <span *ngIf="userId !== reply.user_id"
+                                                        (click)="viewProfile(profile.profile_url)"><img
+                                                            class="img-responsive user-photo"
+                                                            [src]="profile.profile_picture"></span>
+                                                </div>
+                                            </div>
+                                            <div class="MultiCommentBody ml-auto">
+                                                <div class="PostedComment" *ngIf=" !cmt.isModify  ; else editmode">
+                                                    <p><button *ngIf="cmt.amount > 0"
+                                                            class="btn btn-primary">{{cmt.amount}}</button>{{cmt.comment}}
+                                                    </p>
+                                                </div>
+
+                                                <ng-template #editmode>
+                                                    <div class="TypeCommentBox ml-auto w-100 mb-3"
+                                                        *ngIf="cmt.isModify ">
+                                                        <textarea class="form-control"
+                                                            (blur)="onComment($event)">{{cmt.comment}}</textarea>
+                                                        <a (click)="AddComment('modify',cmt.comment_uid)"><img
+                                                                src="assets/plane.svg" alt="" /></a>
+                                                    </div>
+                                                </ng-template>
+
+                                                <div class="CommentOption">
+                                                    <ul class="d-flex">
+                                                        <li>
+                                                            <div class="d-flex LikedIcon " (click)="likeComment(cmt)"
+                                                                *ngIf="!cmt.you_liked  && !cmt.isLike ">
+                                                                <span></span>
+                                                                <strong
+                                                                    *ngIf="cmt.total_likes > '0'">{{cmt.total_likes}}</strong>
+                                                            </div>
+                                                            <div class="d-flex LikedIcon active"
+                                                                (click)="unlikeComment(cmt)"
+                                                                *ngIf="cmt.isLike || cmt.you_liked ">
+                                                                <span></span>
+                                                                <strong
+                                                                    *ngIf="cmt.total_likes > '0'">{{cmt.total_likes}}</strong>
+                                                            </div>
+                                                        </li>
+                                                        <!-- <li (click)="onTips(templateTips,'comment',cmt)"><a><img
+                                                                    src="assets/Currency.svg" alt="" /></a>
+                                                        </li> -->
+                                                        <li (click)="reply(cmt)"><a><img src="assets/backArrow.svg"
+                                                                    alt="" /></a>
+                                                        </li>
+                                                        <li class="ellipsisDropdown DropNone"
+                                                            *ngIf="userId === cmt.user_id">
+                                                            <div class="btn-group " dropdown>
+                                                                <span dropdownToggle class="dropdown-toggle"><img
+                                                                        src="assets/eclipse.svg" alt="" /></span>
+                                                                <ul id="dropdown-basic" *dropdownMenu
+                                                                    class="smile-list  dropdown-menu  dropdown-menu-right"
+                                                                    role="menu">
+
+
+                                                                    <li (click)="updateComment(cmt)">
+                                                                        <div class="d-flex">
+                                                                            <img src="assets/edit-tools.svg" alt=""
+                                                                                id="10">
+                                                                            <p>Edit</p>
+                                                                        </div>
+                                                                    </li>
+
+                                                                    <li (click)="deleteComment('comment',cmt)">
+                                                                        <div class=" d-flex">
+                                                                            <img src="assets/interface.svg" alt=""
+                                                                                id="10">
+                                                                            <p>Delete</p>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="TypeComment d-flex mb-3" *ngIf="cmt.replaytoComment ">
+                                                    <div class="TypeCommentIMG"><span><img
+                                                                [src]="profilePicture"></span>
+                                                    </div>
+                                                    <div class="TypeCommentBox ml-auto">
+                                                        <textarea class="form-control" placeholder="Add Comment..."
+                                                            (blur)="onComment($event)"></textarea>
+                                                        <a (click)="AddComment('reply',cmt.comment_uid)"><img
+                                                                src="assets/plane.svg" alt="" /></a>
+                                                    </div>
+                                                </div>
+                                                <div class="SubComments" *ngIf="cmt.reply">
+                                                    <div class="MultiComment d-flex" *ngFor="let reply of cmt.reply">
+                                                        <div *ngFor="let profile of reply.profile">
+                                                            <div pTooltip="{{profile.display_name}}  at {{reply.created_date }}"
+                                                                tooltipPosition="top" class="MultiCommentIMG">
+
+                                                                <span *ngIf="subscriberUserID !== profile.user_id"
+                                                                    (click)="viewProfile(profile.profile_url)"><img
+                                                                        class="img-responsive user-photo"
+                                                                        [src]="profile.profile_picture"></span>
+                                                                <span *ngIf="subscriberUserID === profile.user_id"><img
+                                                                        class="img-responsive user-photo"
+                                                                        [src]="profile.profile_picture"></span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="MultiCommentBody">
+                                                            <div class="PostedComment"
+                                                                *ngIf="!reply.isModify; else editmode">
+                                                                <p>{{reply.comment}} </p>
+                                                            </div>
+                                                            <ng-template #editmode>
+                                                                <div class="TypeCommentBox ml-auto w-100 mb-3"
+                                                                    *ngIf="reply.isModify ">
+                                                                    <textarea class="form-control"
+                                                                        (blur)="onComment($event)">{{reply.comment}}</textarea>
+                                                                    <a (click)="AddComment('modify',reply.comment_uid)"><img
+                                                                            src="assets/plane.svg" alt="" /></a>
+                                                                </div>
+                                                            </ng-template>
+
+                                                            <div class="CommentOption">
+                                                                <ul class="d-flex">
+                                                                    <li>
+                                                                        <div class="d-flex LikedIcon "
+                                                                            (click)="likeComment(reply)"
+                                                                            *ngIf="!reply.you_liked  && !reply.isLike ">
+                                                                            <span></span>
+                                                                            <strong
+                                                                                *ngIf="reply.total_likes > '0'">{{reply.total_likes}}</strong>
+                                                                        </div>
+                                                                        <div class="d-flex LikedIcon active"
+                                                                            (click)="unlikeComment(reply)"
+                                                                            *ngIf="reply.isLike || reply.you_liked ">
+                                                                            <span></span>
+                                                                            <strong
+                                                                                *ngIf="reply.total_likes > '0'">{{reply.total_likes}}</strong>
+                                                                        </div>
+                                                                    </li>
+                                                                    <!-- <li><a><img src="assets/backArrow.svg" alt="" /></a>
+                                                                    </li>-->
+
+                                                                    <li class="ellipsisDropdown DropNone"
+                                                                        *ngIf="userId === reply.user_id">
+                                                                        <div class="btn-group " dropdown>
+                                                                            <span dropdownToggle
+                                                                                class="dropdown-toggle"><img
+                                                                                    src="assets/eclipse.svg"
+                                                                                    alt="" /></span>
+                                                                            <ul id="dropdown-basic" *dropdownMenu
+                                                                                class="smile-list  dropdown-menu  dropdown-menu-right"
+                                                                                role="menu">
+
+
+                                                                                <li (click)="updateComment(reply)">
+                                                                                    <div class="d-flex">
+                                                                                        <img src="assets/edit-tools.svg"
+                                                                                            alt="" id="10">
+                                                                                        <p>Edit</p>
+                                                                                    </div>
+                                                                                </li>
+
+                                                                                <li
+                                                                                    (click)="deleteComment('reply',cmt,reply)">
+                                                                                    <div class=" d-flex">
+                                                                                        <img src="assets/interface.svg"
+                                                                                            alt="" id="10">
+                                                                                        <p>Delete</p>
+                                                                                    </div>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- new -->
+                                    <div class="ml-auto" *ngIf="post.total_comments > 5 && post.commentArr">
+                                        <p (click)="loadMore(post)">Load More</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="allData.packs">
+                            <div *ngFor="let pack of allData.packs;let i = index">
+                                <div class="RecentMyPostBody" *ngIf="pack.isDelete">
+                                    <div class="RecentMyPostHead d-flex">
+                                        <div class="RecentMyPostHeadLeft">
+                                            <span>
+                                                <img [src]="profilePicture">
+                                            </span>
+                                            <h3>{{displayName}}</h3>
+                                            <strong>@{{userName}}</strong>
+                                        </div>
+                                        <div class="RecentMyPostHeadRight">
+                                            <div class="PostDate"><span><img src="assets/PostsIcon.svg" alt="" /></span>
+                                                {{pack.publish_date}}
+                                            </div>
+                                            <div class="DLC d-flex">
+                                                <strong>DLC</strong> <span>$ {{pack.price}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="PostImage">
+                                        <div class="slider">
+
+                                            <carousel [interval]="false">
+                                                <div *ngIf="pack.medias.image">
+                                                    <slide *ngFor="let img of pack.medias.image">
+                                                        <img [src]="img" (click)="open(postImages,pack.medias)"
+                                                            alt="first slide" style="display: block; width: 100%;">
+                                                    </slide>
+                                                </div>
+                                                <div *ngIf="pack.medias.video">
+                                                    <slide *ngFor="let img of pack.medias.video">
+                                                        <video controls (click)="open(postImages,pack.medias)"
+                                                            alt="first slide" style="display: block; width: 100%;">
+                                                            <source [src]="img">
+                                                        </video>
+                                                    </slide>
+                                                </div>
+                                            </carousel>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="PostOption">
+                                        <ul class="d-flex">
+
+                                            <li class="ellipsisDropdown DropNone ml-auto">
+                                                <div class="btn-group " dropdown>
+                                                    <span dropdownToggle class="dropdown-toggle"><img
+                                                            src="assets/eclipse.svg" alt="" /></span>
+                                                    <ul id="dropdown-basic" *dropdownMenu
+                                                        class="smile-list  dropdown-menu  dropdown-menu-right"
+                                                        role="menu">
+
+                                                        <li (click)="update('pack',pack.pack_id)" *ngIf="pack.isUpdate">
+                                                            <div class="d-flex">
+                                                                <img src="assets/edit-tools.svg" alt="" id="10">
+                                                                <p>Edit</p>
+                                                            </div>
+                                                        </li>
+
+                                                        <li (click)="delete('pack',pack)">
+                                                            <div class=" d-flex">
+                                                                <img src="assets/interface.svg" alt="" id="10">
+                                                                <p>Delete</p>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="ColorOption">
+
+                                        <div class="mb-4" [ngxSummernoteView]="pack.description"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="allData.products">
+                            <div *ngFor="let prod of allData.products;let i = index">
+                                <div class="RecentMyPostBody" *ngIf="prod.isDelete">
+                                    <div class="RecentMyPostHead d-flex">
+                                        <div class="RecentMyPostHeadLeft">
+                                            <span>
+                                                <img [src]="profilePicture">
+                                            </span>
+                                            <h3>{{displayName}}</h3>
+                                            <strong>@{{userName}}</strong>
+                                        </div>
+                                        <div class="RecentMyPostHeadRight">
+                                            <div class="PostDate"><span><img src="assets/PostsIcon.svg" alt="" /></span>
+                                                {{prod.created_at}}
+                                            </div>
+                                            <div class="DLC d-flex">
+                                                <strong>Product</strong>&nbsp;<span>${{prod.price}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="PostImage">
+                                        <div class="slider">
+
+                                            <carousel [interval]="false">
+                                                <div *ngIf="prod.medias.image">
+                                                    <slide *ngFor="let img of prod.medias.image">
+                                                        <img [src]="img" (click)="open(postImages,prod.medias)"
+                                                            alt="first slide" style="display: block; width: 100%;">
+                                                    </slide>
+                                                </div>
+                                                <div *ngIf="prod.medias.video">
+                                                    <slide *ngFor="let img of prod.medias.video">
+                                                        <video controls (click)="open(postImages,prod.medias)"
+                                                            alt="first slide" style="display: block; width: 100%;">
+                                                            <source [src]="img">
+                                                        </video>
+                                                    </slide>
+                                                </div>
+                                            </carousel>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="PostOption">
+                                        <ul class="d-flex">
+                                            <li class="ellipsisDropdown DropNone ml-auto">
+                                                <div class="btn-group " dropdown>
+                                                    <span dropdownToggle class="dropdown-toggle"><img
+                                                            src="assets/eclipse.svg" alt="" /></span>
+                                                    <ul id="dropdown-basic" *dropdownMenu
+                                                        class="smile-list  dropdown-menu  dropdown-menu-right"
+                                                        role="menu">
+
+                                                        <li (click)="update('product',prod.product_id)"
+                                                            *ngIf="prod.isUpdate">
+                                                            <div class="d-flex">
+                                                                <img src="assets/edit-tools.svg" alt="" id="10">
+                                                                <p>Edit</p>
+                                                            </div>
+                                                        </li>
+
+                                                        <li (click)="delete('product',prod)">
+                                                            <div class=" d-flex">
+                                                                <img src="assets/interface.svg" alt="" id="10">
+                                                                <p>Delete</p>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="ColorOption" *ngIf="prod.tag">
+                                        <ul class="feed-list d-flex">
+
+                                            <li *ngFor="let hash of prod.product_tags"><span
+                                                    class="DanceColor"></span><strong>{{hash}}</strong></li>
+                                        </ul>
+                                        <!-- <ul class="d-flex">
+
+
+                                            <li><span class="DanceColor"></span> <strong>#Dance</strong></li>
+                                            <li><span class="FunnyColor"></span> <strong>#Funny</strong></li>
+                                            <li><span class="MovieColor"></span> <strong>#Movie</strong></li>
+                                            <li><span class="DramaColor"></span> <strong>#Drama</strong></li>
+                                            <li><span class="RomanceColor"></span> <strong>#Romance</strong></li>
+                                        </ul> -->
+                                    </div>
+
+                                    <div class="mb-4" [ngxSummernoteView]="prod.product_description"></div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="allData.exclusives">
+                            <div *ngFor="let exclusive of allData.exclusives;let i = index">
+                                <div class="RecentMyPostBody" *ngIf="exclusive.isDelete">
+                                    <div class="RecentMyPostHead d-flex">
+                                        <div class="RecentMyPostHeadLeft">
+                                            <span>
+                                                <img [src]="profilePicture">
+                                            </span>
+                                            <h3>{{displayName}}</h3>
+                                            <strong>@{{userName}}</strong>
+                                        </div>
+                                        <div class="RecentMyPostHeadRight">
+                                            <div class="PostDate"><span><img src="assets/PostsIcon.svg" alt="" /></span>
+                                                {{exclusive.created_on}}
+                                            </div>
+                                            <div class="DLC d-flex">
+                                                <strong>Exclusive</strong> <span>$ {{exclusive.min_contribution}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="PostImage">
+                                        <div class="slider">
+                                            <carousel [interval]="false">
+                                                <div *ngIf="exclusive.medias.image">
+                                                    <slide *ngFor="let img of exclusive.medias.image">
+                                                        <img [src]="img" (click)="open(postImages,exclusive.medias)"
+                                                            alt="first slide" style="display: block; width: 100%;">
+                                                    </slide>
+                                                </div>
+                                                <div *ngIf="exclusive.medias.video">
+                                                    <slide *ngFor="let img of exclusive.medias.video">
+                                                        <video controls (click)="open(postImages,exclusive.medias)"
+                                                            alt="first slide" style="display: block; width: 100%;">
+                                                            <source [src]="img">
+                                                        </video>
+                                                    </slide>
+                                                </div>
+                                            </carousel>
+                                            <div class=" progrebssbar">
+                                                <p-progressBar [value]="exclusive.goal_achieved_percent">
+                                                </p-progressBar>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="PostOption">
+                                        <ul class="d-flex">
+
+                                            <li class="ellipsisDropdown DropNone ml-auto">
+                                                <div class="btn-group " dropdown>
+                                                    <span dropdownToggle class="dropdown-toggle"><img
+                                                            src="assets/eclipse.svg" alt="" /></span>
+                                                    <ul id="dropdown-basic" *dropdownMenu
+                                                        class="smile-list  dropdown-menu  dropdown-menu-right"
+                                                        role="menu">
+
+                                                        <li (click)="update('exclusive',exclusive.exclusive_id)"
+                                                            *ngIf="exclusive.isUpdate">
+                                                            <div class="d-flex">
+                                                                <img src="assets/edit-tools.svg" alt="" id="10">
+                                                                <p>Edit</p>
+                                                            </div>
+                                                        </li>
+
+                                                        <li (click)="delete('exclusive',exclusive)">
+                                                            <div class=" d-flex">
+                                                                <img src="assets/interface.svg" alt="" id="10">
+                                                                <p>Delete</p>
+                                                            </div>
+                                                        </li>
+
+                                                        <li (click)="update('content',exclusive.exclusive_id)"
+                                                            *ngIf="exclusive.allowContent">
+                                                            <div class=" d-flex">
+                                                                <img src="assets/content.svg" alt="" id="10">
+                                                                <p>Update Content</p>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="ColorOption">
+
+
+                                        <div class="mb-4" [ngxSummernoteView]="exclusive.description"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                    <div *ngIf="isPost">
+                        <div class="col-12 mt-5" *ngFor="let postData of posts; let i = index">
+                            <div class="RecentMyPostBody" *ngIf="postData.isDelete">
+                                <div class="RecentMyPostHead d-flex">
+                                    <div class="RecentMyPostHeadLeft">
+                                        <span>
+                                            <img [src]="profilePicture">
+                                        </span>
+                                        <h3>{{displayName}}</h3>
+                                        <strong>@{{userName}}</strong>
+                                    </div>
+                                    <div class="RecentMyPostHeadRight">
+                                        <div class="PostDate"><span><img src="assets/PostsIcon.svg" alt="" /></span>
+                                            {{postData.publish_date}}
+                                        </div>
+                                        <!-- <div class="DLC d-flex">
+                                                    <strong>DLC</strong> <span>$ 10</span>
+                                                </div> -->
+                                    </div>
+                                </div>
+
+                                <div class="PostImage">
+                                    <div class="slider">
+
+                                        <carousel [interval]="false">
+                                            <div *ngIf="postData.medias.image">
+                                                <slide *ngFor="let img of postData.medias.image">
+                                                    <img [src]="img" alt="" (click)="open(postImages,postData.medias)"
+                                                        style="display: block; width: 100%;">
+                                                </slide>
+                                            </div>
+                                            <div *ngIf="postData.medias.video">
+                                                <slide *ngFor="let img of postData.medias.video">
+                                                    <video controls alt="" (click)="open(postImages,postData.medias)"
+                                                        style="display: block; width: 100%;">
+                                                        <source [src]="img">
+                                                    </video>
+                                                </slide>
+                                            </div>
+                                        </carousel>
+
+                                    </div>
+
+                                </div>
+                                <div class="PostOption">
+                                    <ul class="d-flex">
+
+                                        <li class="d-flex CommentCounter" (click)="LoadComments(postData)"
+                                            *ngIf="postData.comments ">
+                                            <span><img src="assets/CommentIconBlue.svg" alt="" />
+                                            </span>
+                                            <strong *ngIf="postData.total_comments >  0">
+                                                {{postData.total_comments}}</strong>
+                                        </li>
+
+                                        <li class="d-flex CommentCounter" *ngIf="!postData.comments ">
+                                            <span><img src="assets/CommentIconGreFill.svg" alt="" />
+                                            </span>
+                                        </li>
+
+                                        <div class="btn-group EmojiLoveDIV" dropdown>
+
+                                            <span dropdownToggle class="dropdown-toggle">
+
+                                                <img height="23px" width="23px" *ngIf="postData.is60"
+                                                    src="assets/Poop.png" alt="" />
+                                                <img height="23px" width="23px" *ngIf="postData.is70"
+                                                    src="assets/emoji.png" alt="" />
+                                                <img height="23px" width="23px" *ngIf="postData.is80"
+                                                    src="assets/smily.png" alt="" />
+                                                <img height="23px" width="23px" *ngIf="postData.is90"
+                                                    src="assets/EmojiLove.svg" alt="" />
+                                                <img height="23px" width="23px" *ngIf="postData.is100"
+                                                    src="assets/fire.png" alt="" />
+                                                <img height="23px" width="23px" *ngIf="postData.totalVotes == '0'"
+                                                    src="assets/smily.png" alt="" />
+                                            </span>
+                                            <strong *ngIf="postData.totalVotes > '0'">{{postData.totalVotes}}</strong>
+
+
+                                            <ul id="dropdown-basic" *dropdownMenu
+                                                class="smile-list  dropdown-menu  dropdown-menu-center" role="menu">
+                                                <div class="d-flex">
+                                                    <li>
+                                                        <div class="EmojiLoveDIV-LI">
+                                                            <img (click)="Voting('10',postData.post_id)"
+                                                                src="assets/fire.png" alt="" id="10">
+                                                            <span
+                                                                *ngIf="postData.votes.ten > 0 ">{{postData.votes.ten}}</span>
+
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="EmojiLoveDIV-LI">
+                                                            <img (click)="Voting('9',postData.post_id)"
+                                                                src="assets/heart.png" alt="" id="9">
+                                                            <span
+                                                                *ngIf="postData.votes.nine > 0">{{postData.votes.nine}}</span>
+
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="EmojiLoveDIV-LI"><img
+                                                                (click)="Voting('8',postData.post_id)"
+                                                                src="assets/smily.png" alt="" id="8">
+                                                            <span
+                                                                *ngIf="postData.votes.eight > 0">{{postData.votes.eight}}</span>
+
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="EmojiLoveDIV-LI"><img
+                                                                (click)="Voting('7',postData.post_id)"
+                                                                src="assets/emoji.png" alt="" id="7">
+                                                            <span
+                                                                *ngIf="postData.votes.seven > 0">{{postData.votes.seven}}</span>
+
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="EmojiLoveDIV-LI"><img
+                                                                (click)="Voting('10',postData.post_id)"
+                                                                src="assets/Poop.png" alt="" id="6">
+                                                            <span
+                                                                *ngIf="postData.votes.six > 0">{{postData.votes.six}}</span>
+                                                        </div>
+                                                    </li>
+                                                </div>
+                                            </ul>
+                                        </div>
+                                        <!-- <li class="d-flex AwardsCounter"><span><img src="../../..assets/daimond.svg"
+                                                    alt="" />
+                                            </span>
+                                            <strong>Awards : 5</strong></li> -->
+                                        <li class="ellipsisDropdown DropNone">
+                                            <div class="btn-group " dropdown>
+                                                <span dropdownToggle class="dropdown-toggle"><img
+                                                        src="assets/eclipse.svg" alt="" /></span>
+                                                <ul id="dropdown-basic" *dropdownMenu
+                                                    class="smile-list  dropdown-menu  dropdown-menu-right" role="menu">
+
+                                                    <li (click)="update('post',postData.post_id)"
+                                                        *ngIf="postData.isUpdate">
+                                                        <div class="d-flex">
+                                                            <img src="assets/edit-tools.svg" alt="" id="10">
+                                                            <p>Edit</p>
+                                                        </div>
+                                                    </li>
+
+                                                    <li (click)="delete('post',postData)">
+                                                        <div class=" d-flex">
+                                                            <img src="assets/interface.svg" alt="" id="10">
+                                                            <p>Delete</p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+
+                                    </ul>
+                                </div>
+                                <div class="ColorOption" *ngIf="postData.tag">
+                                    <ul class="feed-list d-flex">
+
+                                        <li *ngFor="let hash of postData.tags"><span
+                                                class="DanceColor"></span><strong>{{hash}}</strong></li>
+                                    </ul>
+
+
+
+                                </div>
+
+                                <div class="mb-4" [ngxSummernoteView]="postData.description"></div>
+
+                                <div class="TypeComment d-flex mb-3" *ngIf="postData.comments">
+                                    <div class="TypeCommentIMG"><span><img [src]="profilePicture"></span></div>
+                                    <div class="TypeCommentBox ml-auto">
+                                        <textarea class="form-control" placeholder="Add Comment..."
+                                            (blur)="onComment($event)"></textarea>
+                                        <a (click)="AddComment('comment',postData.post_id)"><img src="assets/plane.svg"
+                                                alt="" /></a>
+                                    </div>
+
+                                </div>
+                                <div class="MultiComment " *ngIf="postData.total_comments > 0">
+                                    <div class="d-flex" *ngFor="let cmt of postData.commentArr">
+                                        <div *ngFor="let profile of cmt.profile">
+                                            <div pTooltip="{{profile.display_name}}  on {{cmt.created_date }}"
+                                                tooltipPosition="top" class="MultiCommentIMG">
+                                                <span (click)="viewProfile(profile.profile_url)"><img
+                                                        class="img-responsive user-photo"
+                                                        [src]="profile.profile_picture"></span>
+                                            </div>
+                                        </div>
+                                        <div class="MultiCommentBody ml-auto">
+                                            <div class="PostedComment" *ngIf=" !cmt.isModify  ; else editmode">
+                                                <p><button *ngIf="cmt.amount > 0"
+                                                        class="btn btn-primary">{{cmt.amount}}</button>{{cmt.comment}}
+                                                </p>
+                                            </div>
+
+                                            <ng-template #editmode>
+                                                <div class="TypeCommentBox ml-auto w-100 mb-3" *ngIf="cmt.isModify ">
+                                                    <textarea class="form-control"
+                                                        (blur)="onComment($event)">{{cmt.comment}}</textarea>
+                                                    <a (click)="AddComment('modify',cmt.comment_uid)"><img
+                                                            src="assets/plane.svg" alt="" /></a>
+                                                </div>
+                                            </ng-template>
+
+                                            <div class="CommentOption">
+                                                <ul class="d-flex">
+                                                    <li>
+                                                        <div class="d-flex LikedIcon " (click)="likeComment(cmt)"
+                                                            *ngIf="!cmt.you_liked  && !cmt.isLike ">
+                                                            <span></span>
+                                                            <strong
+                                                                *ngIf="cmt.total_likes > '0'">{{cmt.total_likes}}</strong>
+                                                        </div>
+                                                        <div class="d-flex LikedIcon active"
+                                                            (click)="unlikeComment(cmt)"
+                                                            *ngIf="cmt.isLike || cmt.you_liked ">
+                                                            <span></span>
+                                                            <strong
+                                                                *ngIf="cmt.total_likes > '0'">{{cmt.total_likes}}</strong>
+                                                        </div>
+                                                    </li>
+                                                    <!-- <li (click)="onTips(templateTips,'comment',cmt)"><a><img
+                                                                    src="assets/Currency.svg" alt="" /></a>
+                                                        </li> -->
+                                                    <li (click)="reply(cmt)"><a><img src="assets/backArrow.svg"
+                                                                alt="" /></a>
+                                                    </li>
+                                                    <li class="ellipsisDropdown DropNone"
+                                                        *ngIf="userId === cmt.user_id">
+                                                        <div class="btn-group " dropdown>
+                                                            <span dropdownToggle class="dropdown-toggle"><img
+                                                                    src="assets/eclipse.svg" alt="" /></span>
+                                                            <ul id="dropdown-basic" *dropdownMenu
+                                                                class="smile-list  dropdown-menu  dropdown-menu-right"
+                                                                role="menu">
+
+
+                                                                <li (click)="updateComment(cmt)">
+                                                                    <div class="d-flex">
+                                                                        <img src="assets/edit-tools.svg" alt="" id="10">
+                                                                        <p>Edit</p>
+                                                                    </div>
+                                                                </li>
+
+                                                                <li (click)="deleteComment('comment',cmt)">
+                                                                    <div class=" d-flex">
+                                                                        <img src="assets/interface.svg" alt="" id="10">
+                                                                        <p>Delete</p>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="TypeComment d-flex mb-3" *ngIf="cmt.replaytoComment ">
+                                                <div class="TypeCommentIMG"><span><img [src]="profilePicture"></span>
+                                                </div>
+                                                <div class="TypeCommentBox ml-auto">
+                                                    <textarea class="form-control" placeholder="Add Comment..."
+                                                        (blur)="onComment($event)"></textarea>
+                                                    <a (click)="AddComment('reply',cmt.comment_uid)"><img
+                                                            src="assets/plane.svg" alt="" /></a>
+                                                </div>
+                                            </div>
+                                            <div class="SubComments" *ngIf="cmt.reply">
+                                                <div class="MultiComment d-flex" *ngFor="let reply of cmt.reply">
+                                                    <div *ngFor="let profile of reply.profile">
+                                                        <div pTooltip="{{profile.display_name}}  at {{cmt.created_date }}"
+                                                            tooltipPosition="top" class="MultiCommentIMG">
+                                                            <span><img class="img-responsive user-photo"
+                                                                    [src]="profile.profile_picture"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="MultiCommentBody">
+                                                        <div class="PostedComment"
+                                                            *ngIf="!reply.isModify; else editmode">
+                                                            <p>{{reply.comment}} </p>
+                                                        </div>
+                                                        <ng-template #editmode>
+                                                            <div class="TypeCommentBox ml-auto w-100 mb-3"
+                                                                *ngIf="reply.isModify ">
+                                                                <textarea class="form-control"
+                                                                    (blur)="onComment($event)">{{reply.comment}}</textarea>
+                                                                <a (click)="AddComment('modify',reply.comment_uid)"><img
+                                                                        src="assets/plane.svg" alt="" /></a>
+                                                            </div>
+                                                        </ng-template>
+
+                                                        <div class="CommentOption">
+                                                            <ul class="d-flex">
+                                                                <li>
+                                                                    <div class="d-flex LikedIcon "
+                                                                        (click)="likeComment(reply)"
+                                                                        *ngIf="!reply.you_liked  && !reply.isLike ">
+                                                                        <span></span>
+                                                                        <strong
+                                                                            *ngIf="reply.total_likes > '0'">{{reply.total_likes}}</strong>
+                                                                    </div>
+                                                                    <div class="d-flex LikedIcon active"
+                                                                        (click)="unlikeComment(reply)"
+                                                                        *ngIf="reply.isLike || reply.you_liked ">
+                                                                        <span></span>
+                                                                        <strong
+                                                                            *ngIf="reply.total_likes > '0'">{{reply.total_likes}}</strong>
+                                                                    </div>
+                                                                </li>
+                                                                <!-- <li><a><img src="assets/backArrow.svg" alt="" /></a>
+                                                                    </li>-->
+
+                                                                <li class="ellipsisDropdown DropNone"
+                                                                    *ngIf="userId === reply.user_id">
+                                                                    <div class="btn-group " dropdown>
+                                                                        <span dropdownToggle
+                                                                            class="dropdown-toggle"><img
+                                                                                src="assets/eclipse.svg"
+                                                                                alt="" /></span>
+                                                                        <ul id="dropdown-basic" *dropdownMenu
+                                                                            class="smile-list  dropdown-menu  dropdown-menu-right"
+                                                                            role="menu">
+
+
+                                                                            <li (click)="updateComment(reply)">
+                                                                                <div class="d-flex">
+                                                                                    <img src="assets/edit-tools.svg"
+                                                                                        alt="" id="10">
+                                                                                    <p>Edit</p>
+                                                                                </div>
+                                                                            </li>
+
+                                                                            <li
+                                                                                (click)="deleteComment('reply',cmt,reply)">
+                                                                                <div class=" d-flex">
+                                                                                    <img src=".assets/interface.svg"
+                                                                                        alt="" id="10">
+                                                                                    <p>Delete</p>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="ml-auto" *ngIf="postData.total_comments > 5 && postData.commentArr">
+                                    <p (click)="loadMore(postData)">Load More</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div *ngIf="isPack">
+                        <div class="col-12 mt-5" *ngFor="let postData of packs; let i = index">
+
+                            <div class="RecentMyPostBody" *ngIf="postData.isDelete">
+                                <div class="RecentMyPostHead d-flex">
+                                    <div class="RecentMyPostHeadLeft">
+                                        <span>
+                                            <img [src]="profilePicture">
+                                        </span>
+                                        <h3>{{displayName}}</h3>
+                                        <strong>@{{userName}}</strong>
+                                    </div>
+                                    <div class="RecentMyPostHeadRight">
+                                        <div class="PostDate"><span><img src="assets/PostsIcon.svg" alt="" /></span>
+                                            {{postData.publish_date }}
+                                        </div>
+                                        <div class="DLC d-flex">
+                                            <strong>DLC</strong> <span>$ {{postData.price}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="PostImage">
+                                    <div class="slider">
+
+                                        <carousel [interval]="false">
+                                            <div *ngIf="postData.medias.image">
+                                                <slide *ngFor="let img of postData.medias.image">
+                                                    <img [src]="img" (click)="open(postImages,post.medias)"
+                                                        alt="first slide" style="display: block; width: 100%;">
+                                                </slide>
+                                            </div>
+                                            <div *ngIf="postData.medias.video">
+                                                <slide *ngFor="let img of postData.medias.video">
+                                                    <video controls (click)="open(postImages,postData.medias)"
+                                                        alt="first slide" style="display: block; width: 100%;">
+                                                        <source [src]="img">
+                                                    </video>
+                                                </slide>
+                                            </div>
+                                        </carousel>
+                                    </div>
+
+                                </div>
+                                <div class="PostOption">
+                                    <ul class="d-flex">
+
+                                        <li class="ellipsisDropdown DropNone ml-auto">
+                                            <div class="btn-group " dropdown>
+                                                <span dropdownToggle class="dropdown-toggle"><img
+                                                        src="assets/eclipse.svg" alt="" /></span>
+                                                <ul id="dropdown-basic" *dropdownMenu
+                                                    class="smile-list  dropdown-menu  dropdown-menu-right" role="menu">
+
+                                                    <li (click)="update('pack',postData.pack_id)"
+                                                        *ngIf="postData.isUpdate">
+                                                        <div class="d-flex">
+                                                            <img src="assets/edit-tools.svg" alt="" id="10">
+                                                            <p>Edit</p>
+                                                        </div>
+                                                    </li>
+
+                                                    <li (click)="delete('pack',postData)">
+                                                        <div class=" d-flex">
+                                                            <img src="assets/interface.svg" alt="" id="10">
+                                                            <p>Delete</p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="ColorOption">
+
+
+                                    <div class="mb-4" [ngxSummernoteView]="postData.description"></div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div *ngIf="isProduct">
+                        <div class="col-12 mt-5" *ngFor="let postData of products; let i = index">
+                            <div class="RecentMyPostBody" *ngIf="postData.isDelete">
+                                <div class="RecentMyPostHead d-flex">
+                                    <div class="RecentMyPostHeadLeft">
+                                        <span>
+                                            <img [src]="profilePicture">
+                                        </span>
+                                        <h3>{{displayName}}</h3>
+                                        <strong>@{{userName}}</strong>
+                                    </div>
+                                    <div class="RecentMyPostHeadRight">
+                                        <div class="PostDate"><span><img src="assets/PostsIcon.svg" alt="" /></span>
+                                            {{postData.created_at}}
+                                        </div>
+                                        <div class="DLC d-flex">
+                                            <strong>DLC</strong> <span>$ {{postData.price}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="PostImage">
+                                    <div class="slider">
+
+                                        <carousel [interval]="false">
+                                            <div *ngIf="postData.medias.image">
+                                                <slide *ngFor="let img of postData.medias.image">
+                                                    <img [src]="img" (click)="open(postImages,postData.medias)"
+                                                        alt="first slide" style="display: block; width: 100%;">
+                                                </slide>
+                                            </div>
+                                            <div *ngIf="postData.medias.video">
+                                                <slide *ngFor="let img of postData.medias.video">
+                                                    <video controls (click)="open(postImages,postData.medias)"
+                                                        alt="first slide" style="display: block; width: 100%;">
+                                                        <source [src]="img">
+                                                    </video>
+                                                </slide>
+                                            </div>
+                                        </carousel>
+
+                                    </div>
+
+                                </div>
+                                <div class="PostOption">
+                                    <ul class="d-flex">
+
+                                        <li class="ellipsisDropdown DropNone ml-auto">
+                                            <div class="btn-group " dropdown>
+                                                <span dropdownToggle class="dropdown-toggle"><img
+                                                        src="assets/eclipse.svg" alt="" /></span>
+                                                <ul id="dropdown-basic" *dropdownMenu
+                                                    class="smile-list  dropdown-menu  dropdown-menu-right" role="menu">
+
+                                                    <li (click)="update('product',postData.product_id)"
+                                                        *ngIf="postData.isUpdate">
+                                                        <div class="d-flex">
+                                                            <img src="assets/edit-tools.svg" alt="" id="10">
+                                                            <p>Edit</p>
+                                                        </div>
+                                                    </li>
+
+                                                    <li (click)="delete('product',postData)">
+                                                        <div class=" d-flex">
+                                                            <img src="assets/interface.svg" alt="" id="10">
+                                                            <p>Delete</p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="ColorOption" *ngIf="postData.tag">
+                                    <ul class="feed-list d-flex">
+
+                                        <li *ngFor="let hash of postData.product_tags"><span
+                                                class="DanceColor"></span><strong>{{hash}}</strong></li>
+                                    </ul>
+
+                                </div>
+
+                                <div class="mb-4" [ngxSummernoteView]="postData.product_description"></div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div *ngIf="isExclusive">
+                        <div class="col-12 mt-5" *ngFor="let postData of exclusive; let i = index">
+                            <div class="RecentMyPostBody" *ngIf="postData.isDelete">
+                                <div class="RecentMyPostHead d-flex">
+                                    <div class="RecentMyPostHeadLeft">
+                                        <span>
+                                            <img [src]="profilePicture">
+                                        </span>
+                                        <h3>{{displayName}}</h3>
+                                        <strong>@{{userName}}</strong>
+                                    </div>
+                                    <div class="RecentMyPostHeadRight">
+                                        <div class="PostDate"><span><img src="assets/PostsIcon.svg" alt="" /></span>
+                                            {{postData.created_on}}
+                                        </div>
+                                        <div class="DLC d-flex">
+                                            <strong>DLC</strong> <span>$ {{postData.min_contribution}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="PostImage">
+                                    <div class="slider">
+
+                                        <carousel [interval]="false">
+                                            <div *ngIf="postData.medias.image">
+                                                <slide *ngFor="let img of postData.medias.image">
+                                                    <img [src]="img" (click)="open(postImages,postData.medias)"
+                                                        alt="first slide" style="display: block; width: 100%;">
+                                                </slide>
+                                            </div>
+                                            <div *ngIf="postData.medias.video">
+                                                <slide *ngFor="let img of postData.medias.video">
+                                                    <video controls (click)="open(postImages,postData.medias)"
+                                                        alt="first slide" style="display: block; width: 100%;">
+                                                        <source [src]="img">
+                                                    </video>
+                                                </slide>
+                                            </div>
+                                        </carousel>
+
+
+                                    </div>
+
+                                </div>
+                                <div class="PostOption">
+                                    <ul class="d-flex">
+
+                                        <li class="ellipsisDropdown DropNone ml-auto">
+                                            <div class="btn-group " dropdown>
+                                                <span dropdownToggle class="dropdown-toggle"><img
+                                                        src="assets/eclipse.svg" alt="" /></span>
+                                                <ul id="dropdown-basic" *dropdownMenu
+                                                    class="smile-list  dropdown-menu  dropdown-menu-right" role="menu">
+
+                                                    <li (click)="update('exclusive',postData.exclusive_id)"
+                                                        *ngIf="postData.isUpdate">
+                                                        <div class="d-flex">
+                                                            <img src="assets/edit-tools.svg" alt="" id="10">
+                                                            <p>Edit</p>
+                                                        </div>
+                                                    </li>
+
+                                                    <li (click)="delete('exclusive',postData)">
+                                                        <div class=" d-flex">
+                                                            <img src="assets/interface.svg" alt="" id="10">
+                                                            <p>Delete</p>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="ColorOption">
+
+                                    <div class="mb-4" [ngxSummernoteView]="postData.description"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <ng-template #postImages>
+            <!--             <div class="modal-header">
+                <h2>Media</h2>
+                <button class="close"><img src="assets/CloseBlue.svg" (click)="modalRef.hide()" alt="" /></button>
+            </div> -->
+
+            <div class="modal-body">
+
+                <button class="close"><img src="assets/CloseBlue.svg" (click)="modalRef.hide()" alt="" /></button>
+                <carousel [interval]="false">
+                    <div *ngIf="mediaImages.image">
+                        <slide *ngFor="let img of mediaImages.image">
+                            <img [src]="img" alt="" style="display: block; width: 100%;">
+                        </slide>
+                    </div>
+                    <div *ngIf="mediaImages.video">
+                        <slide *ngFor="let img of mediaImages.video">
+                            <video controls alt="" style="display: block; width: 100%;">
+                                <source [src]="img">
+                            </video>
+                        </slide>
+                    </div>
+                </carousel>
+            </div>
+
+        </ng-template>
+
+
+        <ng-template #template>
+
+            <div class="AcountContent">
+                <div class="modal-header">
+                    <h2>Edit Profile</h2>
+                    <button class="close"><img src="assets/CloseBlue.svg" (click)="close()" alt="" /></button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="editProfileForm">
+                        <div class="ProfileTimline">
+                            <ul class="d-flex media">
+                                <li>
+                                    <div class="ProfileTimlineBox ProfilePicture">
+                                        <span>
+                                            <img [src]="profilePicture" *ngIf="!isNewProfileImage">
+                                            <div class="d-flex">
+                                                <ngx-dropzone-image-preview *ngFor="let f of files"
+                                                    ngProjectAs="ngx-dropzone-preview" [file]="f">
+                                                </ngx-dropzone-image-preview>
+                                            </div>
+                                            <ngx-dropzone (change)="onSelectImage($event)">
+                                                <ngx-dropzone-label></ngx-dropzone-label>
+                                            </ngx-dropzone>
+                                        </span>
+                                        <strong>Profile picture</strong>
+                                        <p class="text-danger" *ngIf="isMoreProfileImage">Please select only one image.
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="ProfileTimlineBox TimelinePicture">
+                                        <span>
+                                            <img [src]="timelineImage" *ngIf="!isNewTimelineImage">
+
+                                            <div class="d-flex">
+                                                <ngx-dropzone-image-preview *ngFor="let f of filesTimelines"
+                                                    ngProjectAs="ngx-dropzone-preview" [file]="f">
+                                                </ngx-dropzone-image-preview>
+                                            </div>
+                                            <ngx-dropzone (change)="onSelectTimeline($event)">
+                                                <ngx-dropzone-label></ngx-dropzone-label>
+                                            </ngx-dropzone>
+                                        </span>
+                                        <strong>Timeline picture</strong>
+                                        <p class="text-danger" *ngIf="isMoreTimelineImage">Please select only one image.
+                                        </p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="ProfileTimlineBox ProfileVideo">
+                                        <span>
+                                            <div *ngIf="!isNewProfileVideo">
+                                                <video controls>
+                                                    <source [src]="profileVideo">
+                                                </video>
+
+                                            </div>
+
+                                            <div class="d-flex">
+                                                <ngx-dropzone-video-preview ngProjectAs="ngx-dropzone-preview"
+                                                    *ngFor="let f of filesVideos" [file]="f">
+
+                                                </ngx-dropzone-video-preview>
+                                            </div>
+                                            <ngx-dropzone (change)="onSelectVideo($event)">
+                                                <ngx-dropzone-label></ngx-dropzone-label>
+                                            </ngx-dropzone>
+                                        </span>
+                                        <strong>Profile Video</strong>
+                                        <p class="text-danger" *ngIf="isMoreProfileVideo">Please select only one video.
+                                        </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Display Name</label>
+                                    <input type="text" (change)="onChange('displyName',$event)"
+                                        formControlName="display_name" [(ngModel)]="updateDisplayName"
+                                        class="form-control">
+                                </div>
+                            </div>
+                            <div class="offset-md-2 col-md-5">
+                                <div class="form-group">
+                                    <label>Birthday</label>
+
+                                    <p-calendar class="form-control" dateFormat="dd/mm/yy" [style]="{'width':'100%'}"
+                                        [inputStyle]="{'width':'100%'}" [(ngModel)]="updateBirthdate"
+                                        formControlName="birthdate" placeholder="Birth Date" [yearNavigator]="true"
+                                        yearRange="{{minYear}}:{{maxYear}}" (onSelect)="onChange('birthdate',$event)">
+                                    </p-calendar>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Location</label>
+
+                                    <input type="text" class="form-control" (change)="onChange('location',$event)"
+                                        [(ngModel)]="updateLocation" formControlName="location" placeholder="Location">
+                                </div>
+                            </div>
+                            <div class="offset-md-2 col-md-5">
+                                <div class="form-group">
+                                    <label>Website</label>
+                                    <input type="text" class="form-control" (change)="onChange('website',$event)"
+                                        [(ngModel)]="updateWebsite" formControlName="website" placeholder="Website">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Bio</label>
+                                    <textarea class="form-control" [(ngModel)]="updateAbout"
+                                        (change)="onChange('about',$event)" formControlName="about"
+                                        placeholder="About You"></textarea>
+
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label>Category</label>
+
+                                    <p-dropdown [options]="categoryList" [(ngModel)]="updateCategory"
+                                        class="form-control RadiusNone BorderNoneSelectBox"
+                                        (onChange)="onChange('category',$event)" formControlName="category">
+                                    </p-dropdown>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <button class="btn btn-primary" (click)="onEdit()" [disabled]="showSpinner">Good to Go<i
+                                        *ngIf="showSpinner" class="fa fa-spinner fa-spin"></i></button>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+            </div>
+        </ng-template>
+        <!-- <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog> -->

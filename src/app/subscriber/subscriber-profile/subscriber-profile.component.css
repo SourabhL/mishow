@@ -1,0 +1,37 @@
+.img-container{
+    height: 400px;
+}
+.ProfilePictureEdit{
+    margin:0 0 20px;
+}
+
+.profileTitle span{
+    position:relative;
+    margin: 0 0 0 10px;
+}
+.profileTitle span i.fa-certificate{
+    color: #3b5998;
+    font-size: 35px;
+    vertical-align: top;
+}
+.profileTitle span i.fa-check{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    font-size: 13px;
+    line-height: 100%;
+    vertical-align: top;
+    margin: -6px 0 0;
+}
+.posted-date h4{
+    margin:0;
+    padding:0;
+    color: #007bff;
+    font-size:18px;
+}
+.posted-date p{
+    color:#666;
+    font-size:15px;
+}

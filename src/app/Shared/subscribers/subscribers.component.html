@@ -1,0 +1,27 @@
+<div class="ContentWrap">
+    <div class="container">
+        <div style="text-align: center;">
+            <h2>{{title}}</h2>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-3" *ngFor="let list of SubscriberList">
+                <div class="SubscribersBox" (click)="viewProfile(list.profile_url)">
+                    <div class="d-flex">
+                        <div class="SubscribersIMG"><span>
+                                <img [src]="list.profile_picture">
+                            </span></div>
+                        <div class="SubscribersBody">
+                            <h3>{{list.display_name}}</h3>
+                            <h4>@{{list.profile_url}}</h4>
+                            <a>{{list.location}}</a>
+                        </div>
+                        <div class="SubscribersDropdown">
+                            <span></span>
+                        </div>
+                    </div>
+                    <h6>{{list.about}}</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

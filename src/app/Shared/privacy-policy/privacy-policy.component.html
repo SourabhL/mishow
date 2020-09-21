@@ -1,0 +1,513 @@
+<header>
+    <div class="header">
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="#"><img src="assets/Logo.svg" alt="" /></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><img src="assets/NavIcon.svg" alt="" /></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" (click)="navigate('login')">Log in</a></li>
+                    <li class="nav-item"><a class="nav-link" (click)="navigate('signup')">Sign up</a></li>
+                </ul>
+                <ul class="navbar-nav How-Work">
+                    <li class="nav-item"><a class="nav-link" href="/howitworks">How it Works</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+</header>
+
+
+<div class="ContentWrap">
+    <div class="container">
+        <div class="row" *ngIf="isPrivacy">
+            <div class="col-md-12 mb-3">
+                <h2>Privacy Policy</h2>
+            </div>
+            <div class="col-md-12">
+                <p>
+                    mi.show (owned by MS Media LLC, a California Limited Liability Company) is a subscription content
+                    and
+                    freelance
+                    marketplace platform, accessible by any users over the age of 18. This privacy policy applies to all
+                    subscribers,
+                    freelance creators, and users of the website. By accessing our website you agree to this privacy
+                    policy
+                    as well as our
+                    Terms of Use.
+                </p>
+
+                <p>Information that we collect</p>
+
+                <p>Regardless of account type: subscriber or creator, we collect this basic information at signup:</p>
+
+
+                <ol>
+                    <li class="ml-4">
+                        Your e-mail
+                    </li>
+                    <li class="ml-4">
+                        Username
+                    </li>
+                    <li class="ml-4">
+                        Password
+                    </li>
+                </ol>
+
+                <p>You must sign up for an account to utilize our service. During your first login, you will be asked
+                    what
+                    type of account
+                    you are signing up for: creator or subscriber. The subscriber account is purely for subscribing to
+                    freelance creators,
+                    browsing submitted content, products, services and interacting with creators via comments and
+                    messages.</p>
+
+                <p>You may also sign up via social media (Google, Twitter, Instagram, etc.) in which we will ask
+                    permission
+                    to access basic
+                    information such as your name, email, profile and/or header images. You can manage the information
+                    you
+                    share with us via
+                    these platforms by going to their respective privacy/security options to disable sharing of any
+                    specific
+                    or all
+                    information.</p>
+
+                <p>Additionally, you can choose to add other data such as location, display name, website, etc., which
+                    will
+                    be stored
+                    similarly to comments.</p>
+
+                <p><b>Freelance Creators</b></p>
+
+                <p>A Freelance Creator is someone who wishes to utilize the platform to sell their creative works,
+                    products, and/or
+                    services. To become a creator, you must select the "I am a creator" option after you login for the
+                    first
+                    time. At that
+                    point, you can begin uploading content in your free tier. However, to receive payouts you must
+                    complete
+                    the Partner
+                    Agreement form which includes collecting additional information and you must agree to the agreement.
+                    Depending on your
+                    location, which is derived from your IP address, you must provide some or all of the following:</p>
+
+                <ul>
+                    <li class="ml-4">Legal Name or Company Name</li>
+                    <li class="ml-4">Address and Country</li>
+                    <li class="ml-4">Social media usernames (optional)</li>
+                    <li class="ml-4">Date of birth</li>
+                    <li class="ml-4">Tax Identification number or SSN (for IRS Form W-9)</li>
+                    <li class="ml-4">Government Issued Identification Card (Drivers License, Passport, etc.)</li>
+                    <li class="ml-4">A picture of you holding your ID</li>
+                    <li class="ml-4">Banking information for payouts (depending on payout method selected)</li>
+                </ul>
+
+                <p>All Personally Identifiable Information (PII) is encrypted using AES 256-bit encryption. Other
+                    information that you
+                    provide via profile settings and any information included in your posts, are designed to be posted
+                    and
+                    available to your
+                    subscribers and users of the website. Utilize tier subscription settings to control where and how
+                    your
+                    posts are shown
+                    to subscribers. You may also use privacy settings to set your profile to private.</p>
+
+                <p><b>Subscribers</b></p>
+
+                <p>A subscriber is a user who wishes to subscribe and/or purchase creative works, products, and/or
+                    services. We collect
+                    your e-mail, username, and password during sign up. You may also enter in additional information
+                    that
+                    identifies you as
+                    a user, such as: display name, profile picture, location, and date of birth to ensure you are over
+                    the
+                    age of 18.</p>
+
+                <p><b>Additional information that we collect as you use our services</b></p>
+
+                <p>We will never sell or share your information with any entity, company, or person. We utilize third
+                    party
+                    solutions to
+                    ensure our service is running smoothly. Additional information that we gather include your browser
+                    type,
+                    access times,
+                    pages viewed and your IP address. Some actions, such as subscriptions and purchases are inherently
+                    recorded in our
+                    system and are displayed to only the appropriate users (i.e., the user(s) involved and admins).</p>
+
+                <p><b>Third-Party Payment Processors</b></p>
+
+                <p>All payments are performed using third party services. We do not record or store any payment
+                    information
+                    that you
+                    submit.</p>
+
+                <p><b>The Privacy Mission</b></p>
+                <p>At the core of what we do, we value and respect your right to privacy. As we continue to grow, we
+                    will
+                    introduce new
+                    ways of controlling your privacy in as many aspects as deemed appropriate by us and the community
+                    (all
+                    of you!). We
+                    thank you for using our service. You receive notification via e-mail and/or platform notification
+                    any
+                    time this policy
+                    is updated.</p>
+
+                <p><b>Contact Us</b></p>
+                <p>If you have any questions or concerns about this Privacy Policy, please contact us at: 611 Gateway
+                    Blvd
+                    Suite 120, South
+                    San Francisco, CA 94080. privacy@mi.show</p>
+            </div>
+
+
+        </div>
+
+        <div class="row" *ngIf="isTerms" class="CommanPages">
+            <div class="col-md-12">
+                <h3>Terms of Service</h3>
+                <p>By accessing this website (<a href="">http://mi.show</a> and hereafter the "service") and signing up
+                    for an account,
+                    you agree to the following terms of service.</p>
+
+                <h3>Agreement of Terms</h3>
+                <p>You may use this service if you agree to be bound by the terms of service contained herein and also
+                    agree to the Privacy Policy. You must be at least 18 years old to utilize this service. If you are accepting these terms
+                    on
+                    behalf of an organization, company, or other legal entity, you represent and warrant that you have
+                    the authorization
+                    to do so and can legally enter into binding contracts on behalf of such entities to these terms.
+                </p>
+
+                <h3>Privacy Policy</h3>
+                <p> Our Privacy Policy outlines how we handle the information you submit, upload, and provide to this
+                    website. You understand that through the use of our service, you consent to the collection and use
+                    of data and
+                    information as set forth in the Privacy Policy. You also understand and consent to having your
+                    information stored and
+                    processed in the United States.</p>
+
+
+                <h3>Accounts</h3>
+                <p>You must create an account to use the service. You are responsible for safeguarding your account. We
+                    enforce a minimum password of one lower case, one upper case, one number, one special character,
+                    with a
+                    minimum length of
+                    8 characters. We will not be held liable for any loss or damages incurred by the improper
+                    safeguarding
+                    of your account.
+                    System notifications, which notify you of service and/or administrative announcements are part of
+                    the
+                    service
+                    that we provide.</p>
+                <p>You are not able to opt-out of receiving them.</p>
+
+                <h3>Content</h3>
+                <p> We do not support, endorse, represent, or make any guarantees or warranties for the content that is
+                    submitted to our service. We cannot guarantee the truthfulness, accuracy, reliability or any
+                    information submitted. By
+                    using our service, you warrant that you are of sound mind to use caution when viewing content and
+                    that not all content
+                    available on the Internet was created without ill intention. You also understand that some content
+                    may be, but not
+                    limited to: offensive, inappropriate, sensitive, harmful, or deceptive. We will not be held
+                    responsible for any content that
+                    you may view which is contrary to your beliefs, opinions, or way of life. If you believe that your
+                    content has been
+                    submitted in such is considered copyright infringement, see our DMCA policy for further steps.</p>
+
+                <p>You express that content uploaded the service is your content, that you have full rights to the
+                    content
+                    and are acting
+                    in good faith not to be committing copyright infringement by uploading your content to the best of
+                    your
+                    knowledge.
+                    Content includes media in any format still or video, text, figures, art, illustrations, or
+                    computer-generated images.
+                    You understand that you are solely responsible for your content and that your content is not illegal
+                    by
+                    any definition
+                    of local, state, federal law or the law of your governing country. By posting your content, you
+                    grant
+                    the service a
+                    non-exclusive, worldwide, irrevocable, sub-licenseable, royalty-free license to use, display, edit,
+                    modify, distribute,
+                    reproduce, and create derivative works of your content. This allows us to provide the service to you
+                    and
+                    all users as
+                    well as to promote the service in any format across any distribution channel or medium. This
+                    includes
+                    third-party
+                    websites and other advertising services and/or mediums.</p>
+
+                <p>It is against this policy to post any content that is inappropriate, false, hateful, abusive,
+                    threatening, obscene,
+                    vulgar, violent, gore, extreme, exploitative, non-consensual, pornographic, or overtly sexually
+                    suggestive. We maintain
+                    a three strikes policy in which if you do post content with the previously mentioned content, your
+                    account will be
+                    suspended until you acknowledge these terms. After repeated violations, you will be banned. We have
+                    a
+                    zero tolerance
+                    policy against any content, material, or posting which suggests or promotes child sexual
+                    exploitation in
+                    any way. You
+                    will be immediately banned in this case.</p>
+
+                <h3>Disclaimer of Warranties & Limitations of Liability</h3>
+
+                <p>
+                    The service is provided to you on as "as is" and "as available" basis. We make no guarantee that the
+                    service, in all or
+                    in part, will be available to you, your subscribers, or any user at all times. We provide the
+                    service
+                    with no guarantee
+                    and no warranty of any kind, express or implied. Nor does the service or company, MS Media LLC,
+                    warrant
+                    or guarantee the
+                    accuracy, completeness, reliability, usefulness, or availability. Results of the service will vary
+                    and
+                    the service makes
+                    no guarantee or warranty as to the successfulness of the service by its users. Lastly, the service
+                    makes
+                    no guarantee or
+                    warranty as to the retention of content that is uploaded.
+
+                    By using this service, you agree to indemnify and hold harmless MS Media LLC, the owner of the
+                    service,
+                    its employees,
+                    agents, representatives, and partners against any and all claims, demands, actions, causes of
+                    actions,
+                    suits, judgments,
+                    proceedings, liabilities, damages, costs, losses and expenses (to include attorney's fees and legal
+                    costs) arising from
+                    any of the following:</p>
+                <ul>
+                    <li class="ml-4">Your use of the service, service features, or anything regarding the mi.show
+                        platform</li>
+                    <li class="ml-4">
+                        Any content that you upload, create, publish, distribute, sell, or otherwise make available to
+                        other
+                        users on the site
+                    </li>
+                    <li class="ml-4">
+                        Any engagements, interactions, or transactions between you and another user on or off the
+                        service
+                    </li>
+                    <li class="ml-4">
+                        Your violation of these terms or any applicable law which governs you
+                    </li>
+                </ul>
+
+                <p>
+                    TO THE MAXIMUM EXTENT ALLOW BY APPLICABLE LAW, MS MEDIA LLC SHALL NOT BE LIABLE FOR DIRECT,
+                    INDIRECT,
+                    SPECIAL,
+                    CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR ANY LOSS IN REVENUE OR PROFITS, OR ANY LOSS OF DATA AND
+                    INFORMATION, OR ANY
+                    TANGIBLE LOSSES, WHETHER INCURRED DIRECTLY OR INDIRECTLY RESULTING FROM: USING THIS SERVICE; ANY
+                    CONTENT, PRODUCTS, OR
+                    SERVICES OBTAINED FROM USING THE SERVICE; UNAUTHORIZED ACCESS OR USE OF YOUR INFORMATION OR DATA; OR
+                    ANY
+                    CONTENT,
+                    CONDUCT, OR TRANSMISSIONS FROM ANY THIRD PARTY USING THE SERVICE INCLUDING OFFENSIVE, ILLEGAL, OR
+                    DEFAMATORY ACTIONS OR
+                    STATEMENTS.</p>
+                <p>
+                    We maintain the right to change these Terms at any time. We will make every attempt to notify you of
+                    any
+                    changes, via
+                    e-mail or system notification, where it will be up to you to read and understand the updated terms.
+                    By
+                    continuing to use
+                    the service, you agree to be bound by the revised terms. The revised terms serve as a replacement
+                    for
+                    outdated terms of
+                    service; the changes will not be retroactive.
+
+                    If any dispute between you and the service arises, you agree that the laws of the State of
+                    California
+                    will govern these
+                    terms and the dispute.
+                </p>
+                <h3>Refunds & Cancellations</h3>
+
+
+                <p>Subscription and DLC purchases are final and non-refundable. You may cancel any recurring subscriptions at any time by accessing the creators profile of the subscription you intend to cancel and unsubscribing. DLC purchases are accessible at anytime and can be found in the creator profile or in your payment settings.</p>
+
+                              <p>Exclusive purchases where creative works are made once goal is reached will be refunded automatically if creative works are not delivered within 30 days from which the goal was reached. Exclusive purchases where the creative work(s) is "available now", i.e. automatically released when goal is reached, are final and non-refundable. Product purchases are refundable provided that the items are returned in the same condition as received within 14 days of the shipment date. Contact refunds@mi.show for any inquiries regarding your exclusive or product purchases.</p>
+
+            </div>
+        </div>
+        <div class="row" *ngIf="isUSC">
+            <div class="col-md-12 mb-3">
+                <h2>U.S.C 2257</h2>
+            </div>
+            <div class="col-md-12">
+                <p class="GeneralText mb-4">I am a box of crayons, you'd be the giant name brand one with the built in a
+                    the
+                    sharp ener. I'm down you always say something encouraging to help me feel better is I am a box of
+                    crayons, you'd be the giant name brand one with the built in a the sharp ener. I'm down you always
+                    say
+                    something encouraging to help me feel better is I am a box of crayons, you'd be the giant name brand
+                    one
+                    with the built in a the sharp ener. I'm down you always say something encouraging to help me feel
+                    better
+                    isI am a box of crayons, you'd be the giant name brand one with the built in a the sharp ener. I'm
+                    down
+                    you always say something encouraging to help me feel better is...I am a box of crayons, you'd be the
+                    giant name brand one with the built in a the sharp ener. I'm down you always say something
+                    encouraging
+                    to help me feel better is I am a box of crayons, you'd be the giant name brand one with the built in
+                    a
+                    the sharp ener. I'm down you always say something encouraging to help me feel better is </p>
+                <ul class="GeneralUL mb-4">
+                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+                    <li>Cras et quam ac ipsum bibendum malesuada.</li>
+                    <li>Duis facilisis nisl eget metus ultricies, quis posuere lorem dignissim.</li>
+                    <li>Cras sit amet neque vehicula justo finibus efficitur at a turpis.</li>
+                    <li>Donec eget justo euismod, porta diam nec, facilisis velit</li>
+                    <li>Cras et quam ac ipsum bibendum malesuada.</li>
+                </ul>
+                <p class="GeneralText mb-3">I am a box of crayons, you'd be the giant name brand one with the built in a
+                    the
+                    sharp ener. I'm down you always say something encouraging to help me feel better is I am a box of
+                    crayons, you'd be the giant name brand one with the built in a the sharp ener. I'm down you always
+                    say
+                    something encouraging to help me feel better is I am a box of crayons, you'd be the giant name brand
+                    one
+                    with the built in a the sharp ener. I'm down you always say something encouraging to help me feel
+                    better
+                    isI am a box of crayons, you'd be the giant name brand one with the built in a the sharp ener. I'm
+                    down
+                    you always say something encouraging to help me feel better is...</p>
+                <p class="mb-2">I am a box of crayons, you'd be the giant name brand one with the built in a the sharp
+                    ener.
+                    I'm down you always say something encouraging to help me feel better is I am a box of crayons, you'd
+                    be
+                    the giant name brand one with the built in a the sharp ener. I'm down you always say something
+                    encouraging to help me feel better is</p>
+            </div>
+
+
+        </div>
+        <div class="row" *ngIf="isWorks">
+            <div class="col-md-12 mb-3">
+                <h2>How it Works</h2>
+            </div>
+            <div class="col-md-12">
+                <p class="GeneralText mb-4">mi.show is the first freelance and content subscription marketplace that
+                    gives you complete control over how you sell your products, services, and content. This is a hybrid
+                    social media marketplace fit for all creative people looking for a creative outlet. We're excited to offer the following:</p>
+                <!-- <ul class="GeneralUL mb-4">
+                    <li>Free & Tiered Subscriptions</li>
+                    <li>Sell your products</li>
+                    <li>Sell downloadable content (DLC)</li>
+                    <li>Fund exclusive projects using our "exclusive" post module</li>
+                    <li>More features coming soon</li>
+                </ul> -->
+                <p>DRAFT</p>
+            </div>
+
+
+        </div>
+        <div class="row" *ngIf="isDMCA">
+            <div class="col-md-12 mb-3">
+                <h2>DMCA</h2>
+            </div>
+            <div class="col-md-12">
+                <p class="GeneralText mb-4">If you, or your representative, want to file a claim of copyright
+                    infringement by our customers, subscribers, or users please follow the guidelines as provided below.
+                </p>
+                <p class="GeneralText mb-4">
+                <h3>Notice of Copyright  Infringement</h3>
+                <p class="GeneralText mb-4">If you, or your representative, believe that your created work(s) has been
+                    posted in a way that constitutes copyright infringement according to the Digital Millennium
+                    Copyright Act (DMCA), please provide our designated copyright agent (located below) with the
+                    following information:</p>
+                <ul class="GeneralUL mb-4">
+                    <li>A statement that you believe in good faith that posted work(s) was not authorized by the
+                        copyright owner, agent, or other body;</li>
+                    <li>Your full name, address, telephone number, and e-mail address;</li>
+                    <li>A description of the alleged copyrighted work or other intellectual property (IP);</li>
+                    <li>Specific description of the page, including URL, username and time that the work was accessed by
+                        you or your representative;</li>
+                    <li>The original work that was used in part or in full;</li>
+                    <li>Include all information above in a generated PDF that contains the electronic signature of the
+                        person(s) or agent(s) that are authorized to act on behalf of the owner of the copyrighted
+                        work(s). Mail or e-mail to:</li>
+                    <br />MS Media LLC<br />Attn: Tifanie F.<br />611 Gateway Blvd Suite 120<br />South San Francisco,
+                    CA 94080<br />dmca@mi.show
+                </ul>
+                <h4>Our Take Down Process</h4>
+                <p class="GeneralText mb-3">
+
+                    Upon receipt of a take down request, website administrators of mi.show will expeditiously flag the
+                    content for review. During this review process, content will be unavailable for retrieval unless
+                    otherwise determined. As indicated in our Terms of Service under Content Policy, we reserve the
+                    right to remove any content, material, information, and/or data at any time for any reason. It is
+                    also the policy of this website to terminate the account of repeat offenders and make every attempt
+                    to prevent them from accessing the site again via permanent ban (“permaban”).
+
+                    The affected user may choose to submit a counter-notification to the designated agent containing a
+                    statement under penalty of perjury that the user (creator) believes in good faith that the work
+                    cited for take down was improperly identified. The user may further submit all materials/content
+                    used in the creation of said content. After the notification has been received by our designated
+                    agent, the content will be restored in full within 10 business days unless formal court action has
+                    been filed by the party or representative who submitted the original notice of copyright
+                    infringement.</p>
+                <h4>DMCA Counter-Notification Process</h4>
+                <p class="GeneralText mb-3">If you are the owner of the content that has been removed, you will have
+                    received an e-mail of the notice of take down from the e-mail address listed under Notice of
+                    Copyright Infringement. We have made the counter-notification process as simple as possible. Reply
+                    to the e-mail with the following information:</p>
+
+                <ul class="GeneralUL mb-4">
+                    <li>Include this statement in the document:
+                        <p>
+                        <ul class="GeneralUL mb-4">
+                            <li class="ml-4">“I [insert your full legal name], under penalty of perjury, hereby declare
+                                that under
+                                good faith the referenced material in the ‘notice of copyright infringement’ information
+                                was mistakenly identified and removed temporarily.”</li>
+                            <li>Include confirmation that the material identified was posted by you and that the system
+                                did not notify you by mistake;</li>
+                            <li>A statement that the user will accept any legal process from your country of origin or
+                                residence, whether the United States or other territory that recognizes the DMCA or
+                                equivalent, from the person who initiated the claim.</li>
+                            <li>Include all information above in a generated PDF that contains the electronic signature
+                                of the user.</li>
+                            <li>Send attachment in reply to the e-mail that you received.</li>
+                        </ul>
+                    </li>
+                    <li>Your reply must be in English or Spanish. No other languages will be accepted in your reply and
+                        will not be processed.</li>
+                </ul>
+                <p class="GeneralText mb-3">As indicated above, content will be restored unless otherwise contested in a
+                    formal court process within 10 business days.</p>
+                <h4>More Information</h4>
+                <p class="GeneralText mb-3">Any attempts to send information to the above contact address and/or e-mail
+                    that are not related to copyright notifications will be ignored. Please use the community and/or
+                    customer support contact information to receive help from customer support agents.</p>
+
+                <p class="GeneralText mb-3">We reserve the right to add, modify, and/or alter this policy, with or
+                    without notice to our users or visitors, at any time. We will attempt to post a notification of
+                    modification to this and all site policies whenever possible. All rights reserved.</p>
+
+                <p class="GeneralText mb-3">This website qualifies as a “Service Provider” under 17 U.S.C. 512(k)(1)
+                    which states: “entity offering the transmission, routing, or providing of connections for digital
+                    online communications, between or among points specified by a user, of material of the user’s
+                    choosing, without modification to the content of the material as sent or received.” We are not
+                    liable “for monetary relief … for infringement of copyright”. More information can be found in 17
+                    USC 512.</p>
+            </div>
+
+
+        </div>
+    </div>
+</div>

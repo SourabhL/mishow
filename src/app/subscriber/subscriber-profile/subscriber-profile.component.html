@@ -1,0 +1,241 @@
+<section class="ProfileHeader ContentWrap">
+    <div class="ProfileFull-Img" *ngIf="isTimeline">
+        <span><img [src]="timelineImage" alt="" /></span>
+    </div>
+    <div class="ProfileFull-Img" *ngIf="!isTimeline">
+        <span><img src="assets/profile-img.jpg" alt="" /></span>
+    </div>
+    <!-- <div class="container">
+        <div class="TipSubscribd d-flex">
+            <a href=""><span>$</span> <strong>Tip</strong></a>
+            <a href=""><span><img src="../../..assets/UserCheckWhite.svg" alt="" /></span>
+                <strong>Subscribed</strong></a>
+        </div>
+    </div> -->
+</section>
+
+<section class="ProfileContent">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="UserProfileInfo d-flex">
+                    <div class="UserProfilePicture">
+                        <span>
+                            <img [src]="profilePicture">
+                        </span>
+                    </div>
+                    <div class="UserProfileBody">
+                        <h3>{{displayName}}</h3>
+                        <h4>@{{userName}}</h4>
+                        <h5 class="d-flex"><span><img src="assets/LocationPin.svg" alt="" /> </span>
+                            <strong>{{location}}</strong></h5>
+                        <!-- <div class="Verified d-flex"><span><img src="assets/verified.svg"
+                                    alt="" /></span><strong>Verified</strong></div> -->
+                    </div>
+                </div>
+                <div class="UserProfileLink">
+                    <ul>
+
+                        <li (click)="showSubscriber()"><a><span><img src="assets/following.svg"></span>
+                                <strong>{{totalFollowing}}
+                                    Following</strong></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="SubscribersDiv d-flex">
+
+                    <div class="Subscriberseclipse ellipsisDropdown DropNone">
+                        <div class="btn-group " dropdown>
+                            <span dropdownToggle class="dropdown-toggle"><img src="assets/eclipse.svg" alt="" /></span>
+                            <ul id="dropdown-basic" *dropdownMenu class="smile-list  dropdown-menu  dropdown-menu-right"
+                                role="menu">
+
+
+                                <li (click)="editProfile(template)">
+                                    <div class="d-flex">
+                                        <img src="assets/edit-tools.svg" alt="" id="10">
+                                        <p>Edit Profile</p>
+                                    </div>
+                                </li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="AboutMe">
+                    <div class="AboutMeTitle d-flex">
+                        <h2>About Me</h2>
+                        <span><img src="assets/minus.svg" alt=""></span>
+                    </div>
+                    <p>{{about}} <a href=""><strong>Show More
+                                Info</strong> <span><img src="assets/DownArrowBlue.svg" alt="" /> </span></a>
+                    </p>
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <!-- <div class="col-md-3">
+            <div class="SuggestionsDiv">
+                <div class="SuggestionsTitle d-flex">
+                    <h2>Suggestions</h2>
+                    <span><img src="assets/FreeSymbol.svg" alt="" /></span>
+                </div>
+                <ul class="SuggestionsUl">
+                    <li>
+                        <div class="SuggestionBox d-flex">
+                            <div class="SuggestionPicture"><span></span></div>
+                            <div class="SuggestionName">
+                                <h3>Sonia Patric</h3>
+                                <a href="">@sofiahayat</a>
+                            </div>
+                            <div class="SuggestionViewProfile">
+                                <a href="">View Profile</a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="SuggestionBox d-flex">
+                            <div class="SuggestionPicture"><span></span></div>
+                            <div class="SuggestionName">
+                                <h3>Sonia Patric</h3>
+                                <a href="">@sofiahayat</a>
+                            </div>
+                            <div class="SuggestionViewProfile">
+                                <a href="">View Profile</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="SuggestionViewMore"><a href="">View More</a></div>
+            </div>
+        </div> -->
+
+    </div>
+</section>
+
+
+
+<ng-template #template>
+
+    <div class="AcountContent">
+        <div class="modal-header">
+            <h2>Edit Profile</h2>
+            <button class="close"><img src="assets/CloseBlue.svg" (click)="modalRef.hide()" alt="" /></button>
+        </div>
+        <div class="modal-body">
+
+            <div class="ProfileTimline">
+                <ul class="d-flex">
+                    <li>
+                        <div class="ProfileTimlineBox ProfilePicture">
+                            <span>
+
+                                <img [src]="profilePicture" *ngIf="!isNewProfileImage">
+                                <div class="d-flex">
+                                    <ngx-dropzone-image-preview *ngFor="let f of files"
+                                        ngProjectAs="ngx-dropzone-preview" [file]="f">
+                                    </ngx-dropzone-image-preview>
+                                </div>
+                                <ngx-dropzone (change)="onSelectImage($event)">
+                                    <ngx-dropzone-label></ngx-dropzone-label>
+                                </ngx-dropzone>
+                            </span>
+                            <strong>Profile picture</strong>
+                            <p class="text-danger" *ngIf="isMoreProfileImage">Please select only one image.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="ProfileTimlineBox TimelinePicture">
+                            <span>
+
+                                <img [src]="timelineImage" *ngIf="!isNewTimelineImage">
+
+                                <div class="d-flex">
+                                    <ngx-dropzone-image-preview *ngFor="let f of filesTimelines"
+                                        ngProjectAs="ngx-dropzone-preview" [file]="f">
+                                    </ngx-dropzone-image-preview>
+                                </div>
+                                <ngx-dropzone (change)="onSelectTimeline($event)">
+                                    <ngx-dropzone-label></ngx-dropzone-label>
+                                </ngx-dropzone>
+                            </span>
+                            <strong>Timeline picture</strong>
+                            <p class="text-danger" *ngIf="isMoreTimelineImage">Please select only one image.</p>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Display Name</label>
+                        <input type="text" (change)="onChange('displyName',$event)" [(ngModel)]="updateDisplayName"
+                            class="form-control">
+
+                    </div>
+                </div>
+                <div class="offset-md-2 col-md-5">
+                    <div class="form-group">
+                        <label>Birthday</label>
+
+                        <p-calendar class="form-control" [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                            [(ngModel)]="updateBirthdate" placeholder="Birth Date" [yearNavigator]="true"
+                            yearRange="{{minYear}}:{{maxYear}}" (onSelect)="onChange('birthdate',$event)">
+                        </p-calendar>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Location</label>
+
+                        <input type="text" class="form-control" (change)="onChange('location',$event)"
+                            [(ngModel)]="updateLocation" placeholder="Location">
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Bio</label>
+                        <textarea class="form-control" [(ngModel)]="updateAbout" (change)="onChange('about',$event)"
+                            placeholder="About You"></textarea>
+
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label>Category</label>
+
+                        <p-multiSelect [(ngModel)]="updateCategory" [filter]="false"
+                            class="form-control RadiusNone BorderNoneSelectBox" (onChange)="onChange('category')"
+                            [options]="categoryList">
+                        </p-multiSelect>
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <button class="btn btn-primary" (click)="onEdit()" [disabled]="showSpinner">Good to Go<i
+                            *ngIf="showSpinner" class="fa fa-spinner fa-spin"></i></button>
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</ng-template>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

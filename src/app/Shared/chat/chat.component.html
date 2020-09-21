@@ -1,0 +1,93 @@
+<div class="ContentWrap">
+
+    <div class="col-md-12">
+        <div class="MessageTitle">
+            <h2>Messages</h2>
+        </div>
+        <div class="ChatMessage d-flex">
+            <div class="ChatMessageLeft">
+                <div class="ChatMessageLeftTop">
+                    <div class="ChatMessageLink">
+                        <ul class="d-flex">
+                            <li class="active"><a href="">Inbox</a></li>
+                            <li><a href="">Archived</a></li>
+                            <li><a href="">Blocked</a></li>
+                        </ul>
+                    </div>
+                    <div class="MessageSearch">
+                        <button> <img src="assets/SearchIcon.svg" alt="" /></button>
+                        <input type="" name="" placeholder="Search Messages">
+                    </div>
+                </div>
+                <div class="ChatMessageList">
+                    <ul>
+                        <div *ngFor="let user of channels">
+                            <li>
+                                <div class="ChatUser">
+                                    <div class="ChatUserIMG"></div>
+                                    <div class="ChatUserTitle">
+                                        <h3>{{user.friendlyName}}</h3>
+                                        <p>20mins ago</p>
+                                    </div>
+                                    <div class="ChatUserBody">
+                                        <p>Lorem Ipsum is simply dummy text of</p>
+                                        <div class="ChatUserStatus StatusOnline"></div>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+                    </ul>
+                </div>
+            </div>
+            <div class="ChatMessageRight">
+                <div class="ChatMessageRightHead d-flex align-items-center">
+                    <div class="ChatMessageName">
+                        <h3>John Doe</h3>
+                        <p>lorem ipsum doller isset</p>
+                    </div>
+                    <div class="EllipsisOption ml-auto"><img src="assets/HorizontalEllipsis.svg" alt=""></div>
+                </div>
+                <div class="ChatMessageRightBody">
+                    <ul>
+                        <li class="">
+                            <div class="ChatMessageBox d-flex">
+                                <span></span>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                    Lorem
+                                    Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="ChatMessageBoxDate">
+                                <h4><span>May 2</span></h4>
+                            </div>
+                        </li>
+                        <li class="OnlineUsers">
+                            <div class="ChatMessageBox d-flex">
+                                <span></span>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                    Lorem
+                                    Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="ChatMessageRightFooter align-items-center d-flex">
+                    <div class="ChatMessageTextarea ">
+                        <textarea placeholder="Write a message....."></textarea>
+                    </div>
+                    <div class="TextareaOption">
+                        <ul class="d-flex">
+                            <li><a href=""><img src="assets/pictureBlue.svg" alt="" /></a></li>
+                            <li><a href=""><img src="assets/Mic.svg" alt="" /></a></li>
+                            <li><a href=""><img src="assets/Camera.svg" alt="" /></a></li>
+                            <li><a href=""><img src="assets/GIF.svg" alt="" /></a></li>
+                            <li><a href=""><img src="assets/Label.svg" alt="" /></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,38 @@
+<div class="ContentWrap">
+    <section class="ProfileHeader AccountPage">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-12 col-lg-3">
+                    <ul class="setting-menu">
+                        <li class="AccountSettings">
+                            <a (click)="Active(1)" [class]="isActive == 1 ? 'active' : '' ">Account</a>
+                        </li>
+
+                        <li class="PrivactNav"><a [class]="isActive == 5 ? 'active' : '' "
+                                (click)="Active(5)">Privacy</a>
+                        </li>
+
+                        <li class="NotificationNav"><a [class]="isActive == 4 ? 'active' : '' "
+                                (click)="Active(4)">NOTIFICATIONS</a></li>
+
+                        <li class="SubscriptionNav"><a [class]="isActive == 3 ? 'active' : '' " (click)="Active(3)"
+                                *ngIf="isCreator">SUBSCRIPTION</a>
+                        </li>
+
+                        <li class="BankingNav"><a [class]="isActive == 2 ? 'active' : '' "
+                                (click)="Active(2)">BANKING</a>
+                        </li>
+
+
+
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-9">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>

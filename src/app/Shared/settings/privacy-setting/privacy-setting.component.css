@@ -1,0 +1,15 @@
+.private_profile-content{
+    padding:0 0 0 15px;
+}
+.private_profile-content h4{
+    color: #4747bf;
+    line-height: 24px;
+    font-size: 1.2rem;
+    margin: 0 0 5px;
+}
+.private_profile-content p{
+    font-size: .9rem;
+    line-height: normal;
+    margin:0 0 15px;
+}
+.modify-you{ background:#eee; padding:25px; border-radius:10px;}

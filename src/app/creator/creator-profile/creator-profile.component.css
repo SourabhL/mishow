@@ -1,0 +1,127 @@
+.img-container{height: 400px;}
+.ProfilePictureEdit{margin:0 0 20px;}
+.profileTitle span{position:relative;margin: 0 0 0 10px;}
+.profileTitle span i.fa-certificate{color: #3b5998;font-size: 35px;vertical-align: top;}
+.profileTitle span i.fa-check{position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);color: #fff;
+font-size: 13px;line-height: 100%;vertical-align: top;margin: -6px 0 0;}
+.posted-date h4{margin:0;padding:0;color: #007bff;font-size:18px;}
+.posted-date p{color:#666;font-size:15px;}
+.slider img {cursor: pointer;}
+.profile-section .feed-top{align-items:center;}
+.profile-section .feed-top h5 {font-size: 1.2rem;margin: 0 0 0 20px;}
+
+.ProfileHeader{ position:relative;}
+.ProfileFull-Img {position: relative;}
+.ProfileFull-Img img{ border-radius:40px 40px 0px 0px; max-width:100%;}
+.ProfileFull-Img:before{ content:''; position:absolute; width:100%; height:100%;
+display:block; background:rgba(9, 49, 73, 0.72); border-radius:40px 40px 0px 0px;}
+.ProfileHeader .container{ height:100%; position:absolute; top:0;left:0; width:100%;}
+.TipSubscribd{ position:absolute; bottom:20px; right:15px;}
+.TipSubscribd a{ border:2px solid rgba(255, 255, 255, 0.2); border-radius:100px; display:block;
+padding:10px 31px; line-height:28px; font-weight:500; font-size: 13px; text-transform: uppercase; color: #F5F9FF;}
+.TipSubscribd a span{ max-height:28px; font-weight: 500; text-transform: uppercase; color: #F5F9FF; margin-right:6px;
+font-size:19px; vertical-align:middle;}
+.TipSubscribd a + a{ margin-left:54px;}
+
+section.ProfileContent{ padding:30px 0 0;}
+.UserProfileInfo{ width:100%; position:relative; margin:-100px 0 60px;align-items:center; padding:40px 0 0;}
+.UserProfilePicture{ margin:0 30px 0 0;}
+.UserProfilePicture span{display:block; width:168px; height:168px; border-radius:100px; background:#eee;}
+.UserProfilePicture span img{ display:block; width:168px; height:168px; border-radius:100px;}
+.UserProfileBody{ display:block; position:relative;}
+.UserProfileBody h3{ margin:0; padding:0; display:block; font-weight:500; font-size:22px; line-height:28px; text-align:center; color:#171736; }
+.UserProfileBody h4{ margin:0 0 7px; padding:0; display:block; font-weight:400; font-size:21px; line-height:27px; text-align:center; color:#2982BA;}
+.UserProfileBody h5{ margin:0; padding:0; align-items:center; line-height:14px;}
+.UserProfileBody h5 span{ margin:0 9px 0 0;}
+.UserProfileBody h5 span img{ vertical-align:top; }
+.UserProfileBody h5 strong{font-weight: 500; font-size: 12px; line-height: 15px; text-align: center; color: #939598;}
+.Verified{ position:absolute; top:0; left:100%; margin:5px 0 0 10px; }
+.Verified span{ margin:0 4px 0 0;}
+.Verified span img{ vertical-align:top;}
+.Verified strong{ font-weight:500; font-size:12px; line-height:20px; text-align:center; color:#939598;}
+.UserProfileLink{ display:block;}
+.UserProfileLink ul{ margin:0; padding:0; list-style:none;}
+.UserProfileLink ul li{ display:block; width:100%; margin:0 0 16px;}
+.UserProfileLink ul li a{ position:relative; padding:0 0 0 54px;display: block; line-height:31px;}
+.UserProfileLink ul li a:hover{ text-decoration:none;}
+.UserProfileLink ul li a:hover strong{ color:#8a96a3;}
+.UserProfileLink ul li a span{ position:absolute; top:0; left:0; width:36px; text-align: center;}
+.UserProfileLink ul li a strong{font-weight: 500; font-size: 18px; color:#171736; line-height:31px;}
+
+.SubscribersDiv { justify-content:flex-end; align-items:center; margin:0 0 50px;}
+.SubscribersInfo{font-weight:500; font-size:13px; line-height:17px; color: #939598; text-align:center; }
+.SubscribersInfo span{ display:block; margin:0 0 2px;}
+.SubscribersInfo strong{font-weight:500; font-size: 13px; line-height: 17px; color: #939598;}
+.Subscriberseclipse{ margin-left:15px;}
+
+.ColorOption{ margin:0 0 20px;}
+.ColorOption ul{ margin:0; padding:0; list-style:none;}
+.ColorOption ul li{ text-align:center;}
+.ColorOption ul li + li{ margin-left:20px;}
+.ColorOption ul li span{ margin:0 auto 2px; display:block; width:58px; height:4px; border-radius:100px;}
+.ColorOption ul li strong{ display:block;font-weight:400; font-size: 15px; line-height:19px; color: #171736;}
+
+.DanceColor{ background:#91DDFF;}
+.FunnyColor{ background:#C1FF91;}
+.MovieColor{ background:#FF8D8D;}
+.DramaColor{ background:#BBA3FF;}
+.RomanceColor{ background:#FF7DCB;}
+
+.AboutMe{ margin:0 0 40px; border:2px solid #D6DDE4; background:#fff; padding:25px 30px; display:block; align-items:center; border-radius:20px;}
+.AboutMeTitle{ margin-bottom:20px;  }
+.AboutMeTitle h2{ margin:0; padding:0; display:block;font-style: normal; font-weight:500; font-size:17px; line-height:22px; color: #2982BA;}
+.AboutMeTitle span{ margin-left:auto; }
+.AboutMe p{ margin:0 0 50px; padding:0; display:block; font-size: 16px; line-height: 25px; color: #171736; text-align:center;}
+.AboutMe p a{ margin:20px 0 0; display:block; text-align:center;font-weight:500; font-size: 14px; line-height: 18px; color:#2982BA;}
+.AboutMe p a img { width:14px; height:6px; vertical-align:middle; margin-left:20px;}
+.AboutImages span{ background:#eee; border-radius:20px; display:block; height:250px;}
+
+.RecentMyPost{ margin:0 0 50px;}
+.RecentMyPostTitle{ margin:0 0 20px;}
+.RecentMyPostTitle h2{ margin:0; padding:0; display:block; font-weight:500; font-size:17px; line-height:22px; color:#2982BA;}
+
+.RecentMyPostHead{ margin:0 0 30px; position:relative;}
+.RecentMyPostHeadLeft{ padding:0 0 0 65px;}
+.RecentMyPostHeadLeft span{ position:absolute; top:0; left:0; display:block; width:52px; height:52px; background:#eee; border-radius:100px;}
+.RecentMyPostHeadLeft span img{ height:52px; width:52px; border-radius:100px;}
+.RecentMyPostHeadLeft h3{ margin:0; padding:0; font-weight:500; font-size:22px; line-height:28px; color:#171736;}
+.RecentMyPostHeadLeft strong{font-weight:500; font-size:18px; line-height:23px; color:#2E84BC;}
+
+.RecentMyPostHeadRight{ margin:0 0 0 auto;text-align:center;}
+.RecentMyPostHeadRight .PostDate{position: relative; padding:0 0 0 24px; font-weight: 400; font-size: 18px; line-height: 22px;  color: #939598; display: inline-block; margin:0 0 5px;}
+.RecentMyPostHeadRight .PostDate span{ position:absolute; top:0; left:0;  display:block;}
+.RecentMyPostHeadRight .PostDate span img{ height:18px;}
+.DLC{border:2px solid #2F84BC; border-radius:100px; display:block; align-items:center; text-align:center; padding:0 10px 2px;
+    height:24px;}
+.DLC strong{font-weight: 500; font-size:14px; line-height:15px; text-align:center; color: #2982BA;}
+.DLC span{ color:#2F84BC; font-size:14px;}
+.PostImage{ display:block; margin:0 0 10px; }
+.PostImage span{ border-radius:20px; display:block; background:#eee; width:100%; height:250px;}
+
+.PostOption{ padding:0 0 10px; margin:0 0 14px; display:block; border-bottom:1px solid #CACACA;}
+.PostOption ul{ margin:0; padding:0; list-style:none;justify-content:space-between;}
+.PostOption ul li.d-flex{ align-items:center;}
+.PostOption ul li strong{font-weight:normal; font-size:16px; line-height:20px; color:#171736;}
+.PostOption ul li span{ margin:0 7px 0 0;}
+.LikeCounter span img{ max-width:18px;}
+.CommentCounter span img{ max-width:21px;}
+.SmileyCounter span img{ max-width:19px;}
+.AwardsCounter span img{ max-width:18px;}
+.AwardsCounter strong{font-weight:500; font-size: 15px; line-height: 19px; color: #8A96A3;}
+.PostDropdown span img{ max-width:4px;}
+
+li{
+    cursor: pointer;
+}
+@media screen and (max-width: 300px){
+  .SubscribersDiv {     justify-content: space-around;
+    }
+}
+@media screen and (max-width: 600px) {
+  .SubscribersDiv {     justify-content: space-around;
+    }
+}
+@media screen and (max-width: 900px) {
+  .SubscribersDiv {     justify-content: space-around;
+    }
+}

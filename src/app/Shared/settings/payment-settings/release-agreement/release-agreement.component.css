@@ -1,0 +1,32 @@
+.modify-you{ background:#eee; padding:25px; border-radius:10px;}
+.modify-you h6{ color: #3b5998;font-size: 1rem;  font-weight: 700; margin: 0 0 1.2rem;}
+
+.modify-you.AccountSetting  form{ max-width:100%;}
+.AccountSettingBody{ max-width:350px;}
+.edit-table-div{ border:1px solid #afbddc; border-radius:4px; width:100%; padding:8px 10px; background:#fff;
+line-height:22px; margin:0 20px 0 0;}
+
+.modify-you label{ color: #3b5998;font-size: 15px; font-weight: 600; display: block; width: 100%;}
+.modify-you p{ font-size:15px; color:#666;margin-left: 2px;}
+.modify-you .form-group textarea,
+.modify-you .form-group input{ border:1px solid #afbddc; border-radius:4px; width:100%; padding:8px 10px; background:#fff;
+line-height:22px; margin:0 20px 0 0;}
+.modify-you .form-group textarea{ height:120px;}
+
+body .modify-you .ui-inputswitch .ui-inputswitch-slider:before,
+body .modify-you .ui-inputswitch .ui-inputswitch-slider{ border-radius:4px;}
+
+.AccountSetting h4{ border-bottom:1px solid #3b5998; padding-bottom:10px; position:relative;    width: calc(100% - 30px);}
+.AccountSetting h4:before{ content:"\f063"; font-family:'FontAwesome'; color:#3b5998; font-size:14px; position:absolute; bottom:-9px; right:-30px;}
+.danger-div button{ border:1px solid #dc3545;}
+
+.input-wrap{ position:relative;}
+.input-wrap input{padding-right:30px;}
+.input-wrap i{ position:absolute; top:13px;}
+.input-wrap i.fa-check{ color:green; right:10px;}
+.input-wrap i.fa-times{ color:red; right:12px;}
+
+.PostingNudity p{ line-height:26px; vertical-align:top; margin:0 0 0 10px; padding:0;}
+.loadPDF{ background:#fff; height:150px; width:100%;}
+.VerificationBox ngx-dropzone-preview,
+.VerificationBox ngx-dropzone-image-preview{ width:100%;    min-width: unset!important; max-width: unset!important; padding: 0!important;}

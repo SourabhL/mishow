@@ -1,0 +1,247 @@
+<form [formGroup]="notificationSettingForm" *ngIf="isCreator">
+    <div class="AcountContent">
+        <div class="AccountTitle">
+            <h2 class="d-flex"><span><img src="assets/BellGrey.svg" alt="" /> </span> Notifications
+            </h2>
+        </div>
+        <div class="NotoficationOption">
+            <ul class="d-flex">
+                <!-- <li class="d-flex">
+                    <p-inputSwitch></p-inputSwitch>
+                    <div class="SwitchDIV"></div> <strong>New Messages </strong>
+                </li> -->
+                <li class="d-flex">
+                    <p-inputSwitch formControlName="new_subscriber"
+                        (onChange)="onCreatorChange('new_subscriber',$event)"
+                        [(ngModel)]="creatorNotification.new_subscriber">
+                    </p-inputSwitch>
+
+                    <div class="SwitchDIV"></div> <strong>New Subscriber</strong>
+                </li>
+                <!-- <li class="d-flex">
+                    <p-inputSwitch formControlName="new_tip" (onChange)="onCreatorChange('new_tip',$event)"
+                        [(ngModel)]="creatorNotification.new_tip"></p-inputSwitch>
+                    <div class="SwitchDIV"></div> <strong>Tips</strong>
+                </li> -->
+                <li class="d-flex">
+                    <p-inputSwitch formControlName="new_pack_purchase"
+                        (onChange)="onCreatorChange('new_pack_purchase',$event)"
+                        [(ngModel)]="creatorNotification.new_pack_purchase">
+                    </p-inputSwitch>
+                    <div class="SwitchDIV"></div> <strong>DLC Purchases</strong>
+                </li>
+                <li class="d-flex">
+                    <p-inputSwitch formControlName="product_expiration"
+                        [(ngModel)]="creatorNotification.product_expiration"
+                        (onChange)="onCreatorChange('product_expiration',$event)"></p-inputSwitch>
+                    <div class="SwitchDIV"></div> <strong>Product Expiration</strong>
+                </li>
+                <li class="d-flex">
+                    <p-inputSwitch formControlName="post_goes_live"
+                        (onChange)="onCreatorChange('post_goes_live',$event)"
+                        [(ngModel)]="creatorNotification.post_goes_live">
+                    </p-inputSwitch>
+                    <div class="SwitchDIV"></div> <strong>Scheduled Posts Go Live</strong>
+                </li>
+                <li class="d-flex">
+                    <p-inputSwitch formControlName="new_contribution_to_creator"
+                        [(ngModel)]="creatorNotification.new_contribution_to_creator"
+                        (onChange)="onCreatorChange('new_contribution_to_creator',$event)"></p-inputSwitch>
+                    <div class="SwitchDIV"></div> <strong>Exclusive Purchases</strong>
+                </li>
+                <li class="d-flex">
+                    <p-inputSwitch></p-inputSwitch>
+                    <div class="SwitchDIV"></div> <strong>Mutual Exclusive Purchases</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+</form>
+
+<form [formGroup]="subscriber_notification" *ngIf="isSubscriber">
+    <div class="AcountContent">
+        <div class="AccountTitle">
+            <h2 class="d-flex"><span><img src="assets/BellGrey.svg" alt="" /> </span> Notifications
+            </h2>
+        </div>
+        <div class="NotoficationOption">
+            <ul class="d-flex">
+                <li class="d-flex">
+                    <p-inputSwitch formControlName="new_post_from_creator"
+                        [(ngModel)]="subscriberNotification.new_post_from_creator"
+                        (onChange)="onSubscriberChange('new_post_from_creator',$event)"></p-inputSwitch>
+                    <div class="SwitchDIV"></div> <strong>New Posts</strong>
+                </li>
+                <li class="d-flex">
+                    <p-inputSwitch formControlName="new_pack_from_creator"
+                        [(ngModel)]="subscriberNotification.new_pack_from_creator"
+                        (onChange)="onSubscriberChange('new_pack_from_creator',$event)"></p-inputSwitch>
+                    <div class="SwitchDIV"></div> <strong>New DLCs</strong>
+                </li>
+                <li class="d-flex">
+                    <p-inputSwitch formControlName="new_product_from_creator"
+                        [(ngModel)]="subscriberNotification.new_product_from_creator"
+                        (onChange)="onSubscriberChange('new_product_from_creator',$event)">
+                    </p-inputSwitch>
+                    <div class="SwitchDIV"></div> <strong>New Products</strong>
+                </li>
+                <li class="d-flex">
+                    <p-inputSwitch formControlName="new_exclusives_from_creator"
+                        [(ngModel)]="subscriberNotification.new_exclusives_from_creator"
+                        (onChange)="onSubscriberChange('new_exclusives_from_creator',$event)">
+                    </p-inputSwitch>
+                    <div class="SwitchDIV"></div> <strong>New Exclusives</strong>
+                </li>
+                <li class="d-flex">
+                    <p-inputSwitch formControlName="new_contribution_to_creator"
+                        [(ngModel)]="subscriberNotification.new_contribution_to_creator"
+                        (onChange)="onSubscriberChange('new_contribution_to_creator',$event)">
+                    </p-inputSwitch>
+                    <div class="SwitchDIV"></div> <strong>Mutual Exclusive Purchases</strong>
+                </li>
+            </ul>
+        </div>
+    </div>
+</form>
+
+
+
+<!-- <div class="modify-you">
+    <form [formGroup]="notificationSettingForm" *ngIf="isCreator">
+        <div class="form-group">
+            <div class="d-flex">
+                <p-inputSwitch formControlName="new_subscriber" (onChange)="onCreatorChange('new_subscriber',$event)"
+                    [(ngModel)]="creatorNotification.new_subscriber">
+                </p-inputSwitch>
+                <div class="private_profile-content">
+                    <h4>New Subscriber</h4>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="d-flex">
+                <p-inputSwitch formControlName="new_tip" (onChange)="onCreatorChange('new_tip',$event)"
+                    [(ngModel)]="creatorNotification.new_tip"></p-inputSwitch>
+                <div class="private_profile-content">
+                    <h4>Tips</h4>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="d-flex">
+                <p-inputSwitch formControlName="new_pack_purchase"
+                    (onChange)="onCreatorChange('new_pack_purchase',$event)"
+                    [(ngModel)]="creatorNotification.new_pack_purchase">
+                </p-inputSwitch>
+                <div class="private_profile-content">
+                    <h4>Pack Purchases</h4>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="d-flex">
+                <p-inputSwitch formControlName="product_expiration" [(ngModel)]="creatorNotification.product_expiration"
+                    (onChange)="onCreatorChange('product_expiration',$event)"></p-inputSwitch>
+                <div class="private_profile-content">
+                    <h4>Product Expiration</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="d-flex">
+                <p-inputSwitch formControlName="post_goes_live" (onChange)="onCreatorChange('post_goes_live',$event)"
+                    [(ngModel)]="creatorNotification.post_goes_live">
+                </p-inputSwitch>
+                <div class="private_profile-content">
+                    <h4>When Pending Post Go Live</h4>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="d-flex">
+                <p-inputSwitch formControlName="new_contribution_to_creator"
+                    [(ngModel)]="creatorNotification.new_contribution_to_creator"
+                    (onChange)="onCreatorChange('new_contribution_to_creator',$event)"></p-inputSwitch>
+                <div class="private_profile-content">
+                    <h4>Exclusive Contributions</h4>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="d-flex">
+                <p-inputSwitch formControlName="mutual_contribution"></p-inputSwitch>
+                <div class="private_profile-content" (onChange)="onCreatorChange('mutual_contribution',$event)">
+                    <h4>Mutual Contributions</h4>
+                    <p>After you've made a contribution to another Creator's exclusive content, receive notifications as
+                        others make
+                        contributions towards the goal.</p>
+                </div>
+            </div>
+        </div>
+
+    </form>
+    <form [formGroup]="subscriber_notification" *ngIf="isSubscriber">
+        <div class="form-group">
+            <div class="d-flex">
+                <p-inputSwitch formControlName="new_post_from_creator"
+                    [(ngModel)]="subscriberNotification.new_post_from_creator"
+                    (onChange)="onSubscriberChange('new_post_from_creator',$event)"></p-inputSwitch>
+                <div class="private_profile-content">
+                    <h4>New Post</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="d-flex">
+                <p-inputSwitch formControlName="new_pack_from_creator"
+                    [(ngModel)]="subscriberNotification.new_pack_from_creator"
+                    (onChange)="onSubscriberChange('new_pack_from_creator',$event)"></p-inputSwitch>
+                <div class="private_profile-content">
+                    <h4>New Pack</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="d-flex">
+                <p-inputSwitch formControlName="new_product_from_creator"
+                    [(ngModel)]="subscriberNotification.new_product_from_creator"
+                    (onChange)="onSubscriberChange('new_product_from_creator',$event)">
+                </p-inputSwitch>
+                <div class="private_profile-content">
+                    <h4>New Product</h4>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="d-flex">
+                <p-inputSwitch formControlName="new_exclusives_from_creator"
+                    [(ngModel)]="subscriberNotification.new_exclusives_from_creator"
+                    (onChange)="onSubscriberChange('new_exclusives_from_creator',$event)">
+                </p-inputSwitch>
+                <div class="private_profile-content">
+                    <h4>New Exclusives</h4>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="d-flex">
+                <p-inputSwitch formControlName="new_contribution_to_creator"
+                    [(ngModel)]="subscriberNotification.new_contribution_to_creator"
+                    (onChange)="onSubscriberChange('new_contribution_to_creator',$event)"></p-inputSwitch>
+                <div class="private_profile-content">
+                    <h4>Mutual Contributions</h4>
+                    <p>After you've made a contribution to another Creator's exclusive content, receive notifications as
+                        others make
+                        contributions towards the goal.</p>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div> -->

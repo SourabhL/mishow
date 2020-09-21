@@ -1,0 +1,897 @@
+<div class="ContentWrap">
+    <section class="profile-section">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-9 mt-3" *ngIf="isPost">
+                    <div>
+                        <div class="RecentMyPostBody">
+                            <div class="RecentMyPostHead d-flex">
+                                <div class="RecentMyPostHeadLeft">
+                                    <span>
+                                        <img [src]="profile.profile_picture">
+                                    </span>
+                                    <h3>{{profile.display_name}}</h3>
+                                    <strong>@{{profile.profile_url}}</strong>
+                                </div>
+                                <div class="RecentMyPostHeadRight">
+                                    <div class="PostDate"><span><img src="assets/PostsIcon.svg" alt="" /></span>
+                                        {{data.publish_date}}
+                                    </div>
+                                    <!-- <div class="DLC d-flex">
+                                                        <strong>DLC</strong> <span>$ 10</span>
+                                                    </div> -->
+                                </div>
+                            </div>
+
+                            <div class="PostImage">
+                                <div class="slider">
+                                    <carousel [interval]="false">
+                                        <div *ngIf="media.image">
+                                            <slide *ngFor="let img of media.image">
+                                                <img [src]="img" alt="" style="display: block; width: 100%;">
+                                            </slide>
+                                        </div>
+                                        <div *ngIf="media.video">
+                                            <slide *ngFor="let img of media.video">
+                                                <video controls alt="" style="display: block; width: 100%;">
+                                                    <source [src]="img">
+                                                </video>
+                                            </slide>
+                                        </div>
+                                    </carousel>
+
+                                </div>
+
+                            </div>
+                            <div class="PostOption">
+                                <ul class="d-flex">
+                                    <!-- <li class="d-flex LikeCounter"><span><img src="../../..assets/likeIcon.svg"
+                                                                                        alt="" />
+                                                                                </span>
+                                                                                <strong>20</strong></li> -->
+                                    <li class="d-flex CommentCounter" (click)="LoadComments(data)"
+                                        *ngIf="data.comments">
+                                        <span><img src="assets/CommentIconBlue.svg" alt="" />
+                                        </span>
+                                        <strong *ngIf="data.total_comments > 0">{{data.total_comments}}</strong>
+                                    </li>
+
+                                    <li class="d-flex CommentCounter" *ngIf="!data.comments">
+                                        <span><img src="assets/CommentIconGreFill.svg" alt="" />
+                                        </span>
+                                    </li>
+
+
+                                    <div class="btn-group EmojiLoveDIV" dropdown>
+
+                                        <span dropdownToggle class="dropdown-toggle">
+                                            <img height="23px" width="23px" *ngIf="data.is60" src="assets/Poop.png"
+                                                alt="" />
+                                            <img height="23px" width="23px" *ngIf="data.is70" src="assets/emoji.png"
+                                                alt="" />
+                                            <img height="23px" width="23px" *ngIf="data.is80" src="assets/smily.png"
+                                                alt="" />
+                                            <img height="23px" width="23px" *ngIf="data.is90" src="assets/EmojiLove.svg"
+                                                alt="" />
+                                            <img height="23px" width="23px" *ngIf="data.is100" src="assets/fire.png"
+                                                alt="" />
+                                            <img height="23px" width="23px" *ngIf="data.totalVotes == '0'"
+                                                src="assets/smily.png" alt="" />
+                                        </span>
+                                        <strong *ngIf="data.totalVotes > '0'">{{data.totalVotes}}</strong>
+
+
+                                        <ul id="dropdown-basic" *dropdownMenu
+                                            class="smile-list  dropdown-menu  dropdown-menu-center" role="menu">
+                                            <div class="d-flex">
+                                                <li>
+                                                    <div class="EmojiLoveDIV-LI">
+                                                        <img (click)="Voting('10',data.post_id)" src="assets/fire.png"
+                                                            alt="" id="10">
+                                                        <span *ngIf="vote.ten > 0 ">{{vote.ten}}</span>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="EmojiLoveDIV-LI">
+                                                        <img (click)="Voting('9',data.post_id)" src="assets/heart.png"
+                                                            alt="" id="9">
+                                                        <span *ngIf="vote.nine > 0 ">{{vote.nine}}</span>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="EmojiLoveDIV-LI"><img (click)="Voting('8',data.post_id)"
+                                                            src="assets/smily.png" alt="" id="8">
+                                                        <span *ngIf="vote.eight > 0">{{vote.eight}}</span>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="EmojiLoveDIV-LI"><img (click)="Voting('7',data.post_id)"
+                                                            src="assets/emoji.png" alt="" id="7">
+                                                        <span *ngIf="vote.seven > 0 ">{{vote.seven}}</span>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="EmojiLoveDIV-LI"><img (click)="Voting('6',data.post_id)"
+                                                            src="assets/Poop.png" alt="" id="6">
+                                                        <span *ngIf="vote.six > 0 ">{{vote.six}}</span>
+                                                    </div>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <li class="ellipsisDropdown DropNone">
+                                        <div class="btn-group " dropdown>
+                                            <span dropdownToggle class="dropdown-toggle"><img src="assets/eclipse.svg"
+                                                    alt="" /></span>
+                                            <ul id="dropdown-basic" *dropdownMenu
+                                                class="smile-list  dropdown-menu  dropdown-menu-right" role="menu">
+
+                                                <li (click)="update('post',data.post_id)">
+                                                    <div class="d-flex">
+                                                        <img src="assets/edit-tools.svg" alt="" id="10">
+                                                        <p>Edit</p>
+                                                    </div>
+                                                </li>
+
+                                                <li (click)="delete('post',data)">
+                                                    <div class=" d-flex">
+                                                        <img src="assets/interface.svg" alt="" id="10">
+                                                        <p>Delete</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+
+                                </ul>
+                            </div>
+
+                            <div class="ColorOption" *ngIf="data.tag">
+                                <ul class="feed-list d-flex mr-2">
+
+                                    <li *ngFor="let hash of data.tags"><span
+                                            class="DanceColor"></span><strong>{{hash}}</strong></li>
+
+                                </ul>
+                            </div>
+                            <div class="mb-4" [ngxSummernote]="config" id="editor" [(ngModel)]="data.description">
+                            </div>
+
+                            <div class="TypeComment d-flex mb-3" *ngIf="data.comments">
+                                <div class="TypeCommentIMG"><span><img [src]="profile.profile_picture"></span></div>
+                                <div class="TypeCommentBox ml-auto">
+                                    <textarea class="form-control" placeholder="Add Comment..."
+                                        (blur)="onComment($event)"></textarea>
+                                    <a (click)="AddComment('comment',data)"><img src="assets/plane.svg" alt="" /></a>
+                                </div>
+
+                            </div>
+
+                            <!-- new -->
+                            <div class="MultiComment " *ngIf="data.total_comments > 0">
+                                <div class="d-flex" *ngFor="let cmt of data.commentArr">
+                                    <div *ngFor="let profile of cmt.profile">
+                                        <div pTooltip="{{profile.display_name}}  at {{cmt.created_date }}"
+                                            tooltipPosition="top" class="MultiCommentIMG">
+                                            <span *ngIf="subscriberUserID !== cmt.user_id"
+                                                (click)="viewProfile(profile.profile_url)"><img
+                                                    class="img-responsive user-photo"
+                                                    [src]="profile.profile_picture"></span>
+                                            <span *ngIf="subscriberUserID === cmt.user_id"><img
+                                                    class="img-responsive user-photo"
+                                                    [src]="profile.profile_picture"></span>
+                                        </div>
+                                    </div>
+                                    <div class="MultiCommentBody ml-auto">
+                                        <div class="PostedComment" *ngIf="!cmt.isModify; else editmode">
+                                            <p><button *ngIf="cmt.amount > 0"
+                                                    class="btn btn-primary">{{cmt.amount}}</button>{{cmt.comment}}
+                                            </p>
+                                        </div>
+                                        <ng-template #editmode>
+                                            <div class="TypeCommentBox ml-auto w-100 mb-3" *ngIf="cmt.isModify ">
+                                                <textarea class="form-control"
+                                                    (blur)="onComment($event)">{{cmt.comment}}</textarea>
+                                                <a *ngIf="subscriberUserID == cmt.user_id"
+                                                    (click)="AddComment('modify',data,cmt)"><img src="assets/plane.svg"
+                                                        alt="" /></a>
+                                            </div>
+                                        </ng-template>
+
+                                        <div class="CommentOption">
+                                            <ul class="d-flex">
+                                                <li>
+                                                    <div class="d-flex LikedIcon " (click)="likeComment(cmt)"
+                                                        *ngIf="!cmt.you_liked  && !cmt.isLike ">
+                                                        <span></span>
+                                                        <strong
+                                                            *ngIf="cmt.total_likes > '0'">{{cmt.total_likes}}</strong>
+                                                    </div>
+                                                    <div class="d-flex LikedIcon active" (click)="unlikeComment(cmt)"
+                                                        *ngIf="cmt.isLike || cmt.you_liked ">
+                                                        <span></span>
+                                                        <strong
+                                                            *ngIf="cmt.total_likes > '0'">{{cmt.total_likes}}</strong>
+                                                    </div>
+                                                </li>
+                                                <!-- <li (click)="onTips(templateTips,'comment',cmt)"><a><img
+                                                            src="assets/Currency.svg" alt="" /></a>
+                                                </li> -->
+                                                <li (click)="reply(cmt)"><a><img src="assets/backArrow.svg"
+                                                            alt="" /></a>
+                                                </li>
+                                                <li class="ellipsisDropdown DropNone"
+                                                    *ngIf="subscriberUserID === cmt.user_id">
+                                                    <div class="btn-group " dropdown>
+                                                        <span dropdownToggle class="dropdown-toggle"><img
+                                                                src="assets/eclipse.svg" alt="" /></span>
+                                                        <ul id="dropdown-basic" *dropdownMenu
+                                                            class="smile-list  dropdown-menu  dropdown-menu-right"
+                                                            role="menu">
+
+
+                                                            <li (click)="updateComment(cmt)">
+                                                                <div class="d-flex">
+                                                                    <img src="assets/edit-tools.svg" alt="" id="10">
+                                                                    <p>Edit</p>
+                                                                </div>
+                                                            </li>
+
+                                                            <li (click)="deleteComment('comment',cmt)">
+                                                                <div class=" d-flex">
+                                                                    <img src="assets/interface.svg" alt="" id="10">
+                                                                    <p>Delete</p>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="TypeComment d-flex mb-3" *ngIf="cmt.replaytoComment ">
+                                            <div class="TypeCommentIMG"><span><img
+                                                        [src]="profile.profile_picture"></span>
+                                            </div>
+                                            <div class="TypeCommentBox ml-auto">
+                                                <textarea class="form-control" placeholder="Add Comment..."
+                                                    (blur)="onComment($event)"></textarea>
+                                                <a (click)="AddComment('reply',data,cmt)"><img src="assets/plane.svg"
+                                                        alt="" /></a>
+                                            </div>
+                                        </div>
+                                        <div class="SubComments" *ngIf="cmt.reply">
+                                            <div class="MultiComment d-flex" *ngFor="let reply of cmt.reply">
+                                                <div *ngFor="let profile of reply.profile">
+                                                    <div pTooltip="{{profile.display_name}}  at {{reply.created_date }}"
+                                                        tooltipPosition="top" class="MultiCommentIMG">
+
+                                                        <span *ngIf="subscriberUserID !== profile.user_id"
+                                                            (click)="viewProfile(profile.profile_url)"><img
+                                                                class="img-responsive user-photo"
+                                                                [src]="profile.profile_picture"></span>
+                                                        <span *ngIf="subscriberUserID === profile.user_id"><img
+                                                                class="img-responsive user-photo"
+                                                                [src]="profile.profile_picture"></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="MultiCommentBody">
+                                                    <div class="PostedComment" *ngIf="!reply.isModify ; else editmode ">
+                                                        <p>{{reply.comment}} </p>
+                                                    </div>
+                                                    <ng-template #editmode>
+                                                        <div class="TypeCommentBox ml-auto w-100 mb-3">
+                                                            <div class="TypeCommentIMG"><span><img
+                                                                        [src]="profileImage"></span>
+                                                            </div>
+                                                            <div class="TypeCommentBox ml-auto" *ngIf="cmt.isModify ">
+                                                                <textarea class="form-control"
+                                                                    (blur)="onComment($event)">{{reply.comment}}</textarea>
+                                                                <a
+                                                                    (click)="AddComment('modify',data,reply.comment_uid)"><img
+                                                                        src="assets/plane.svg" alt="" /></a>
+                                                            </div>
+                                                        </div>
+                                                    </ng-template>
+
+                                                    <div class="CommentOption">
+                                                        <ul class="d-flex">
+                                                            <li>
+                                                                <div class="d-flex LikedIcon "
+                                                                    (click)="likeComment(reply)"
+                                                                    *ngIf="!reply.you_liked  && !reply.isLike ">
+                                                                    <span></span>
+                                                                    <strong
+                                                                        *ngIf="reply.total_likes > '0'">{{reply.total_likes}}</strong>
+                                                                </div>
+                                                                <div class="d-flex LikedIcon active"
+                                                                    (click)="unlikeComment(reply)"
+                                                                    *ngIf="reply.isLike || reply.you_liked ">
+                                                                    <span></span>
+                                                                    <strong
+                                                                        *ngIf="reply.total_likes > '0'">{{reply.total_likes}}</strong>
+                                                                </div>
+                                                            </li>
+                                                            <li class="ellipsisDropdown DropNone"
+                                                                *ngIf="subscriberUserID === reply.user_id">
+                                                                <div class="btn-group " dropdown>
+                                                                    <span dropdownToggle class="dropdown-toggle"><img
+                                                                            src="assets/eclipse.svg" alt="" /></span>
+                                                                    <ul id="dropdown-basic" *dropdownMenu
+                                                                        class="smile-list  dropdown-menu  dropdown-menu-right"
+                                                                        role="menu">
+
+
+                                                                        <li (click)="updateComment(reply)">
+                                                                            <div class="d-flex">
+                                                                                <img src="assets/edit-tools.svg" alt=""
+                                                                                    id="10">
+                                                                                <p>Edit</p>
+                                                                            </div>
+                                                                        </li>
+
+                                                                        <li (click)="deleteComment('reply',cmt,reply)">
+                                                                            <div class=" d-flex">
+                                                                                <img src="assets/interface.svg" alt=""
+                                                                                    id="10">
+                                                                                <p>Delete</p>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="ml-auto" *ngIf="data.total_comments > 5 && data.commentArr">
+                                <p (click)="loadMore(data)">Load More</p>
+                            </div>
+                            <!-- new -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-9 mt-3" *ngIf="isPack">
+                    <div>
+                        <div class="RecentMyPostBody">
+                            <div class="RecentMyPostHead d-flex">
+                                <div class="RecentMyPostHeadLeft">
+                                    <span>
+                                        <img [src]="profile.profile_picture">
+                                    </span>
+                                    <h3>{{profile.display_name}}</h3>
+                                    <strong>@{{profile.profile_url}}</strong>
+                                </div>
+                                <div class="RecentMyPostHeadRight">
+                                    <div class="PostDate"><span><img src="assets/PostsIcon.svg" alt="" /></span>
+                                        {{data.publish_date}}
+                                    </div>
+                                    <!-- <div class="DLC d-flex">
+                                                                            <strong>DLC</strong> <span>$ 10</span>
+                                                                        </div> -->
+                                </div>
+                            </div>
+
+                            <div class="PostImage">
+                                <div class="slider">
+                                    <carousel [interval]="false">
+                                        <div *ngIf="media.image">
+                                            <slide *ngFor="let img of media.image">
+                                                <img [src]="img" alt="" style="display: block; width: 100%;">
+                                            </slide>
+                                        </div>
+                                        <div *ngIf="media.video">
+                                            <slide *ngFor="let img of media.video">
+                                                <video controls alt="" style="display: block; width: 100%;">
+                                                    <source [src]="img">
+                                                </video>
+                                            </slide>
+                                        </div>
+                                    </carousel>
+
+                                </div>
+
+                            </div>
+                            <div class="mb-4" [ngxSummernote]="config" id="editor" [(ngModel)]="data.description">
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-9 mt-3" *ngIf="isProduct">
+                    <div>
+                        <div class="RecentMyPostBody">
+                            <div class="RecentMyPostHead d-flex">
+                                <div class="RecentMyPostHeadLeft">
+                                    <span>
+                                        <img [src]="profile.profile_picture">
+                                    </span>
+                                    <h3>{{profile.display_name}}</h3>
+                                    <strong>@{{profile.profile_url}}</strong>
+                                </div>
+                                <div class="RecentMyPostHeadRight">
+                                    <div class="PostDate"><span><img src="assets/PostsIcon.svg" alt="" /></span>
+                                        {{data.created_at}}
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="PostImage">
+                                <div class="slider">
+                                    <carousel [interval]="false">
+                                        <div *ngIf="media.image">
+                                            <slide *ngFor="let img of media.image">
+                                                <img [src]="img" alt="" style="display: block; width: 100%;">
+                                            </slide>
+                                        </div>
+                                        <div *ngIf="media.video">
+                                            <slide *ngFor="let img of media.video">
+                                                <video controls alt="" style="display: block; width: 100%;">
+                                                    <source [src]="img">
+                                                </video>
+                                            </slide>
+                                        </div>
+                                    </carousel>
+
+                                </div>
+
+                            </div>
+
+                            <div class="ColorOption">
+                                <ul class="feed-list" *ngFor="let hash of data.tags">
+                                    <li>{{hash}}</li>
+                                </ul>
+
+                            </div>
+                            <div class="mb-4" [ngxSummernote]="config" id="editor"
+                                [(ngModel)]="data.product_description">
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-9 mt-3" *ngIf="isExclusive">
+                    <div>
+                        <div class="RecentMyPostBody">
+                            <div class="RecentMyPostHead d-flex">
+                                <div class="RecentMyPostHeadLeft">
+                                    <span>
+                                        <img [src]="profile.profile_picture">
+                                    </span>
+                                    <h3>{{profile.display_name}}</h3>
+                                    <strong>@{{profile.profile_url}}</strong>
+                                </div>
+                                <div class="RecentMyPostHeadRight">
+                                    <div class="PostDate"><span><img src="assets/PostsIcon.svg" alt="" /></span>
+                                        {{data.modified_on}}
+                                    </div>
+                                    <!-- <div class="DLC d-flex">
+                                                                            <strong>DLC</strong> <span>$ 10</span>
+                                                                        </div> -->
+                                </div>
+                            </div>
+
+                            <div class="PostImage">
+                                <div class="slider">
+                                    <carousel [interval]="false">
+                                        <div *ngIf="media.image">
+                                            <slide *ngFor="let img of media.image">
+                                                <img [src]="img" alt="" style="display: block; width: 100%;">
+                                            </slide>
+                                        </div>
+                                        <div *ngIf="media.video">
+                                            <slide *ngFor="let img of media.video">
+                                                <video controls alt="" style="display: block; width: 100%;">
+                                                    <source [src]="img">
+                                                </video>
+                                            </slide>
+                                        </div>
+                                    </carousel>
+
+                                </div>
+
+                            </div>
+                            <div class="mb-4" [ngxSummernote]="config" id="editor" [(ngModel)]="data.description">
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-3 mt-3"></div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<ng-template #templateTips>
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="modal-header">
+        <h4 class="text-primary">Contribution</h4>
+    </div>
+    <div class="modal-body">
+
+        <div class="Manually-price form-group col-md-6 offset-3 d-flex">
+            <input type="text1" placeholder="Contribution Amount" class="form-control"
+                (blur)="onContributionBlur($event)">
+        </div>
+        <div class="text-danger" *ngIf="isValue">
+            Please select amount of tip.
+        </div>
+        <div class="Tips-btn col-md-6 offset-3">
+            <button class="btn btn-primary w-100" (click)="onContributionSubmit('exclusive',templateCard)"
+                [disabled]="showSpinner">Contribute <i *ngIf="showSpinner" class="fa fa-spinner fa-spin"></i></button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #templateCard>
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div *ngIf="isCardDetails">
+        <div class="modal-header">
+            <h4 class="text-primary">Card Details</h4>
+        </div>
+        <div>
+            Net amount : {{payAmount}}
+        </div>
+        <!-- card -->
+        <div class="card-box p-4">
+            <h4>Your Saved Card</h4>
+            <div class="form-group">
+                <label>Bank Name</label>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-control">xxxx xxxx xxxx {{cardNumber}}</div>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <button class="btn mr-0 btn-primary w-100" (click)="card()" [disabled]="showSpinner">Pay <i
+                                *ngIf="showSpinner" class="fa fa-spinner fa-spin"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 mb-4">
+            <button class="btn mr-0 btn-secondary w-100" (click)="displayForm()">Add new Card</button>
+        </div>
+
+        <div class="modify-you SubcriptionSetting">
+            <form class="row" [formGroup]="newCard" (ngSubmit)="onNewcardSubmit(newCard.valid)" *ngIf="showCard"
+                class="row mb-3">
+                <div class="col-md-6">
+                    <h4>Billing Info</h4>
+
+                    <div class="form-group mb-3">
+                        <label>Full name</label>
+                        <input type="text" formControlName="newLegalName">
+                        <div *ngIf="!newCard.get('newLegalName').valid && submitted">
+                            <div class="text-danger" *ngIf="newCard.get('newLegalName').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Address</label>
+                        <input type="text" formControlName="newAddress">
+                        <div *ngIf="!newCard.get('newAddress').valid && submitted">
+                            <div class="text-danger" *ngIf="newCard.get('newAddress').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row  mb-3">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" formControlName="newCity">
+                                <div *ngIf="!newCard.get('newCity').valid && submitted">
+                                    <div class="text-danger" *ngIf="newCard.get('newCity').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Zipcode</label>
+                                <input type="number" formControlName="newZipcode">
+                                <div *ngIf="!newCard.get('newZipcode').valid && submitted">
+                                    <div class="text-danger" *ngIf="newCard.get('newZipcode').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row  mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>State</label>
+                                <input type="text" formControlName="newState">
+                                <div *ngIf="!newCard.get('newState').valid && submitted">
+                                    <div class="text-danger" *ngIf="newCard.get('newState').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Country</label>
+                                <p-dropdown [options]="countryList" formControlName="newCountry"></p-dropdown>
+                                <div *ngIf="!newCard.get('newCountry').valid && submitted">
+                                    <div class="text-danger" *ngIf="newCard.get('newCountry').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label>Address</label>
+                        <input type="text" formControlName="newAddress">
+                        <div *ngIf="!newCard.get('newAddress').valid && submitted">
+                            <div class="text-danger" *ngIf="newCard.get('newAddress').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h4>Credit Card Info</h4>
+                    <div class="row  mb-3">
+                        <div class="col-md-12">
+                            <label>Card Number</label>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" formControlName="newCardNumber">
+                                <div *ngIf="!newCard.get('newCardNumber').valid && submitted">
+                                    <div class="text-danger" *ngIf="newCard.get('newCardNumber').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+
+                                <div *ngIf="!newCard.get('newCardNumber').valid">
+                                    <div class="text-danger" *ngIf="newCard.get('newCardNumber').errors['pattern']">
+                                        Please enter valid card number
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Cardholder Name</label>
+                        <input type="text" formControlName="newCardName">
+                        <div *ngIf="!newCard.get('newCardName').valid && submitted">
+                            <div class="text-danger" *ngIf="newCard.get('newCardName').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Expire Date</label>
+                        <p-calendar view="month" dateFormat="mm/yy" [yearNavigator]="true"
+                            formControlName="newExpirydate" yearRange="{{minYear}}:{{maxYear}}" [readonlyInput]="true">
+                        </p-calendar>
+                        <div *ngIf="!newCard.get('newExpirydate').valid && submitted">
+                            <div class="text-danger" *ngIf="newCard.get('newExpirydate').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label>CVV</label>
+                                <input type="password" formControlName="newCvv">
+                                <div *ngIf="!newCard.get('newCvv').valid && submitted">
+                                    <div class="text-danger" *ngIf="newCard.get('newCvv').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group text-center">
+                        <button class="btn btn-primary" type="submit" [disabled]="showSpinner">Submit <i
+                                *ngIf="showSpinner" class="fa fa-spinner fa-spin"></i> </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <!-- card -->
+    </div>
+
+    <div *ngIf="!isCardDetails">
+        <div class="modal-header">
+            <h4 class="text-primary">Add Card</h4>
+        </div>
+        <div class="modify-you SubcriptionSetting">
+            <form class="row" [formGroup]="cardForm" (ngSubmit)="onSubmit(cardForm.valid)">
+                <div class="col-md-6">
+                    <h4>Billing Info</h4>
+
+                    <div class="form-group mb-3">
+                        <label>Full name</label>
+                        <input type="text" formControlName="legal_name">
+                        <div *ngIf="!cardForm.get('legal_name').valid && submitted">
+                            <div class="text-danger" *ngIf="cardForm.get('legal_name').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Address</label>
+                        <input type="text" formControlName="address">
+                        <div *ngIf="!cardForm.get('address').valid && submitted">
+                            <div class="text-danger" *ngIf="cardForm.get('address').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row  mb-3">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" formControlName="city">
+                                <div *ngIf="!cardForm.get('city').valid && submitted">
+                                    <div class="text-danger" *ngIf="cardForm.get('city').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Zipcode</label>
+                                <input type="number" formControlName="zipcode">
+                                <div *ngIf="!cardForm.get('zipcode').valid && submitted">
+                                    <div class="text-danger" *ngIf="cardForm.get('zipcode').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row  mb-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>State</label>
+                                <input type="text" formControlName="state">
+                                <div *ngIf="!cardForm.get('state').valid && submitted">
+                                    <div class="text-danger" *ngIf="cardForm.get('state').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Country</label>
+                                <p-dropdown [options]="countryList" formControlName="country"></p-dropdown>
+                                <div *ngIf="!cardForm.get('country').valid && submitted">
+                                    <div class="text-danger" *ngIf="cardForm.get('country').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <h4>Credit Card Info</h4>
+                    <div class="row  mb-3">
+                        <div class="col-md-12">
+                            <label>Card Number</label>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" formControlName="cardNumber">
+                                <div *ngIf="!cardForm.get('cardNumber').valid && submitted">
+                                    <div class="text-danger" *ngIf="cardForm.get('cardNumber').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+
+                                <div *ngIf="!cardForm.get('cardNumber').valid">
+                                    <div class="text-danger" *ngIf="cardForm.get('cardNumber').errors['pattern']">
+                                        Please enter valid card number
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <input type="text">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Cardholder Name</label>
+                        <input type="text" formControlName="cardName">
+                        <div *ngIf="!cardForm.get('cardName').valid && submitted">
+                            <div class="text-danger" *ngIf="cardForm.get('cardName').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label>Expire Date</label>
+                        <p-calendar view="month" dateFormat="mm/yy" [yearNavigator]="true" formControlName="expirydate"
+                            yearRange="{{minYear}}:{{maxYear}}" [readonlyInput]="true"></p-calendar>
+                        <div *ngIf="!cardForm.get('expirydate').valid && submitted">
+                            <div class="text-danger" *ngIf="cardForm.get('expirydate').errors['required']">
+                                This field is required.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <div class="form-group">
+                                <label>CVV</label>
+                                <input type="password" formControlName="cvv">
+                                <div *ngIf="!cardForm.get('cvv').valid && submitted">
+                                    <div class="text-danger" *ngIf="cardForm.get('cvv').errors['required']">
+                                        This field is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group text-center">
+                        <button class="btn btn-primary" type="submit" [disabled]="showSpinner">Submit <i
+                                *ngIf="showSpinner" class="fa fa-spinner fa-spin"></i> </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>

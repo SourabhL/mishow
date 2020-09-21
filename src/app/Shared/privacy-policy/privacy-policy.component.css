@@ -1,0 +1,290 @@
+
+body{font-family:'Cerebri Sans'; font-weight:400; }
+:focus, a:focus, input:focus, select:focus, textarea:focus, button:focus, img:focus, .form-control:focus {outline: 0; box-shadow: none;}
+
+.btn{border-radius:100px; min-width:218px; padding:18px 20px; line-height:18px; color:#fff; font-weight:500; font-size:21px;}
+.btn-primary{ border:0; transition:ease-in-out .5s;
+    background: rgb(47,133,188); /* Old browsers */
+    background: -moz-linear-gradient(left,  rgba(47,133,188,1) 0%, rgba(116,183,222,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  rgba(47,133,188,1) 0%,rgba(116,183,222,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  rgba(47,133,188,1) 0%,rgba(116,183,222,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2f85bc', endColorstr='#74b7de',GradientType=1 ); /* IE6-9 */
+}
+.btn-primary:hover{
+    background: rgb(116,183,222); /* Old browsers */
+    background: -moz-linear-gradient(left,  rgba(116,183,222,1) 0%, rgba(47,133,188,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(left,  rgba(116,183,222,1) 0%,rgba(47,133,188,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right,  rgba(116,183,222,1) 0%,rgba(47,133,188,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#74b7de', endColorstr='#2f85bc',GradientType=1 ); /* IE6-9 */
+}
+
+
+/***** Header *****/
+header{background: linear-gradient(90deg, #2E84BC -0.76%, #74B7DE 94.64%); padding:26px 70px 107px;}
+.header .navbar.navbar-expand-lg{ padding:0;margin: 0 0 59px;}
+.navbar-brand{ height:77px; padding:0;}
+.navbar-brand img{ vertical-align:top; }
+.navbar-expand-lg .navbar-nav{ position:relative; }
+.navbar-expand-lg .navbar-nav.How-Work{ margin-left:80px;}
+.navbar-expand-lg .navbar-nav.How-Work a{border:2px solid #FF9F69; background:#FF9F69; border-radius:42px; padding:14px 42px; display:block; color:#fff;line-height:20px;font-family:'Cerebri Sans'; font-weight:400;}
+.navbar-expand-lg .navbar-nav.How-Work a:hover{ background:transparent; color:#fff;}
+.navbar-expand-lg .navbar-nav .nav-item a.nav-link{ padding:14px 28px; display:block; color:#fff;line-height:20px;font-family:'Cerebri Sans'; font-weight:400;}
+.navbar-expand-lg .navbar-nav.ml-auto:before{ content:''; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:#F6F6F6; width:2px; height:18px;}
+
+/***** Banner section *****/
+.BannerCaption h2{ margin:0 0 21px; padding:0; display:block; font-family:'Cerebri Sans';  font-weight:700; font-size:55px; line-height:70px; color:#FFF; position:relative;}
+.BannerCaption h2:before{ content:''; width:70px; height:2px; background:#fff; position:absolute; top:-15px; left:3px;}
+.BannerCaption p{ margin:0 0 30px; padding:0; display:block; font-family:'Cerebri Sans'; font-weight:400; font-size: 18px; line-height:23px; color:#F6F6F6;}
+.CaptionButton a{font-family:'Cerebri Sans';font-weight:400; font-size:16px; line-height:19px; margin:0 26px 0 0; border-radius:100px;
+padding:11px 15px; min-width:134px; border:2px solid #fff; text-align:center; transition:ease-in-out .5s; }
+.CaptionBG{ color:#000; background:#fff;}
+.CaptionBG:hover{ background:transparent; color:#fff;}
+.CaptionBDR{ color:#fff;}
+.CaptionBDR:hover{ background:#fff; color:#000;}
+.CaptionButton a:hover{ text-decoration:none;}
+
+/**** Login Form ****/
+.LoginRegisterPage{ max-width:466px; background:#fff; padding:24px 48px 58px; border-radius:30px; display:block;margin:0 auto;}
+.LoginRegisterForm .form-group {width: 100%;padding: 14px 40px 14px 0;margin: 0 0 50px;border-bottom: 2px solid #EFF1F3;position: relative;}
+.LoginRegisterForm .form-group .form-control { padding:0; height:auto; line-height:30px; font-size:21px; color:#171736 !important; font-weight:400; background:transparent; border:0; font-family:'Cerebri Sans';}
+.LoginRegisterForm .form-group .FieldIcon { position:absolute; right:0; top:14px;}
+.LoginWith { margin:0 0 60px;}
+.LoginWith h4 { margin:0 0 13px; padding:0; display:block; font-weight:500;  font-size:16px; line-height:20px; color:#8A96A3;}
+.ForgotPassword { margin-left:auto;}
+.ForgotPassword a { font-size:16px; line-height:20px; text-decoration:underline; color:#8A96A3;}
+.SocialIcon a { margin-left:5px;}
+.LoginRegisterPage h3{ margin:0 0 20px; padding:0; display:block; font-family:'Cerebri Sans'; font-weight:500; font-size:38px; line-height:48px; color:#171736;}
+.LoginBtn{ text-align:center;}
+.LoginBtn button.btn{padding:10px 20px; line-height:32px;}
+
+/***** Creators *****/
+.Creators{ text-align:center; padding:114px 0 60px; background:#fff; border-radius:40px 40px 0 0; margin:-40px 0 0;}
+.Creators h2{ margin:0 0 29px; padding:0; display:block; font-family:'Cerebri Sans'; font-weight:700; font-size: 29px; line-height: 37px; color:#000; position:relative;}
+.Creators h2:before{ content:''; width:70px; height:2px; background:#3B8DC2; position:absolute; top:-28px; left:50%;
+transform:translateX(-50%); display:block;}
+.Creators p{ margin:0 0 40px; padding:0;   font-family:'Cerebri Sans'; font-weight:400; font-size:17px; line-height:22px; text-align:center; color: #979797;}
+.CreatorsIMG{ text-align:center; padding:85px 0 0;}
+
+/***** MultipleSubscription *****/
+.MultipleSubscription{ background:#f1f1f3; padding:151px 0 181px; border-radius:40px 40px 0 0;}
+.MultipleSubscription h2{ margin:0 0 25px; padding:0; display:block; font-family:'Cerebri Sans'; font-weight:700; font-size:61px; line-height:77px; color:#000;}
+.MultipleSubscription p{ margin:0; padding:0; font-family:'Cerebri Sans'; font-weight:400; font-size: 18px; line-height: 23px; color: #727171;}
+.MultipleSubscription ul{ margin:0; padding:0 40px 0 0; list-style:none;align-items:flex-end; justify-content:flex-end;}
+.MultipleSubscription ul li{}
+.MultipleSubscription ul li + li{ margin-left:19px;}
+.MultipleSubscription ul li .Tier{ background:#fff; background:#FFF; box-shadow:0px 0px 40px rgba(0, 0, 0, 0.1); border-radius:10px; text-align:center; padding:25px 15px; width:146px;}
+.MultipleSubscription ul li .Tier h4{ margin:0 0 19px; padding:0; display:block; font-weight: 500; font-size: 26px; line-height: 30px; color: #585858;}
+.MultipleSubscription ul li .Tier span{background:#ECECEC; width:79px; height:79px;display:block; border-radius:100px; margin:0 auto 33px; line-height:79px; }
+.MultipleSubscription ul li .Tier p + p{ margin-top:10px;}
+.MultipleSubscription ul li .Tier p{margin:0; padding:0; font-size:18px; line-height:21px; color:#C1C1C1;}
+.MultipleSubscription ul li.Tier-4 .Tier{ height:522px;}
+.MultipleSubscription ul li.Tier-3 .Tier{ height:433px;}
+.MultipleSubscription ul li.Tier-2 .Tier{ height:362px;}
+.MultipleSubscription ul li.Tier-1 .Tier{ height:283px;}
+
+/***** E2EE *****/
+.E2EE{ padding:293px 0 209px; border-radius:40px 40px 0 0; margin:-40px 0 0; background:#fff;}
+.E2EE h2{ margin:0 0 10px; padding:0; display:block; font-family:'Cerebri Sans'; font-weight:700; font-size:61px; line-height:77px; color:#000;}
+.E2EE h3{ margin:0 0 36px; padding:0; display:block; font-weight:500; font-size:29px; line-height:34px; color:#000;}
+.E2EE p{ margin:0; padding:0; display:block; font-family:'Cerebri Sans'; font-weight:400; font-size: 17px; line-height: 22px; color: #979797; }
+
+/***** EveryoneVoice *****/
+.EveryoneVoice{background: linear-gradient(180deg, #EFEFF1 0%, #F3F3F5 100%), #F2F2F4; border-radius:40px 40px 0px 0px; margin-top:-40px; padding:194px 0;}
+.EveryoneVoice h2{ margin:0 0 18px; padding:0; display:block; font-family:'Cerebri Sans'; font-weight: 700; font-size: 61px; line-height:77px; color:#000;}
+.EveryoneVoice p{ margin:0; padding:0; font-family:'Cerebri Sans'; font-weight:400; font-size: 18px; line-height: 23px; color: #727171;}
+
+/***** Guaranteed *****/
+.Guaranteed { padding:129px 0 116px; background:#fff; border-radius:40px 40px 0 0; margin-top:-40px;}
+.Guaranteed h2{ margin:0 0 9px; padding:0; display:block;font-family:'Cerebri Sans'; font-weight: 500; font-size: 49px; line-height: 62px; color:#000;}
+.Guaranteed p{ margin:0; padding:0; display:block;font-family:'Cerebri Sans'; font-weight:400; font-size:18px; line-height:23px; color:#727171;    }
+
+.GuaranteedButton{ text-align:right;}
+.GuaranteedButton a{font-family:'Cerebri Sans'; font-weight:400; font-size: 16px;line-height: 20px; border-radius:100px; margin:0 0 0 20px; width:150px; display:inline-block; vertical-align:top; text-align:center; }
+.GuaranteedButton a:hover{ text-decoration:none;}
+a.buttonBG{background: linear-gradient(90deg, #2E84BC -0.76%, #74B7DE 94.64%); color:#fff; padding:10px 15px; }
+a.buttonBG:hover{ background:transparent; color:#3B8DC2; border:2px solid #3B8DC2; padding:8px 15px; }
+a.buttonBDR{border:2px solid #3B8DC2; background:#fff; color:#3589BF; padding:8px 15px;transition:ease-in-out .5s;  }
+a.buttonBDR:hover{ background:#3B8DC2; color:#fff;}
+
+/***** Footer css *****/
+.footer{ padding:120px 0 0; border-top:1px solid #EFF1F3;}
+.FooterTop{ margin-bottom:60px;  }
+.FooterLogo{ margin:0 0 46px;}
+.FooterLogo a{display:block;}
+.FooterLogo img{ height:64px;}
+.FooterTop p{ margin:0; padding:0; display:block; font-family:'Cerebri Sans'; font-weight:400; font-size: 18px; line-height: 23px; color: #979797;}
+
+.FooterTop h2{margin:0 0 46px; padding:0; display:block; font-family:'Cerebri Sans'; font-weight: 500; font-size: 40px; line-height:64px; color: #171736;}
+.FooterTop ul{ margin:0; padding:0; list-style:none;}
+.FooterTop ul li{ display:block; margin:0 0 13px;}
+.FooterTop ul li a{font-family:'Cerebri Sans'; font-weight:400; font-size:20px; line-height:31px; color: #979797;}
+
+.FooterContect .input-group {width: 100%; padding:14px 0; margin:0 0 50px; border-bottom:2px solid #EFF1F3; position:relative; }
+.FooterContect .form-control {padding: 0; height: auto; line-height: 30px; font-size:21px; color: #171736 !important; font-weight: 400; background: transparent; border: 0; font-family: 'Cerebri Sans'; }
+.FooterContect button{background:#FF9F69; border:2px solid #FF9F69; border-radius:100px; width:176px; padding:15px; text-align:center;
+font-family:'Cerebri Sans'; font-weight:500; font-size:21px; line-height:31px; color:#FFFFFF; }
+.FooterContect button:hover{ background:transparent; color:#FF9F69;}
+
+.Social-Icon{ padding:39px 0 0;}
+.Social-Icon a{ display:inline-block; vertical-align:top; margin:0 12px 0 0;}
+.FooterBTM{ margin-bottom:30px;}
+.FooterBTM a,
+.FooterBTM{font-family:'Cerebri Sans'; font-weight:400; font-size: 18px; line-height: 23px; color:#979797;}
+.FooterBTM a:hover{ color:#3589BF; text-decoration:none;}
+
+
+/***** Responsive started *****/
+@media(max-width:1199px){
+    .BannerCaption h2 {margin: 0 0 20px; font-size: 48px; line-height: 60px;}
+    .LoginWith, .LoginRegisterForm .form-group {margin: 0 0 30px;}
+    .LoginRegisterPage { padding:30px;}
+    .MultipleSubscription ul {margin: 0 0 50px; align-items: flex-end;justify-content: center; padding:0;}
+    .MultipleSubscription p,
+    .MultipleSubscription h2{ text-align:center;}
+    .MultipleSubscription h2 br + br{ display:none;}
+    .MultipleSubscription {padding:80px 0 120px;}
+    .Creators {padding: 80px 0 20px;}
+    .CreatorsIMG {padding:60px 0 0;}
+    .MultipleSubscription h2 {font-size:48px; line-height:normal;}
+    .MultipleSubscription .col-xl-4 p{ max-width:60%; margin:0 auto;}
+    .E2EE { padding:80px 0 120px;}
+    .E2EE h2{ font-size:48px; line-height:48px;}
+    .E2EE h3 { margin:0 0 20px; font-size:24px; line-height:30px;}
+    .EveryoneVoice{ padding:80px 0 120px;}
+    .EveryoneVoice h2{ font-size:48px; line-height:48px;}
+    .Guaranteed{ padding:80px 0;}
+
+    .Guaranteed h2 {font-size: 42px;}
+    .GuaranteedButton a {margin:0 0 0 10px; width: 130px;}
+    .Guaranteed p {font-size: 16px; max-width:80%;}
+    .Guaranteed p br{ display:none;}
+    .footer { padding:80px 0 0;}
+
+    .FooterTop h2 {margin:0 0 20px; font-size:34px;}
+    .FooterTop ul li a {font-size:18px;}
+    .FooterTop p{ font-size:16px;}
+    .Social-Icon {padding:25px 0 0;}
+    .FooterLogo {margin:0 0 25px;}
+    .FooterContect button {padding:8px 15px;}
+    .FooterTop { margin-bottom:30px;}
+    .FooterBTM a, .FooterBTM {font-size:16px; line-height:normal;}
+}
+
+@media(max-width:991px){
+    header {padding:15px 15px 90px;}
+    .BannerCaption h2 { font-size:36px; line-height:40px;}
+    .BannerCaption p{ font-size:15px;}
+    .BannerCaption p br{ display:none;}
+    .SocialIcon a img{ max-height:24px;}
+    .header .navbar.navbar-expand-lg {margin:0 0 20px;}
+    .LoginRegisterForm .form-group .form-control {font-size:18px;}
+    .LoginRegisterPage h3 {margin: 0 0 5px;font-size:30px; line-height:35px;}
+    .Creators p {margin:0 0 30px; font-size:16px;}
+    .EveryoneVoice h2,
+    .MultipleSubscription h2 {font-size:40px; line-height:44px;}
+    .MultipleSubscription .col-xl-4 p { max-width:70%;}
+    .EveryoneVoice{padding:60px 0 100px;}
+    .MultipleSubscription {padding:80px 0 100px;}
+    .E2EE { padding:50px 0 90px;}
+    .EveryoneVoice p {font-size:16px; line-height:normal;}
+    .EveryoneVoice p br{ display:none;}
+    .Guaranteed {padding:50px 0 60px;}
+    .Guaranteed p {font-size: 15px; max-width: 100%;}
+    .GuaranteedButton { text-align:center;}
+    .GuaranteedButton a{ margin:10px 0;}
+    .Guaranteed h2 { font-size:34px;}
+    .footer { padding:50px 0 0;}
+    .FooterTop ul li a {font-size: 16px; line-height: normal;}
+    .FooterBTM a, .FooterBTM{ font-size:15px;}
+    .FooterContect .input-group{ margin-bottom:20px;}
+    .FooterContect .form-control {font-size:16px;}
+    .FooterContect button {padding:4px 15px; width:140px; font-size:18px;}
+    .FooterTop h2 {margin: 0 0 20px; line-height:54px;font-size:30px;}
+    .FooterLogo img {height: 54px;}
+    .FooterBTM { margin-bottom:20px;}
+    .navbar-expand-lg .navbar-nav.ml-auto:before{ display:none;}
+    .navbar-collapse {background:linear-gradient(90deg, #2E84BC -0.76%, #74B7DE 94.64%); border: 2px solid #3b8ec2;    border-radius:22px;}
+    .navbar-nav.ml-auto .nav-item { border-bottom:1px solid #3b8ec2;}
+    .navbar-expand-lg .navbar-nav.How-Work { margin:0;}
+    .navbar-expand-lg .navbar-nav.How-Work a {border-radius: 0 0 20px 20px;}
+
+}
+
+@media(max-width:767px){
+    .container{ max-width:380px; margin:0 auto;}
+    .navbar-brand {height:42px; padding:0; margin:0; }
+    .navbar-brand img{height:42px;}
+    .header .navbar.navbar-expand-lg{ margin-bottom:34px;}
+    .BannerCaption {padding:15px 0 0;}
+    .BannerCaption .col-md-6{ padding-bottom:50px;}
+    header { padding:15px 15px 40px;}
+    .Creators p {font-size:15px;}
+    .Creators p br{ display:none;}
+    .Creators h2 {margin:0 0 15px;}
+    .btn {min-width: 200px; padding:15px 20px; line-height:18px; font-size:18px;}
+    .E2EE img.img-fluid{ max-width:340px; margin:0 auto; display:block;}
+    .E2EE .col-md-5{ margin-bottom:50px;}
+    .EveryoneVoice p{ margin-bottom:50px;}
+    .GuaranteedButton{ text-align:left; margin-top:20px;}
+    .GuaranteedButton a{ margin-right:20px;}
+
+    .FooterTop .col-md-4{ margin-bottom:25px;}
+    .FooterLogo {margin:0 0 20px;}
+    .FooterTop h2 { margin:0 0 10px; line-height:normal; font-size:22px;}
+    .FooterTop ul li a {font-size:15px; line-height:15px;}
+    .FooterTop ul li{ margin-bottom:10px;}
+    .FooterBTM {margin-bottom:20px; text-align:center;}
+    .FooterBTM .text-right{ text-align:center !important; margin-top:5px;}
+    .FooterTop { margin-bottom:0;}
+    .Guaranteed { padding:30px 0 40px;}
+    .footer { padding:30px 0 0;}
+
+    .MultipleSubscription .container{ max-width:100%;}
+    .MultipleSubscription ul li .Tier { width:100px;}
+    .MultipleSubscription ul li .Tier {padding:15px 10px;}
+    .MultipleSubscription ul li .Tier p{ font-size:15px; line-height:18px;}
+    .MultipleSubscription ul li .Tier h4 {margin:0 0 10px; font-size:18px;}
+    .MultipleSubscription ul li .Tier span {width:60px; height:60px; margin:0 auto 20px; line-height:60px;}
+    .MultipleSubscription ul li .Tier h4 {margin: 0 0 10px; font-size: 16px; line-height:normal;}
+    .MultipleSubscription ul li.Tier-1 .Tier { height:230px;}
+    .MultipleSubscription ul li.Tier-2 .Tier {height:280px;}
+    .MultipleSubscription ul li.Tier-3 .Tier {height: 330px;}
+    .MultipleSubscription ul li.Tier-4 .Tier {height: 380px;}
+    .MultipleSubscription {padding: 40px 0 80px;}
+    .MultipleSubscription ul {margin:0 0 30px;}
+}
+@media(max-width:500px){
+    .MultipleSubscription ul li .Tier {width:90px;}
+    .MultipleSubscription ul li + li {margin-left: 5px;}
+    .MultipleSubscription ul li .Tier { padding:10px 5px;}
+    .MultipleSubscription .col-xl-4 p {max-width: 100%;}
+    .MultipleSubscription h2 {margin: 0 0 25px;}
+}
+
+@media(max-width:400px){
+    .E2EE img.img-fluid {max-width:280px;}
+    .CaptionButton a {font-size: 15px; margin: 0 15px 0 0; padding:8px 10px 9px; min-width:124px;}
+    .BannerCaption h2 {font-size: 30px; line-height: 30px;}
+    .BannerCaption .col-md-6 { padding-bottom:30px;}
+    .Creators h2{ font-size:26px; line-height: normal;}
+    .Creators p {margin:0 0 20px;}
+    .CreatorsIMG { padding:30px 0 0;}
+    .Creators { padding:80px 0 0;}
+    .E2EE .col-md-5 { margin-bottom:10px;}
+    .E2EE h2 {font-size:36px; line-height:36px; margin:0;}
+    .E2EE h3 {margin: 10px 0 20px;font-size: 20px; line-height: 20px;}
+    .EveryoneVoice h2, .MultipleSubscription h2 {font-size: 28px; line-height:normal;}
+    .EveryoneVoice h2 br, .MultipleSubscription h2 br{ display:none;}
+    .Guaranteed h2 {font-size: 28px; margin: 0 0 10px;line-height: 100%;}
+    .GuaranteedButton {margin-top:10px;}
+    .GuaranteedButton a { margin-right:10px;}
+    .Guaranteed {padding: 30px 0 20px;}
+
+    .MultipleSubscription ul li + li {margin-left:0;}
+    .MultipleSubscription ul {align-items:initial; justify-content:center; flex-wrap:wrap;}
+    body .MultipleSubscription ul li {width:44%; margin:0 2% 10px ;}
+    .MultipleSubscription ul li .Tier {width: auto; height: 260px !important;}
+    .MultipleSubscription ul li .Tier {padding: 10px 15px;}
+
+
+}

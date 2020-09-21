@@ -1,0 +1,30 @@
+.AccountSettings a{ background-image:url(/assets/UserGrey.svg); background-size:24px;}
+.AccountSettings a.active,
+.AccountSettings a:hover {background-image:url(/assets/UserDark.svg); background-size:24px;}
+
+.PrivactNav a{background-image:url(/assets/lockGrey.svg); background-size:26px auto;}
+.PrivactNav a.active,
+.PrivactNav a:hover{background-image:url(/assets/lockDark.svg);background-size:26px auto;}
+
+.NotificationNav a{background-image:url(/assets/BellGrey.svg); background-size:21px auto;}
+.NotificationNav a.active,
+.NotificationNav a:hover{background-image:url(/assets/BellDark.svg); background-size:21px auto;}
+
+.SubscriptionNav a{background-image:url(/assets/award.svg); background-size:20px auto;}
+.SubscriptionNav a:active,
+.SubscriptionNav a:hover{background-image:url(/assets/AwardDark.svg); background-size:20px auto;}
+
+.BankingNav a{background-image:url(/assets/BankingGrey.svg); background-size:24px auto;}
+.BankingNav a.active,
+.BankingNav a:hover{background-image:url(/assets/BankingDark.svg); background-size:24px auto;}
+
+.setting-menu{list-style: none; margin:0; padding:0;}
+.setting-menu li{  display:block; position:relative; }
+.setting-menu li + li{ margin-top:36px;}
+.setting-menu li a{ position:relative; padding:0 0 0 36px;font-weight: 500; font-size: 21px; line-height:44px;
+text-transform: uppercase; color: #8A96A3; display:block; background-position:0 50%; background-repeat:no-repeat;}
+.setting-menu li a.active,
+.setting-menu li a:hover { color:#171736;}
+.setting-menu li a.active:before,
+.setting-menu li a:hover:before{content:''; width:2px; height:100%; display:block;
+background: #3A8CC1; border-radius: 100px; position:absolute; top:0; right:0;}

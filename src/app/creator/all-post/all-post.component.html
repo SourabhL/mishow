@@ -1,0 +1,636 @@
+<div class="ContentWrap AllPost pt-40">
+    <div class=" mb-5">
+        <p-progressBar mode="indeterminate" *ngIf="isProgressbar" [style]="{'height': '6px'}"></p-progressBar>
+    </div>
+    <div class="container">
+        <form [formGroup]="postForm" (ngSubmit)="onSubmit(postForm)" enctype="multipart/form-data">
+            <div class="AllPostIcon">
+                <ul class="d-flex">
+                    <li (click)="open('',templateTier)" pTooltip="Tiers" tooltipPosition="top"><img height="50px;"
+                            width="50px;" src="assets/arrowhead-up-outline.svg"></li>
+
+                    <li *ngIf="isApproved" pTooltip="Pack" tooltipPosition="top" (click)="pack()"><img height="50px;"
+                            width="50px;" src="assets/archive-outline.svg"></li>
+
+                    <li *ngIf="isApproved" pTooltip="Exclusives" tooltipPosition="top" (click)="exclsive()"><img
+                            height="50px;" width="50px;" src="assets/star.svg"></li>
+
+                    <li *ngIf="isApproved" pTooltip="Products" tooltipPosition="top" (click)="product()"><img
+                            height="50px;" width="50px;" src="assets/cube-outline.svg"></li>
+
+                    <li *ngIf="!isExclusive" tooltipPosition="bottom"><img height="50px;" width="50px;"
+                            src="assets/clock-outline.svg">
+
+                        <ul *ngIf="isEdit">
+                            <li>this post will expire on {{expDate}}. <span
+                                    (click)="onExpire(expireDays)">{{expireDays}}</span> day</li>
+                        </ul>
+
+                        <ul *ngIf="isAdd">
+                            <li>Expires in <span (click)="onExpire(expireDays)">{{expireDays}}</span> day</li>
+                        </ul>
+                    </li>
+
+                    <li *ngIf="isExclusive " tooltipPosition="bottom"><img height="50px;" width="50px;"
+                            src="assets/clock-outline.svg">
+
+                    </li>
+
+                    <li pTooltip="Post is already live!" tooltipPosition="top" *ngIf="isDateDisable"><img height="50px;"
+                            width="50px;" src="assets/calendar-outline.svg"></li>
+
+                    <li (click)="onCanlendar(templateCalendar)" pTooltip="Schedule Post" tooltipPosition="top"
+                        *ngIf="!isDateDisable"><img height="50px;" width="50px;" src="assets/calendar-outline.svg">
+
+                    </li>
+
+                    <!-- <li class="CounterLI" pTooltip="Set NSFW" tooltipPosition="top">
+                        <p-checkbox formControlName="SFW" [(ngModel)]="NSFW" binary="true" [(ngModel)]="NSFW"
+                            (onChange)="onCheck('SFW',$event)">
+                        </p-checkbox>
+                    </li> -->
+                    <li pTooltip="Comments, Hotlinks and Category" tooltipPosition="top"
+                        (click)="open('',templateSettings)"><img height="50px;" width="50px;"
+                            src="assets/settings-2-outline.svg"></li>
+                </ul>
+            </div>
+
+            <div class="GreenInformationBox mb-2" *ngIf="isPackmessage">
+                <div class="d-flex">
+                    <h4>Downloadable content selected.</h4>
+                    <i>
+                        <img src="assets/ExclamationGreen.svg" alt="" (click)="onCloseClick()" />
+                        <img src="assets/CloseGreen.svg" alt="" (click)="onCloseClick('pack')" class="ml-2" />
+                    </i>
+                </div>
+            </div>
+
+            <div class="GreenInformationBox mb-2" *ngIf="isExclusivemessage">
+                <div class="d-flex">
+                    <h4>Exclusive post type selected.</h4>
+                    <i>
+                        <img src="assets/ExclamationGreen.svg" alt="" (click)="onCloseClick()" />
+                        <img src="assets/CloseGreen.svg" alt="" (click)="onCloseClick('exclusive')" class="ml-2" />
+                    </i>
+                </div>
+            </div>
+
+            <div class="GreenInformationBox mb-2" *ngIf="isProductMessage">
+                <div class="d-flex">
+                    <h4>Posting a new product.</h4>
+                    <i>
+                        <img src="assets/ExclamationGreen.svg" alt="" (click)="onCloseClick()" />
+                        <img src="assets/CloseGreen.svg" alt="" (click)="onCloseClick('product')" class="ml-2" />
+                    </i>
+                </div>
+            </div>
+
+            <div *ngIf="isPack || isExclusive || isProduct" class="input-group  mt-2 mb-4">
+                <input formControlName="title" id="title" [(ngModel)]="title" class="form-control" type="text">
+
+                <div *ngIf="!postForm.get('title').valid && submitted">
+                    <div class="text-danger" *ngIf="postForm.get('title').errors['required']"> This field
+                        is
+                        required.</div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+
+                <div *ngIf="!isContent" [ngxSummernote]="config" #editor id="editor" [(ngModel)]="description"
+                    formControlName="description" (blur)="hashtagArray(postForm.get('description').value)">
+                </div>
+                <div class="mb-4 SummerNote" *ngIf="isContent" [ngxSummernoteView]="description"></div>
+
+                <div *ngIf="!postForm.get('description').valid && submitted">
+                    <div class="text-danger" *ngIf="postForm.get('description').errors['required']"> This field
+                        is
+                        required.</div>
+                </div>
+            </div>
+
+
+            <div class="mb-3 UploadMedia ThumbMultipleImages" *ngIf="isEdit">
+                <h3>Uploaded Media</h3>
+                <P *ngIf="isPost">Drag and drop media here or click to browse.</P>
+                <P *ngIf="isPack">Uploades the files that will be included in the gallery and downloadable.zip file
+                    here.</P>
+                <P *ngIf="isExclusive">Upload preview images for your exclusive content. If the content is not
+                    available, try uploading concept or a stock photo of what you want to create.</P>
+                <P *ngIf="isProduct">Pictures of your product.</P>
+                <div class="d-flex" *ngIf="isPost || isPack || isProduct">
+                    <div *ngIf="media.image" class="d-flex">
+                        <div class="MultipleImages" *ngFor="let img of media.image">
+                            <i *ngIf="img.isShow" class="fa fa-close" (click)="onImageClick(img)"></i>
+                            <img *ngIf="img.isShow" height="200px" width="110px" [src]="img.image">
+                        </div>
+                        <div class="d-flex" *ngIf="media.video">
+                            <div class="MultipleImages ThumbMultipleVideo" *ngFor="let img of media.video">
+                                <i *ngIf="img.isShow" class="fa fa-close" (click)="onVideoClick(img)"></i>
+                                <video *ngIf="img.isShow" controls height="100px" width="200px">
+                                    <source [src]="img.image">
+                                </video>
+                            </div>
+                        </div>
+                        <div *ngIf="submitted">
+                            <div class="text-danger" *ngIf="postRequired"> This field is
+                                required.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex" *ngIf="isExclusive">
+                    <div *ngIf="media.image" class="d-flex">
+                        <div class="MultipleImages" *ngFor="let img of media.image">
+                            <i *ngIf="img.isShow" class="fa fa-close" (click)="onImageClick(img,'content')"></i>
+                            <img *ngIf="img.isShow" height="200px" width="110px" [src]="img.image">
+                            <!-- <p-checkbox (onChange)="onPreviewImage($event,f)" [(ngModel)]="">
+                            </p-checkbox> -->
+                        </div>
+                        <div class="d-flex" *ngIf="media.video">
+                            <div class="MultipleImages ThumbMultipleVideo" *ngFor="let img of media.video">
+                                <i *ngIf="img.isShow" class="fa fa-close" (click)="onVideoClick(img,'content')"></i>
+                                <video *ngIf="img.isShow" controls height="100px" width="200px">
+                                    <source [src]="img.image">
+                                </video>
+                            </div>
+                        </div>
+                        <div *ngIf="submitted">
+                            <div class="text-danger" *ngIf="postRequired"> This field is
+                                required.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" mt-4" *ngIf="isExclusive">
+                    <h5>Preview Images</h5>
+                    <div *ngIf="test.image" class="d-flex">
+                        <div class="MultipleImages" *ngFor="let img of test.image">
+                            <i *ngIf="img.isShow" class="fa fa-close" (click)="onImageClick(img,'preview')"></i>
+                            <img *ngIf="img.isShow" height="200px" width="110px" [src]="img.image">
+                            <!-- <p-checkbox (onChange)="onPreviewImage($event,f)" [(ngModel)]="">
+                                            </p-checkbox> -->
+                        </div>
+                        <div class="d-flex" *ngIf="test.video">
+                            <div class="MultipleImages ThumbMultipleVideo" *ngFor="let img of test.video">
+                                <i *ngIf="img.isShow" class="fa fa-close" (click)="onVideoClick(img,'preview')"></i>
+                                <video *ngIf="img.isShow" controls height="100px" width="200px">
+                                    <source [src]="img.image">
+                                </video>
+                            </div>
+                        </div>
+                        <div *ngIf="submitted">
+                            <div class="text-danger" *ngIf="postRequired"> This field is
+                                required.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" style="text-align: center;" *ngIf="isEdit && !showDropzone">
+                <button [disabled]="isLengthMax" class="btn btn-primary" type="button"
+                    (click)="onUpload()">Upload</button>
+            </div>
+
+            <div class="add-post-bx" *ngIf="isAdd || showDropzone">
+                <div class="UploadMedia mb-3">
+                    <h3>Upload Media</h3>
+                    <P *ngIf="isPost">Drag and drop media here or click to browse.</P>
+                    <P *ngIf="isPack">Uploades the files that will be included in the gallery and downloadable.zip file
+                        here.</P>
+                    <P *ngIf="isExclusive">Upload preview images for your exclusive content. If the content is not
+                        available, try uploading concept or a stock photo of what you want to create.</P>
+                    <P *ngIf="isProduct">Pictures of your product.</P>
+
+                    <div class="flex-wrap d-flex">
+                        <ul class="UploadMediaUl d-flex">
+                            <li class="d-flex" *ngFor="let f of files">
+                                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" [file]="f"
+                                    [removable]="true" (removed)="onRemove(f)" *ngIf="f.is_image">
+                                </ngx-dropzone-image-preview>
+                                <ngx-dropzone-video-preview [removable]="true" (removed)="onRemove(f)"
+                                    ngProjectAs="ngx-dropzone-preview" [file]="f" *ngIf="f.is_video">
+                                </ngx-dropzone-video-preview>
+                                <p-checkbox *ngIf="isPack || isExclusive" (onChange)="onPreviewImage($event,f)">
+                                </p-checkbox>
+                            </li>
+                        </ul>
+                        <ngx-dropzone (change)="onSelect($event)">
+                            <ngx-dropzone-label><img src="assets/Plus.svg" alt="" />
+                            </ngx-dropzone-label>
+                            <!-- <div *ngIf="isAdd"> -->
+                        </ngx-dropzone>
+                    </div>
+                    <div *ngIf="submitted">
+                        <div class="text-danger" *ngIf="postRequired"> This field is
+                            required.</div>
+                    </div>
+
+                    <div *ngIf="submitted">
+                        <div class="text-danger" *ngIf="submitMedia"> There are more then 10 file please remove
+                            some.</div>
+                    </div>
+                    <div class="text-danger" *ngIf="isMaxPost">
+                        Post have limites of 10 items.</div>
+                </div>
+            </div>
+
+            <div *ngIf="isPack" class=" align-items-center row ">
+                <div class="form-group FullBorder col-md-4">
+                    <label class="Label">Price</label>
+                    <div class="input-group">
+                        <input class="form-control" [(ngModel)]="cost" type="number" formControlName="packPrice">
+                    </div>
+                </div>
+                <div *ngIf="!postForm.get('packPrice').valid && submitted">
+                    <div class="text-danger" *ngIf="postForm.get('packPrice').errors['required']"> This field
+                        is
+                        required.</div>
+                </div>
+            </div>
+
+
+            <div *ngIf="isExclusive">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group FullBorder mb-0">
+                            <label class="Label">Minimum Contribution<i class="fa fa-info-circle"
+                                    (click)="open('contribution',templateExclusiveInformation)"></i></label>
+                            <div class="input-group">
+                                <input class="form-control" [(ngModel)]="minimumContribution" id="minimumContribution"
+                                    (change)="onChange('minimumContribution')" formControlName="minimumContribution"
+                                    type="number">
+                            </div>
+                            <div class="ml-3" *ngIf="!postForm.get('minimumContribution').valid && submitted">
+                                <div class="text-danger" *ngIf="postForm.get('minimumContribution').errors['required']">
+                                    This field
+                                    is
+                                    required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-group FullBorder mb-0">
+                            <label class="Label">Goal<i class="fa fa-info-circle"
+                                    (click)="open('goal',templateExclusiveInformation)"></i></label>
+                            <div class="input-group">
+                                <input class="form-control" [(ngModel)]="goal" id="goal" (change)="onChange('goal')"
+                                    formControlName="goal" type="number">
+                            </div>
+                            <div class="ml-3" *ngIf="!postForm.get('goal').valid && submitted">
+                                <div class="text-danger" *ngIf="postForm.get('goal').errors['required']"> This field
+                                    is
+                                    required.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex mr-2 col-md-12 align-items-center">
+                    <p-checkbox formControlName="contentAvailable" binary="true" [(ngModel)]="isAvail"
+                        (onChange)="onChange('avail')">
+                    </p-checkbox>
+                    <p class="mb-0 ml-2 mr-2">Content Available Now</p><i class="fa fa-info-circle"
+                        (click)="open('content',templateExclusiveInformation)"></i>
+
+                </div>
+            </div>
+
+            <div *ngIf="isProduct">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group FullBorder mb-0">
+                            <label class="Label">Price</label>
+                            <div class="input-group">
+                                <input type="number" class="form-control" (change)="onChange('cost')" [(ngModel)]="cost"
+                                    formControlName="cost" type="number">
+                            </div>
+                            <div class="ml-3" *ngIf="!postForm.get('cost').valid && submitted">
+                                <div class="text-danger" *ngIf="postForm.get('cost').errors['required']"> This field
+                                    is
+                                    required.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="form-group FullBorder mb-0">
+                            <label class="Label">Available Quantity</label>
+                            <div class="input-group">
+                                <input class="form-control" (change)="onChange('quantity')" [(ngModel)]="qty"
+                                    formControlName="quantity" type="number">
+                            </div>
+                            <div class="ml-3" *ngIf="!postForm.get('quantity').valid && submitted">
+                                <div class="text-danger" *ngIf="postForm.get('quantity').errors['required']"> This
+                                    field
+                                    is
+                                    required.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <p-dropdown [options]="deliveryMethods_List" formControlName="deliveryMethod"
+                            placeholder="Delivery Method" [(ngModel)]="delivery" (onChange)="onDelivery($event)"
+                            class="d-block Height-56">
+                        </p-dropdown>
+                        <div *ngIf="!postForm.get('deliveryMethod').valid && submitted">
+                            <div class="text-danger" *ngIf="postForm.get('deliveryMethod').errors['required']">
+                                This field is required.</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+
+                        <p-dropdown [options]="InformationList" formControlName="requiredInformation"
+                            [(ngModel)]="information" (onChange)="onInformation($event)" class="d-block Height-56">
+                        </p-dropdown>
+
+                        <div *ngIf="!postForm.get('requiredInformation').valid && submitted">
+                            <div class="text-danger" *ngIf="postForm.get('requiredInformation').errors['required']">
+                                This field is required.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="RedInformationBox mb-2" *ngIf="submitted && tierRequires">
+                <div class="d-flex">
+                    <h4>Please select any Tier!</h4>
+                    <i>
+                        <img src="assets/CloseRed.svg" alt="" (click)="onCloseClick()" class="ml-2" />
+                    </i>
+                </div>
+            </div>
+
+            <div class="RedInformationBox mb-2" *ngIf="categoryRequired && submitted">
+                <div class="d-flex">
+                    <h4>Please select Category!</h4>
+                    <i>
+                        <img src="assets/CloseRed.svg" alt="" (click)="onCloseClick()" class="ml-2" />
+                    </i>
+                </div>
+            </div>
+
+            <div class="RedInformationBox mb-2" *ngIf="expirationRequired && submitted">
+                <div class="d-flex">
+                    <h4>Please set expiration for product!</h4>
+                    <i>
+                        <img src="assets/CloseRed.svg" alt="" (click)="onCloseClick()" class="ml-2" />
+                    </i>
+                </div>
+            </div>
+
+            <div class="RedInformationBox mb-2" *ngIf="morePreviewImage && submitted">
+                <div class="d-flex">
+                    <h4>Please select less then 10 images for preview image!</h4>
+                    <i>
+                        <img src="assets/CloseRed.svg" alt="" (click)="onCloseClick()" class="ml-2" />
+                    </i>
+                </div>
+            </div>
+
+
+
+            <div class="text-center mt-4  mb-2">
+                <button type="submit" class="btn btn-primary" [disabled]="showSpinner">Post <i *ngIf="showSpinner"
+                        class="fa fa-spinner fa-spin"></i></button>
+            </div>
+
+            <!-- information message -->
+            <div class="InformationBox mb-2 mt-2" *ngIf="isCommentsFalse">
+                <div class="d-flex">
+                    <h4>{{commentMessage}}</h4>
+                    <i><img src="assets/CloseBlue.svg" alt="" (click)="onCloseClick('comment')" /></i>
+                </div>
+            </div>
+
+            <div class="InformationBox mb-2" *ngIf="isHotLinksFalse">
+                <div class="d-flex">
+                    <h4>{{hotlinkMessage}}</h4>
+                    <i><img src="assets/CloseBlue.svg" alt="" (click)="onCloseClick('hotlink')" /></i>
+                </div>
+            </div>
+
+            <div class="InformationBox mb-2" *ngIf="isTierFalse">
+                <div class="d-flex">
+                    <h4>{{tierMessage}}</h4>
+                    <i><img src="assets/CloseBlue.svg" alt="" (click)="onCloseClick('tier')" /></i>
+                </div>
+            </div>
+
+            <div class="InformationBox mb-2" *ngIf="isSFWFalse">
+                <div class="d-flex">
+                    <h4>{{SFWMessage}}</h4>
+                    <i><img src="assets/CloseBlue.svg" alt="" (click)="onCloseClick('SFW')" /></i>
+                </div>
+            </div>
+
+            <div class="InformationBox mb-2" *ngIf="isCategoryFalse">
+                <div class="d-flex">
+                    <h4>{{categoryMessage}}</h4>
+                    <i><img src="assets/CloseBlue.svg" alt="" (click)="onCloseClick('category')" /></i>
+                </div>
+            </div>
+
+            <!-- <div class="InformationBox mb-2" *ngIf="isExpireFalse">
+                <div class="d-flex">
+                    <h4>{{expireMessage}}</h4>
+                    <i><img src="assets/CloseBlue.svg" alt="" (click)="onCloseClick('expire')" /></i>
+                </div>
+            </div> -->
+
+
+            <div class="InformationBox mb-2" *ngIf="isScheduleFalse">
+                <div class="d-flex">
+                    <h4>{{scheduleMessage}}</h4>
+                    <i><img src="assets/CloseBlue.svg" alt="" (click)="onCloseClick('schedule')" /></i>
+                </div>
+            </div>
+
+
+            <!-- information message -->
+
+
+
+            <!-- modal for tier -->
+            <ng-template #templateExclusiveInformation>
+                <div class="SelectAvailable">
+                    <button class="close"><img src="assets/CloseBlue.svg" alt="" (click)="modalRef.hide()" /></button>
+
+                    <div class="modal-body">
+                        {{message}}
+                    </div>
+
+                </div>
+            </ng-template>
+            <!-- modal for tier -->
+
+            <!-- modal for settings -->
+            <ng-template #templateSettings>
+                <div class="TierSelectionPopup">
+                    <h3>Post Settings</h3>
+                    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
+                        <span aria-hidden="true"><img src="assets/CloseDark.svg" alt="" /></span>
+                    </button>
+                    <div class="modal-body">
+                        <div class="col-md-12 mb-4" *ngIf="isPost">
+                            <div class="d-flex p-inputswitch">
+                                <p-inputSwitch formControlName="hotlinks" [(ngModel)]="hotlinks"
+                                    (onChange)="onSettingChange('hotlinks',$event)">
+                                </p-inputSwitch>
+                                <p class="ml-2">Hotlinks</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-4" *ngIf="isPost">
+                            <div class="d-flex p-inputswitch">
+                                <p-inputSwitch formControlName="comments" [(ngModel)]="comments"
+                                    (onChange)="onSettingChange('comments',$event)">
+                                </p-inputSwitch>
+                                <p class="ml-2">Comments</p>
+                            </div>
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <div class="form-group">
+
+                                <!-- <p-multiSelect [(ngModel)]="category" [filter]="false"
+                                    class="form-control RadiusNone BorderNoneSelectBox" (onChange)="onCategory($event)"
+                                    [options]="categoryList" formControlName="category">
+                                </p-multiSelect> -->
+
+                                <p-dropdown [(ngModel)]="category" [options]="categoryList"
+                                    class="form-control RadiusNone BorderNoneSelectBox" (onChange)="onCategory($event)"
+                                    formControlName="category">
+                                </p-dropdown>
+
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="text-center mb-4 mt-4">
+                            <button class="btn btn-primary" (click)="settingSave()"> Save</button>
+                        </div>
+
+                    </div>
+                </div>
+            </ng-template>
+            <!-- modal for settings -->
+        </form>
+
+
+    </div>
+</div>
+
+
+
+
+<!-- <owl-date-time #dt1 [stepMinute]="5" (timeChanged)="timeChanged($event)" placeholder="Date Time"></owl-date-time> -->
+<!-- modal for tier -->
+<ng-template #templateTier>
+    <div class="TierSelectionPopup">
+        <h3>Tier Selection</h3>
+        <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true"><img src="assets/CloseDark.svg" alt="" /></span>
+        </button>
+        <div class="TierSelectionBody">
+            <ul>
+
+                <li *ngFor="let tier of tierDetail">
+                    <div class="d-flex" *ngIf="tier.tier_enabled">
+                        <p-radioButton [value]="tier.tier_id" [(ngModel)]="tierValues"
+                            (onClick)="onTierChange(tier.tier_id)"></p-radioButton>
+
+                        <p>{{tier.tier_name}}</p>
+                    </div>
+                </li>
+
+
+            </ul>
+            <ul>
+                <li class="d-flex">
+                    <p-checkbox (onChange)="makeDefault($event)" [disabled]="isDisabled"> </p-checkbox>
+                    <p>Make this my default setting for every new post</p>
+                </li>
+            </ul>
+        </div>
+        <div class="text-center mb-4 mt-4">
+            <button class="btn btn-primary" (click)="tierSave()"> Save</button>
+        </div>
+    </div>
+</ng-template>
+<!-- modal for tier -->
+
+<!-- Modal for calendar -->
+<ng-template #templateCalendar id="calendar">
+    <div class="CalendarPopup">
+        <div class="modal-header">
+            <!-- <h2>Card Details</h2> -->
+            <button class=" close"><img src="assets/CloseBlue.svg" (click)="close(timepickerWithButtons)"
+                    alt="" /></button>
+        </div>
+        <div class="modal-body">
+            <h2>{{dayName}}</h2>
+            <div class="DateFormate">
+                <h4>{{month}}</h4>
+                <h3>{{day}}</h3>
+                <h5>{{year}}</h5>
+            </div>
+            <p-calendar [inline]="true" [minDate]="minDate" [(ngModel)]="schedule_date"
+                (onSelect)="onCalendarSelect($event)"></p-calendar>
+        </div>
+        <div class="ml-auto CalendarPopupButton">
+
+            <button [ngxTimepicker]="timepickerWithButtons" (click)="modalRef.hide()" id="closeBtn">
+                OK
+            </button>
+            <button (click)="modalRef.hide()">Cancel</button>
+
+
+
+        </div>
+    </div>
+</ng-template>
+
+<div class="timepickerPopup" id="timer">
+
+    <ngx-material-timepicker (timeChanged)="timeChanged($event)" [defaultTime]="schedule_time"
+        [confirmBtnTmpl]="confirmBtn" #timepickerWithButtons [minutesGap]="5">
+        <div class="ml-auto CalendarPopupButton">
+            <ng-template #confirmBtn>
+                <button type="button" (click)="timeChanged(timepickerWithButtons)">Ok</button>
+            </ng-template>
+        </div>
+    </ngx-material-timepicker>
+</div>
+
+
+<p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+
+<ng-template #uploadMediaModal let-modal>
+    <div class="TierSelectionPopup">
+        <h3>Confirm Upload</h3>
+        <button type="button" class="close" aria-label="Close" (click)="modal.close('Save click')">
+            <span aria-hidden="true"><img src="assets/CloseDark.svg" alt="" /></span>
+        </button>
+        <div class="TierSelectionBody">
+            <li class="d-flex" *ngFor="let f of files">
+                <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" [file]="f" [removable]="true"
+                    (removed)="onRemove(f)" *ngIf="f.is_image">
+                </ngx-dropzone-image-preview>
+                <ngx-dropzone-video-preview [removable]="true" (removed)="onRemove(f)"
+                    ngProjectAs="ngx-dropzone-preview" [file]="f" *ngIf="f.is_video">
+                </ngx-dropzone-video-preview>
+                <p-checkbox *ngIf="isPack || isExclusive" (onChange)="onPreviewImage($event,f)">
+                </p-checkbox>
+            </li>
+
+
+        </div>
+        <div class="text-center mb-4 mt-4">
+            <button class="btn btn-primary" name="submit" (click)="confirmUpload()"> upload</button>
+            <button class="btn btn-primary" (click)="modal.close('Save click')"> Cancel</button>
+        </div>
+    </div>
+
+</ng-template>

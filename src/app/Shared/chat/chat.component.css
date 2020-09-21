@@ -1,0 +1,102 @@
+*{margin:0; padding:0;}
+
+
+.MessageTitle{ margin:0 0 24px;}
+.MessageTitle h2{ margin:0; padding:0; display:block;  font-family:'Cerebri Sans'; font-style:normal; font-weight:500; font-size:40px; line-height:51px; color: #171736;}
+
+.ChatMessage{ border:2px solid #EEF0F4;}
+.ChatMessageLeft{ border-right:2px solid #EEF0F4; width:311px;}
+
+.ChatMessageLink{ display:block; padding:20px 0 30px 0px; border-bottom:1px solid #EEF0F4;}
+.ChatMessageLink ul{ margin:0; padding:0; list-style:none; justify-content:space-between;}
+.ChatMessageLink ul li{ padding:0 14px;}
+.ChatMessageLink ul li a{font-family:'Cerebri Sans'; font-weight:400; font-size:16px; line-height:20px; color:#0F2124; position:relative; padding:0 0 10px;}
+.ChatMessageLink ul li.active a,
+.ChatMessageLink ul li a:hover{color: #3A8CC1; text-decoration:none;}
+.ChatMessageLink ul li.active a:before,
+.ChatMessageLink ul li a:hover:before{content:''; background:#3A8CC1; height:2px; width:100% ; position:absolute; bottom:0; left:0;}
+
+.MessageSearch{ width:100%; padding:16px 10px 16px 51px; display:block; position:relative;}
+.MessageSearch button{ border:0; background:transparent; position:absolute; left:14px; top:50%; transform:translateY(-50%); display:block;height:16px;}
+.MessageSearch button img{width:16px; vertical-align:top;}
+.MessageSearch input{ width:100%; background:transparent; border:0; display:block; font-family:'Cerebri Sans'; font-weight:400; font-size:15px; line-height:19px; color:#777;}
+
+.ChatMessageList{ display:block;}
+.ChatMessageList ul{ margin:0; padding:0; list-style:none; border-top:1px solid #EEF0F4;}
+.ChatMessageList ul li{ margin:0; padding:15px; display:block; position:relative;}
+.ChatMessageList ul li + li{ border-top:1px solid #EEF0F4;}
+.ChatMessageList ul li.active:before,
+.ChatMessageList ul li:hover:before{ content:''; background:#3A8CC1; width:6px; height:100%; display:block; position:absolute; top:0; left:-1px;}
+
+.ChatUser{ position:relative; padding:0 0 0 75px; min-height:62px; display:flex; display:flex; flex-direction:column; justify-content:center; width:100%;}
+.ChatUserBody{ position:relative; width:100%;}
+.ChatUserBody p{ display:block; margin:0; padding:0 10px 0 0; font-weight:normal; font-size:11px; line-height:13px; color:#575757;}
+.ChatUserBody .ChatUserStatus{ position:absolute; top:3px; right:0; width:8px; height:8px; border-radius:100px; display:block; }
+.StatusOnline{ background:#6FCF97;}
+.StatusOffline{ background:#ddd;}
+
+.ChatUserIMG{ width:62px; height:62px; background:#eee; border-radius:100px; display:block; overflow:hidden; position:absolute; top:0; left:0;}
+.ChatUserIMG img{width:62px; height:62px; background:#eee; border-radius:100px; display:block;}
+.ChatUserTitle{ position:relative; margin:0 0 2px; padding:0; width:100%;}
+.ChatUserTitle h3{ margin:0; padding:0 65px 0 0; display:block; font-weight:400; font-size: 16px; line-height:19px; color:#151515; text-overflow:ellipsis; white-space:nowrap; overflow:hidden; height:19px;}
+.ChatUserTitle p{ margin:0; padding:0; position:absolute; right:0; top:2px;font-family:'Cerebri Sans'; font-weight:400; font-size: 11px; line-height: 19px; color: #6B6B6B;}
+
+.ChatMessageRight {width:calc(100% - 312px);}
+
+.ChatMessageRightFooter{ border-top:2px solid #EEF0F4;}
+.TextareaOption{ margin:0 0 0 auto; padding:0 40px 0 0;}
+.TextareaOption ul{ margin:0; padding:0; list-style:none;}
+.TextareaOption ul li{ margin:0 0 0 14px;}
+.TextareaOption ul li a{ display:block;}
+.ChatMessageTextarea{ padding:0 0 0 40px; width:calc(100% - 160px);}
+.ChatMessageTextarea textarea{ resize:none; border:0; background:transparent; font-family:'Cerebri Sans'; font-weight:400; font-size:17px; line-height: 22px; color:#6B6B6B; width:100%; height:110px; padding:30px 0;}
+
+.ChatMessageRightHead{ padding:25px 38px; border-bottom:2px solid #EEF0F4;}
+.ChatMessageName{ display:block;}
+.ChatMessageName h3{ margin:0 0 9px; padding:0; display:block; font-family:'Cerebri Sans'; font-weight: 600; font-size:21px; line-height:27px; color: #151515; }
+.ChatMessageName p{ margin:0; padding:0; display:block; font-family:'Cerebri Sans'; font-weight:400; font-size: 14px; line-height: 18px; color: #575757;}
+
+.ChatMessageRightBody{ width:100%; padding:25px;}
+.ChatMessageRightBody ul{ margin:0; padding:0; list-style:none;}
+.ChatMessageRightBody ul li{ margin:32px 0;}
+.ChatMessageBox span{ width:62px; height:62px; background:#eee; border-radius:100px; overflow:hidden; display:block; margin:0 12px 0 0;    min-width:62px;}
+.ChatMessageBox span img{ width:62px; height:62px; background:#eee; border-radius:100px;}
+.ChatMessageBox p{ background:#F4F4F4; border-radius:30px 30px 30px 0px; padding:30px; max-width:80%; font-family:'Cerebri Sans'; font-weight:400; font-size:14px; line-height:18px; color:#0F2124;}
+.OnlineUsers .ChatMessageBox{ flex-direction:row-reverse;}
+.OnlineUsers .ChatMessageBox p{background: linear-gradient(90deg, #2E84BC -0.39%, #74B8DE 100%); border-radius: 30px 30px 0px 30px; color:#fff; max-height:75%; }
+.OnlineUsers .ChatMessageBox span{ margin:0 0 0 12px;}
+
+.ChatMessageBoxDate{text-align:center;}
+.ChatMessageBoxDate h4{margin:0; padding:0; display:block; position:relative;  }
+.ChatMessageBoxDate h4 span{font-family:'Cerebri Sans'; font-weight:400; font-size:21px; line-height:27px; color: #0F2124; background:#fff; padding:0 40px;}
+.ChatMessageBoxDate h4:before{ background: #EEF0F4; content:''; display:block; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:80%; height:2px; z-index:-1;}
+
+.MultiChat{ display:block;}
+.MultiChat ul{ list-style:none; margin:0; padding:0; flex-wrap:wrap;}
+.MultiChat ul li{ margin:0 15px 0 0;}
+.MultiChat ul li .MultiChatBox{background: linear-gradient(90deg, #2E84BC -12.52%, #74B7DE 82.87%); border-radius:75px;
+	padding:8px 48px 8px 65px; position:relative;min-height: 50px;}
+.MultiChatBox span{ min-width:50px; width:50px; height:50px; display:block; border-radius:100px; margin:0 40px 0 0; padding:0;
+ position:absolute; top:8px; left:8px; background:#fff;}
+.MultiChatBox h3{ margin:0; padding:0 10px; display:block;font-weight:400; font-size:22px; line-height:50px; color:#fff;}
+.MultiChatBox a{ position:absolute; top:27px; right:22px; display:block;}
+.MultiChatBox a img{ width:16px; display:block;}
+
+.Encrypted{ padding:15px 25px; position:relative; background: linear-gradient(90deg, #2E84BC -12.52%, #74B7DE 82.87%); border-radius:100px;}
+.Encrypted i{ margin:0 15px 0 0;}
+.Encrypted h4{font-weight: 400; font-size: 22px; line-height: 26px; color: #FFFFFF; margin:0; padding:0;}
+
+.DeleteConvertion{ border-radius:50px; display:block; }
+.DeleteConvertion a{background:#E93535; border:2px solid #E93535; font-weight: normal; font-size: 22px; line-height: 26px; text-align: center; color: #FFFFFF;
+border-radius:100px; padding:12px 38px;}
+.DeleteConvertion a:hover{ background:transparent; color:#E93535; text-decoration:none;}
+
+.BabyWonderful { margin:0 0 54px;  }
+.BabyWonderful>span{ width:106px; height:106px; min-width:106px; display:block; background:#eee; margin:0 22px 0 0; border-radius:100px; overflow:hidden;}
+.BabyWonderful>span>img{ width:106px; height:106px; min-width:106px; border-radius:100px;}
+.BabyWonderfulText h2{ margin:0 0 10px; padding:0; display:block; font-weight:400; font-size:25px; line-height:29px; color:#171736; }
+.BabyWonderfulText h3{ margin:0 0 10px; padding:0; display:block; font-weight:400; font-size: 17px; line-height: 20px; color: #8A96A3;}
+
+.ChatSubscriber a{font-weight: normal; font-size: 15px; line-height: 18px; color: #000000; margin:0 20px 0 0;}
+.ChatSubscriber a i{margin:0 10px 0 0;}
+.ChatGraph{ display:block; text-align:center;}

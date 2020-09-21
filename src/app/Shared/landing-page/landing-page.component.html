@@ -1,0 +1,631 @@
+<header>
+    <div class="header">
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="#"><img src="assets/Logo.svg" alt="" /></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><img src="assets/NavIcon.svg" alt="" /></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a class="nav-link" (click)="onClick('login')">Log in</a></li>
+                    <li class="nav-item"><a class="nav-link" (click)="onClick('registration')">Sign up</a></li>
+                </ul>
+                <ul class="navbar-nav How-Work">
+                    <li class="nav-item"><a class="nav-link" href="/howitworks">How it Works</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="BannerCaption">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h2>Your life <br /> your show.</h2>
+                    <p>Join the next-gen content<br />subscription and freelance market platform.</p>
+                    <div class="CaptionButton d-flex">
+                        <a class="CaptionBG" (click)="onClick('registration')">Try it Now</a>
+                        <a href="/howitworks" class="CaptionBDR">Learn More</a>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="LoginRegisterPage">
+                        <h3 *ngIf="isLogin">Log in</h3>
+                        <!-- login form -->
+                        <form class="LoginRegisterForm" *ngIf="isLogin" [formGroup]="LoginForm"
+                            (ngSubmit)="onSubmit(LoginForm.valid,template)">
+                            <div class="form-group">
+                                <input type="text" class="form-control" formControlName="user_name"
+                                    placeholder="Username">
+                                <div class="FieldIcon">
+                                    <img src="assets/UserDark.svg" alt="" />
+                                </div>
+                                <div *ngIf="!LoginForm.get('user_name').valid && loginSubmitted">
+                                    <div class="ErrorMessage"
+                                        *ngIf="LoginForm.get('user_name').errors['required'] || LoginForm.get('user_name').errors['whitespace'] ">
+                                        This field is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group PasswordWrap">
+                                <input type="password" class="form-control" formControlName="password"
+                                    placeholder="Password">
+                                <div class="FieldIcon">
+                                    <img src="assets/Lock.svg" alt="" />
+                                </div>
+                                <div *ngIf="!LoginForm.get('password').valid && loginSubmitted">
+                                    <div class="ErrorMessage"
+                                        *ngIf="LoginForm.get('password').errors['required'] || LoginForm.get('password').errors['whitespace']">
+                                        This field is
+                                        required.
+                                    </div>
+                                </div>
+                                <div *ngIf="!LoginForm.get('password').valid">
+                                    <div class="ErrorMessage" *ngIf="LoginForm.get('password').errors['pattern'] ">
+                                        Password should be 8 character long and must contain at least one lowercase and
+                                        one
+                                        number.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="LoginWith">
+                                <!-- <h4>Login with:</h4> -->
+                                <div class="d-flex align-items-center">
+                                    <!-- <div class="SocialIcon">
+                                        <a href=""><img src="assets/twitter.svg" alt="" /></a>
+                                        <a href=""><img src="assets/instagram.svg" alt="" /> </a>
+                                    </div> -->
+                                    <div class="ForgotPassword">
+                                        <a (click)="onClick('forget')" class="ml-auto">Forgot Password?</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="LoginBtn">
+                                <button class="btn btn-primary" type="submit" [disabled]="login_show_spinner">Login <i
+                                        *ngIf="login_show_spinner" class="fa fa-spinner fa-spin"></i></button>
+                            </div>
+                            <!--<div class="d-flex flex-wrap align-items-center">
+                                        <a href="javascript:void(0)" (click)="loginwithTwitter()"> -->
+                            <!-- <img class="ml-2"
+                                        src="https://cdn.cms-twdigitalassets.com/content/dam/developer-twitter/icons/sign-in-with-twitter-gray-png-img-fullhd-medium.png.img.fullhd.medium.png"
+                                        alt="Sign in with Twitter button"> -->
+                            <!-- s</a> -->
+                            <!-- <button class=" btn btn-primary pull-right" type="submit">Login</button>
+                                </div>-->
+                        </form>
+                        <!-- login form -->
+
+                        <h3 *ngIf="isRegistration">Registration</h3>
+                        <!-- registration -->
+                        <form class="LoginRegisterForm" *ngIf="isRegistration" [formGroup]="RegisterForm"
+                            (ngSubmit)="onSubmitRegister(RegisterForm.valid)">
+
+                            <div class="form-group">
+                                <input type="email" class="form-control" formControlName="email" placeholder="Email"
+                                    id="email" (blur)="checkUser('email',$event)">
+                                <div class="FieldIcon">
+                                    <img src="assets/Email-Icon.svg" alt="" />
+                                </div>
+                                <div *ngIf="!RegisterForm.get('email').valid && submitted">
+                                    <div class="ErrorMessage" *ngIf="RegisterForm.get('email').errors['required']">This
+                                        field
+                                        is
+                                        required.</div>
+
+                                    <div class="ErrorMessage" *ngIf="RegisterForm.get('email').errors['pattern']">Email
+                                        must be in valid format.</div>
+                                </div>
+                                <div *ngIf="isEmail" class="ErrorMessage">
+                                    <div>{{emailMessage}}</div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" formControlName="user_name" id="user_name"
+                                    (keyup)="findSpace($event)" placeholder="Username"
+                                    (blur)="checkUser('username',$event)">
+                                <div class="FieldIcon">
+
+                                    <img src="assets/userBack.svg" alt="" />
+                                </div>
+                                <div *ngIf="!RegisterForm.get('user_name').valid && submitted">
+                                    <div class="ErrorMessage"
+                                        *ngIf="RegisterForm.get('user_name').errors['required'] || RegisterForm.get('user_name').errors['whitespace']">
+                                        This field is required.
+                                    </div>
+                                </div>
+
+                                <div *ngIf="!RegisterForm.get('user_name').valid">
+                                    <div class="ErrorMessage" *ngIf="RegisterForm.get('user_name').errors['pattern'] ">
+                                        Please use , alphabets , numerics and '_' for creating username.
+                                    </div>
+                                </div>
+
+                                <div *ngIf="isMax" class="ErrorMessage">
+                                    <div>exceeded the maximum number of allow character</div>
+                                </div>
+
+                                <div *ngIf="isError" class="ErrorMessage">
+                                    <div>{{errorMessage}}</div>
+                                </div>
+
+
+                                <div class="ErrorMessage" *ngIf="cannotContainSpace">
+                                    User name does not contain space.
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" class="form-control" formControlName="password"
+                                    placeholder="Password">
+                                <div class="FieldIcon">
+                                    <img src="assets/Lock.svg" alt="" />
+                                </div>
+                                <div *ngIf="!RegisterForm.get('password').valid && submitted">
+                                    <div class="ErrorMessage"
+                                        *ngIf="RegisterForm.get('password').errors['required'] || RegisterForm.get('password').errors['whitespace']">
+                                        This field
+                                        is
+                                        required.</div>
+                                </div>
+
+                                <div *ngIf="!RegisterForm.get('password').valid">
+                                    <div class="ErrorMessage"
+                                        *ngIf="RegisterForm.get('password').errors['pattern'] || RegisterForm.get('password').errors['minLength']">
+                                        Password should be 8 character long and must contain at least one lowercase, one
+                                        uppercase , one special character and one
+                                        number.</div>
+                                </div>
+
+                            </div>
+                            <!-- <div class="LoginWith">
+                                <h4>Login with:</h4>
+                                <div class="d-flex align-items-center">
+                                    <div class="SocialIcon">
+                                        <a href=""><img src="assets/twitter.svg" alt="" /></a>
+                                        <a href=""><img src="assets/instagram.svg" alt="" /> </a>
+                                    </div>
+                                   <div class="ForgotPassword">
+                                            <a href="/forgot_password" class="ml-auto">Forgot Password?</a>
+                                        </div>
+                                </div>
+                            </div> -->
+                            <div class="LoginBtn">
+                                <button class="btn btn-primary" type="submit" [disabled]="show_spinner">Sign Up <i
+                                        *ngIf="show_spinner" class="fa fa-spinner fa-spin"></i></button>
+                            </div>
+                            <!--
+                                    <div class="d-flex flex-wrap align-items-center">
+                                        <button class="btn btn-primary" type="submit" [disabled]="
+                                                            show_spinner ">Create
+                                        Account <i *ngIf="show_spinner" class="fa fa-spinner fa-spin"></i></button>
+                                        <span style="margin-left: auto;">Already have account? <a href="/login">login</a></span>
+                                    </div> -->
+                        </form>
+                        <!-- registration -->
+
+                        <!-- forgot password -->
+                        <h3 *ngIf="isForgot">Forget Password</h3>
+                        <form class="LoginRegisterForm" *ngIf="isForgot" [formGroup]="ForgotPasswordForm"
+                            (ngSubmit)="onForgotPassword(ForgotPasswordForm.valid)">
+                            <div class="form-group">
+                                <input type="text" class="form-control" formControlName="user_name"
+                                    placeholder="Username">
+                                <div class="FieldIcon">
+                                    <img src="assets/userBack.svg" alt="" />
+                                </div>
+                                <div *ngIf="!ForgotPasswordForm.get('user_name').valid && forgotSubmitted">
+                                    <div class="ErrorMessage"
+                                        *ngIf="ForgotPasswordForm.get('user_name').errors['required'] || ForgotPasswordForm.get('user_name').errors['whitespace'] ">
+                                        This field is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" formControlName="email" placeholder="Email">
+                                <div class="FieldIcon">
+                                    <img src="assets/Email-Icon.svg" alt="" />
+                                </div>
+                                <div *ngIf="!ForgotPasswordForm.get('email').valid && forgotSubmitted">
+                                    <div class="ErrorMessage"
+                                        *ngIf="ForgotPasswordForm.get('email').errors['required']">
+                                        This field is
+                                        required.
+                                    </div>
+                                    <div class="ErrorMessage" *ngIf="ForgotPasswordForm.get('email').errors['pattern']">
+                                        Email
+                                        must be in valid format.</div>
+                                </div>
+
+                            </div>
+                            <div class="LoginBtn">
+                                <button class="btn btn-primary" type="submit" [disabled]="show_spinner">Submit <i
+                                        *ngIf="show_spinner" class="fa fa-spinner fa-spin"></i></button>
+                            </div>
+                            <!-- <div class="d-flex flex-wrap align-items-center">
+                                    <button class="btn btn-primary" style="margin-right: 5px;" type="submit" [disabled]="show_spinner">Send <i
+                                            *ngIf="show_sforgotSubmitted
+                                </div> -->
+                        </form>
+                        <!-- forgot password -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="Creators">
+    <div class="container">
+        <div class="col-md-12">
+            <h2>CREATORS MAKE 100%</h2>
+            <p>We give exclusivity to the most popular creators and offer everyone the <br /> opportunity to make 100%
+                revenue on their subscription sales.</p>
+            <a href="/howitworks"><button class="btn btn-primary">Learn More</button></a>
+            <div class="CreatorsIMG">
+                <img src="assets/CreatorMake.png" alt="" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="MultipleSubscription">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-12 col-xl-8">
+                <ul class="d-flex">
+                    <li class="Tier-1">
+                        <div class="Tier">
+                            <h4>Tier 1</h4>
+                            <span><img src="assets/CheckIcon.svg" alt="" /></span>
+                            <p>Free Tier</p>
+
+                        </div>
+                    </li>
+                    <li class="Tier-2">
+                        <div class="Tier">
+                            <h4>Tier 2</h4>
+                            <span><img src="assets/CheckIcon.svg" alt="" /></span>
+                            <p>Base Content</p>
+                        </div>
+                    </li>
+                    <li class="Tier-3">
+                        <div class="Tier">
+                            <h4>Tier 3</h4>
+                            <span><img src="assets/CheckIcon.svg" alt="" /></span>
+                            <p>Behind the scenes</p>
+                            <p>Special content</p>
+                        </div>
+                    </li>
+                    <li class="Tier-4">
+                        <div class="Tier">
+                            <h4>Tier 4</h4>
+                            <span><img src="assets/CheckIcon.svg" alt="" /></span>
+                            <p>Loyality Tier</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-12 col-xl-4">
+                <h2>Multiple <br /> Subscription <br /> Tiers</h2>
+                <p>Publish content under multiple tier levels to give your most loyal subscribers a unique experience.
+                    Set the cost of each subscription tier and allow subscribers to upgrade their subscriptions at a
+                    prorated price. Every tier includes the content of the tier(s) below it.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="E2EE">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-5">
+                <!-- <img src="assets/e2ee.png" class="img-fluid" alt="" /> -->
+            </div>
+            <div class="col-md-7">
+                <h2>No Tracking, Ads, or Algorithms.</h2>
+                <p>We don't track our users using cookies, tracking pixels, or any other black magic. We don't monetize
+                    with third-party ads and we don't use big brain algorithms to control what you see. You only see the
+                    content and topics you're subscribed to. </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="EveryoneVoice">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h2>Everyone has a <br /> voice</h2>
+                <p>Creators are given community tools to share <br /> ideas and help other creators. Join the creators
+                    in <br /> your industry having a conversation about how <br /> they have become successful and what
+                    they <br /> continue to do to grow their audience. Give <br /> feedback and get exclusive access to
+                    new <br /> features that you recommend.</p>
+            </div>
+            <div class="col-md-6">
+                <img class="img-fluid" src="assets/EveryoneVoice.jpg" alt="" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="Guaranteed">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <h2>Guaranteed Revenue</h2>
+                <p>Subscriptions mean guaranteed revenue from your users on a monthly basis, paid <br /> out weekly.
+                    Subscription upgrades are available to users missing out on your most <br /> exclusive content.</p>
+            </div>
+            <div class="col-md-4 GuaranteedButton">
+                <a href="#top" class="buttonBG" (click)="onClick('registration')">Sign up</a>
+                <a href="/howitworks" class="buttonBDR">Learn More</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row FooterTop">
+            <div class="col-md-4">
+                <div class="FooterLogo"><a href="index.html"><img src="assets/FooterLogo.svg" alt="" /></a></div>
+                <div class="Social-Icon">
+                    <a href=""><img src="assets/instagram.svg" alt="" /></a>
+                    <a href=""><img src="assets/twitter.svg" alt="" /></a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h2>Quick Links</h2>
+                <ul>
+                    <li><a href="/privacypolicy">Privacy Policy</a></li>
+                    <li><a href="/terms">Terms of Use</a></li>
+                    <li><a href="/howitworks">How it Works</a></li>
+                    <li><a href="/dmca">DMCA</a></li>
+                    <!-- <li><a href="/2257">U.S.C ‌§‌ 2257</a></li> -->
+                </ul>
+            </div>
+            <div class="col-md-4 FooterContect">
+                <h2>Quick Message</h2>
+                <form [formGroup]="quickForm">
+                    <div class="input-group">
+                        <input type="text" formControlName="email" class="form-control" placeholder="Email">
+                        <div *ngIf="!quickForm.get('email').valid && quickSubmitted">
+                            <div class="ErrorMessage" *ngIf="quickForm.get('email').errors['required']">This
+                                field
+                                is
+                                required.</div>
+
+                            <div class="ErrorMessage" *ngIf="quickForm.get('email').errors['pattern']">Email
+                                must be in valid format.</div>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="form-control" formControlName="message" placeholder="Your question">
+                        <div *ngIf="!quickForm.get('message').valid && quickSubmitted">
+                            <div class="ErrorMessage" *ngIf="quickForm.get('message').errors['required']">This
+                                field
+                                is
+                                required.</div>
+
+
+                        </div>
+                    </div>
+                    <button type="button" (click)="onQuick(quickForm.valid)" [disabled]="quickSpinner">Send <i
+                            *ngIf="quickSpinner" class="fa fa-spinner fa-spin"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="row FooterBTM">
+            <div class="col-md-6">Copyright 2020 mi.show. All right reserved.</div>
+        </div>
+    </div>
+</footer>
+
+<!-- user guide popup -->
+<ng-template #template>
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="modal-header">
+        <h4 class="text-primary">Welcome</h4>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-12 mx-auto">
+                    <div class="login-boxs">
+                        <p>Thank you for signing up. Choose an account type below.
+                        </p>
+                        <p></p>
+                        <!-- <p>Let's start guide.</p>
+                        <p class="font-weight-bold">What will you be doing on mi show?</p> -->
+                        <ul>
+                            <li class="d-flex">
+                                <p-radioButton name="account_type" value='5' (onFocus)="type($event)" id="5">
+                                </p-radioButton>
+                                <p class="ml-2"> I want to view content and purchase products or services.
+                                    <b>I’m a
+                                        subscriber.</b></p>
+                            </li>
+                            <li class="d-flex">
+                                <p-radioButton name="account_type" value='2' (onFocus)="type($event)" id="2">
+                                </p-radioButton>
+                                <p class="ml-2"> I want to make money with my content, products, or services. <b>I’m a
+                                        creator/freelancer!</b></p>
+                            </li>
+                            <!-- <div class="text-danger" *ngIf="isType">
+                                Please select any type.
+                            </div> -->
+                            <!-- <li>
+                                        <p-radioButton name="group1" value="3"
+                                            label=" I represent one or more Creators and want to be listed. I’m an Agent, Sponsor, or Group Representative">
+                                        </p-radioButton>
+                                    </li> -->
+                        </ul>
+                        <div class="d-flex flex-warp border-top pt-3 mt-3">
+                            <button class="btn btn-primary" (click)="onGuideSubmit(template2)"
+                                [disabled]="show_spinner">Submit<i *ngIf="show_spinner"
+                                    class="fa fa-spinner fa-spin"></i></button>
+                            <button class="btn btn-secondary ml-auto" (click)="modalRef.hide()">Skip</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- user guide popup -->
+
+<!--Detail Registration popup -->
+<ng-template #template2>
+    <button type="button" class="close" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="modal-header">
+        <h4 class="text-primary">Registration</h4>
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-12 mx-auto">
+                    <div class="login-boxs">
+
+                        <div *ngIf="isSubscriber">
+                            <form [formGroup]="DetailRegistration_Subscriber"
+                                (ngSubmit)="onSubscriberSubmit(DetailRegistration_Subscriber.valid)">
+
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control" formControlName="display_name"
+                                        placeholder="Display Name">
+                                    <div
+                                        *ngIf="!DetailRegistration_Subscriber.get('display_name').valid && isSubscriberSubmit">
+                                        <div class="text-danger"
+                                            *ngIf="DetailRegistration_Subscriber.get('display_name').errors['required'] || DetailRegistration_Subscriber.get('display_name').errors['whitespace'] ">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="file" class="form-control" placeholder="Select profile picture"
+                                        (change)="onFileChange($event)" formControlName="profile_image">
+                                    <div
+                                        *ngIf="!DetailRegistration_Subscriber.get('profile_image').valid && isSubscriberSubmit">
+                                        <div class="text-danger"
+                                            *ngIf="DetailRegistration_Subscriber.get('profile_image').errors['required']">
+                                            This field
+                                            is
+                                            required.</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <!-- <p-multiSelect [filter]="false" class="form-control RadiusNone BorderNoneSelectBox"
+                                        [options]="categoryList" defaultLabel="Follow some categories"
+                                        formControlName="interested_category" >
+                                    </p-multiSelect> -->
+
+                                    <p-dropdown [options]="categoryList" (onChange)="onCategoryChange($event)"
+                                        class="form-control RadiusNone BorderNoneSelectBox"
+                                        formControlName="interested_category">
+                                    </p-dropdown>
+
+
+                                    <div
+                                        *ngIf="!DetailRegistration_Subscriber.get('interested_category').valid && isCreatorSubmit">
+                                        <div class="text-danger"
+                                            *ngIf="DetailRegistration_Subscriber.get('interested_category').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-wrap align-items-center">
+                                    <button class="btn btn-primary" type="submit" [disabled]="
+                                                        show_spinner">Create
+                                        Account <i *ngIf="show_spinner" class="fa fa-spinner fa-spin"></i></button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div *ngIf="isCreator">
+                            <form [formGroup]="DetailRegistration_Creator"
+                                (ngSubmit)="onCreatorSubmit(DetailRegistration_Creator.valid)">
+
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control" formControlName="dispaly_name_creator"
+                                        placeholder="Display Name">
+                                    <div
+                                        *ngIf="!DetailRegistration_Creator.get('dispaly_name_creator').valid && isCreatorSubmit">
+                                        <div class="text-danger"
+                                            *ngIf="DetailRegistration_Creator.get('dispaly_name_creator').errors['required'] || DetailRegistration_Creator.get('dispaly_name_creator').errors['whitespace'] ">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="file" class="form-control" placeholder="Select profile picture"
+                                        (change)="onFileChange($event)" formControlName="profile_image_creator">
+                                    <div
+                                        *ngIf="!DetailRegistration_Creator.get('profile_image_creator').valid && isCreatorSubmit">
+                                        <div class="text-danger"
+                                            *ngIf="DetailRegistration_Creator.get('profile_image_creator').errors['required']">
+                                            This field
+                                            is
+                                            required.</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <p-calendar class="form-control" formControlName="birth_date_creator"
+                                        [style]="{'width':'100%'}" [inputStyle]="{'width':'100%'}"
+                                        placeholder="Birth Date" [yearNavigator]="true" [monthNavigator]="true"
+                                        yearRange="{{minYear}}:{{maxYear}}">
+                                    </p-calendar>
+
+                                    <div
+                                        *ngIf="!DetailRegistration_Creator.get('birth_date_creator').valid && isCreatorSubmit">
+                                        <div class="text-danger"
+                                            *ngIf="DetailRegistration_Creator.get('birth_date_creator').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group GamingDropdown">
+                                    <!-- <p-multiSelect [filter]="false" class="form-control RadiusNone BorderNoneSelectBox"
+                                        [options]="categoryList" formControlName="category"
+                                        defaultLabel="Choose your categories" >
+                                    </p-multiSelect> -->
+                                    <p-dropdown [options]="categoryList"
+                                        class="form-control RadiusNone BorderNoneSelectBox"
+                                        (onChange)="onCategoryChange($event)" formControlName="category">
+                                    </p-dropdown>
+
+                                    <div *ngIf="!DetailRegistration_Creator.get('category').valid && isCreatorSubmit">
+                                        <div class="text-danger"
+                                            *ngIf="DetailRegistration_Creator.get('category').errors['required']">
+                                            This field is required.
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="d-flex flex-wrap align-items-center">
+                                    <button class="btn btn-primary" type="submit" [disabled]="
+                                                                                show_spinner">Create
+                                        Account <i *ngIf="show_spinner" class="fa fa-spinner fa-spin"></i></button>
+
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- Detail Registration popup -->
