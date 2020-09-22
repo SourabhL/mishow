@@ -1,145 +1,252 @@
 <header *ngIf="(isCreator || isSubscriber) && !notLogin">
-    <div class="header">
-        <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" (click)="homeClick()"><img src="assets/LogoWhite.svg" alt="" /></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"><img src="assets/NavIcon.svg" alt="" /></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a class="nav-link d-flex" (click)="homeClick()"><span><img
-                                    src="assets/Home.svg" alt="" /></span>
-                            <strong>Home</strong></a></li>
-                    <li class="nav-item">
-                        <div class="btn-group" dropdown>
-                            <button class="btn btn-secondary dropdown-toggle d-flex" type="button" dropdownToggle>
-                                <span><img src="assets/NotificationWhilte.svg" alt="" /></span>
-                                <strong>Notifications</strong>
-                                <small class="CountNotification" *ngIf="notifications > '0'">{{notifications}}</small>
-                            </button>
-                            <ul id="dropdown-basic" *dropdownMenu class="NavDropDown dropdown-menu"
-                                style="position: absolute;" role="menu" aria-labelledby="button-basic">
-                                <div class="UserDropDown">
-                                    <div class="UserDropDownLink">
-                                        <ul>
-                                            <div *ngFor="let dt of panelLoop">
+  <div class="header">
+    <nav class="navbar navbar-expand-lg">
+      <a class="navbar-brand" (click)="homeClick()"
+        ><img src="assets/LogoWhite.svg" alt=""
+      /></a>
+      <button
+        class="pull-left navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"
+          ><img src="assets/NavIcon.svg" alt=""
+        /></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a
+              class="nav-link d-flex"
+              data-toggle="collapse"
+              data-target=".navbar-collapse.show"
+              (click)="homeClick()"
+              ><span><img src="assets/Home.svg" alt="" /></span>
+              <strong>Home</strong></a
+            >
+          </li>
+          <li class="nav-item" data-target=".navbar-collapse.show">
+            <div class="btn-group" dropdown>
+              <button
+                class="btn btn-secondary dropdown-toggle d-flex"
+                type="button"
+                dropdownToggle
+              >
+                <span><img src="assets/NotificationWhilte.svg" alt="" /></span>
+                <strong>Notifications</strong>
+                <small class="CountNotification" *ngIf="notifications > '0'">{{
+                  notifications
+                }}</small>
+              </button>
+              <ul
+                id="dropdown-basic"
+                *dropdownMenu
+                class="NavDropDown dropdown-menu"
+                style="position: absolute"
+                role="menu"
+                aria-labelledby="button-basic"
+              >
+                <div class="UserDropDown">
+                  <div class="UserDropDownLink">
+                    <ul>
+                      <div *ngFor="let dt of panelLoop">
+                        <li
+                          *ngIf="
+                            dt.Body.event_type === 'NEW_LIKE' ||
+                            dt.Body.event_type === 'NEW_COMMENT'
+                          "
+                          (click)="navigate(dt)"
+                          data-toggle="collapse"
+                          data-target=".navbar-collapse.show"
+                        >
+                          <a>
+                            <div class="d-flex">
+                              <span>
+                                <img
+                                  src="assets/NotificationWhilte.svg"
+                                  alt=""
+                                />
+                              </span>
+                              <strong>{{ dt.Body.event_type }}</strong>
+                              <small class="ml-auto">{{ dt.date }}</small>
+                            </div>
+                            <p>{{ dt.Body.message }}</p>
+                          </a>
+                        </li>
 
-                                                <li *ngIf="dt.Body.event_type === 'NEW_LIKE' || dt.Body.event_type === 'NEW_COMMENT'"
-                                                    (click)="navigate(dt)">
-                                                    <a>
-                                                        <div class="d-flex">
-                                                            <span>
-                                                                <img src="assets/NotificationWhilte.svg" alt="" />
-                                                            </span>
-                                                            <strong>{{dt.Body.event_type}}</strong>
-                                                            <small class="ml-auto">{{dt.date}}</small>
-                                                        </div>
-                                                        <p>{{dt.Body.message}}</p>
-                                                    </a>
-                                                </li>
+                        <li
+                          *ngIf="
+                            !(
+                              dt.Body.event_type === 'NEW_LIKE' ||
+                              dt.Body.event_type === 'NEW_COMMENT'
+                            )
+                          "
+                          (click)="onNotification(dt)"
+                          data-toggle="collapse"
+                          data-target=".navbar-collapse.show"
+                        >
+                          <a>
+                            <div class="d-flex">
+                              <span>
+                                <img
+                                  src="assets/NotificationWhilte.svg"
+                                  alt=""
+                                />
+                              </span>
+                              <strong>{{ dt.Body.event_type }}</strong>
+                              <small class="ml-auto">{{ dt.date }}</small>
+                            </div>
+                            <p>{{ dt.Body.message }}</p>
+                          </a>
+                        </li>
+                      </div>
 
-                                                <li *ngIf="!(dt.Body.event_type === 'NEW_LIKE' || dt.Body.event_type === 'NEW_COMMENT')"
-                                                    (click)="onNotification(dt)">
-                                                    <a>
-                                                        <div class="d-flex">
-                                                            <span>
-                                                                <img src="assets/NotificationWhilte.svg" alt="" />
-                                                            </span>
-                                                            <strong>{{dt.Body.event_type}}</strong>
-                                                            <small class="ml-auto">{{dt.date}}</small>
-                                                        </div>
-                                                        <p>{{dt.Body.message}}</p>
-                                                    </a>
-                                                </li>
+                      <div
+                        *ngIf="nodata"
+                        data-toggle="collapse"
+                        data-target=".navbar-collapse.show"
+                      >
+                        <p class="text-center">No notifications.</p>
+                      </div>
+                    </ul>
+                  </div>
+                </div>
+              </ul>
+            </div>
+          </li>
+          <li
+            class="nav-item"
+            *ngIf="isCreator"
+            [routerLink]="['/creator/allpost']"
+            data-toggle="collapse"
+            data-target=".navbar-collapse.show"
+          >
+            <a class="nav-link d-flex"
+              ><span><img src="assets/CreatPost.svg" alt="" /></span>
+              <strong>Create Post</strong></a
+            >
+          </li>
 
-                                            </div>
-
-                                            <div *ngIf="nodata ">
-                                                <p class="text-center"> No notifications.</p>
-                                            </div>
-
-
-
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </ul>
-                        </div>
-
-                    </li>
-                    <li class="nav-item" *ngIf="isCreator" [routerLink]="['/creator/allpost']"><a
-                            class="nav-link d-flex"><span><img src="assets/CreatPost.svg" alt="" /></span>
-                            <strong>Create Post</strong></a></li>
-
-
-                    <!-- <li [routerLink]="['/creator/chat']" class="nav-item"><a class="nav-link d-flex"><span><img
+          <!-- <li [routerLink]="['/creator/chat']" class="nav-item"><a class="nav-link d-flex"><span><img
                             src="assets/messageWhite.svg" alt="" /></span>
                     <strong>Messages</strong></a></li> -->
-                    <li class="nav-item UserNav">
+          <li class="nav-item UserNav">
+            <div class="btn-group" dropdown>
+              <button
+                class="btn btn-secondary dropdown-toggle d-flex"
+                type="button"
+                dropdownToggle
+                (click)="ondropdownClick()"
+              >
+                <span><img src="assets/UserWhite.svg" alt="" /></span>
+                <strong
+                  >My profile <small>{{ displayName }}</small></strong
+                >
+              </button>
 
-                        <div class="btn-group" dropdown>
-                            <button class="btn btn-secondary dropdown-toggle d-flex" type="button" dropdownToggle
-                                (click)="ondropdownClick()">
-                                <span><img src="assets/UserWhite.svg" alt="" /></span>
-                                <strong>My profile <small>{{displayName}}</small></strong>
-                            </button>
+              <ul
+                id="dropdown-basic"
+                *dropdownMenu
+                class="dropdown-menu dropdown-menu-right"
+                style="position: absolute"
+                role="menu"
+                aria-labelledby="button-basic"
+              >
+                <div class="UserDropDown">
+                  <div class="KatieCena d-flex">
+                    <span *ngIf="profileImage"
+                      ><img [src]="profileImage"
+                    /></span>
+                    <span *ngIf="!profileImage"
+                      ><img src="assets/demoUser.jpg"
+                    /></span>
+                    <h3>
+                      <strong *ngIf="displayName">{{ displayName }}</strong>
+                      <strong *ngIf="!displayName">Your Display name</strong>
+                      <small *ngIf="profileURL">@{{ profileURL }}</small>
+                    </h3>
+                  </div>
 
-                            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right"
-                                style="position: absolute;" role="menu" aria-labelledby="button-basic">
-
-                                <div class="UserDropDown">
-                                    <div class="KatieCena d-flex">
-                                        <span *ngIf="profileImage"><img [src]="profileImage"></span>
-                                        <span *ngIf="!profileImage"><img src="assets/demoUser.jpg"></span>
-                                        <h3>
-                                            <strong *ngIf="displayName">{{displayName}}</strong>
-                                            <strong *ngIf="!displayName">Your Display name</strong>
-                                            <small *ngIf="profileURL">@{{profileURL}}</small>
-                                        </h3>
-                                    </div>
-
-                                    <div class="UserDropDownLink">
-                                        <ul>
-                                            <li (click)="onProfile()"><a class="d-flex"><span><img
-                                                            src="assets/profile.svg" alt="" /></span>
-                                                    <strong>Profile</strong></a></li>
-                                            <!-- <li><a href="" class="d-flex"><span><img src="assets/support.svg"
+                  <div class="UserDropDownLink">
+                    <ul>
+                      <li
+                        (click)="onProfile()"
+                        data-toggle="collapse"
+                        data-target=".navbar-collapse.show"
+                      >
+                        <a class="d-flex"
+                          ><span><img src="assets/profile.svg" alt="" /></span>
+                          <strong>Profile</strong></a
+                        >
+                      </li>
+                      <!-- <li><a href="" class="d-flex"><span><img src="assets/support.svg"
                                                     alt="" /></span>
                                             <strong>Help and support</strong></a></li> -->
-                                            <li (click)="gotoNotification()"><a class="d-flex"><span><img
-                                                            src="assets/BellGrey.svg" alt="" /></span>
-                                                    <strong>Notifications </strong> <small class="CountNotification"
-                                                        *ngIf="notifications > '0'">{{notifications}}</small></a></li>
-                                            <!-- <li><a href="" class="d-flex"><span><img src="assets/messageGrey.svg"
+                      <li
+                        (click)="gotoNotification()"
+                        data-toggle="collapse"
+                        data-target=".navbar-collapse.show"
+                      >
+                        <a class="d-flex"
+                          ><span><img src="assets/BellGrey.svg" alt="" /></span>
+                          <strong>Notifications </strong>
+                          <small
+                            class="CountNotification"
+                            *ngIf="notifications > '0'"
+                            >{{ notifications }}</small
+                          ></a
+                        >
+                      </li>
+                      <!-- <li><a href="" class="d-flex"><span><img src="assets/messageGrey.svg"
                                                     alt="" /></span>
                                             <strong>Messages</strong></a></li> -->
-                                        </ul>
-                                    </div>
-                                    <div class="UserDropDownLink">
-                                        <h4>Other Links</h4>
-                                        <ul>
-                                            <li (click)="onSettings()"><a class="d-flex"><span><img
-                                                            src="assets/settingIcon.svg" alt="" /></span>
-                                                    <strong>Setting</strong></a></li>
-                                            <li (click)="logout()"><a class="d-flex"><span><img src="assets/Logout.svg"
-                                                            alt="" /></span>
-                                                    <strong>Logout</strong></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="MiSymbol">
-                                        <img src="assets/LogoSymbol.svg" alt="" />
-                                    </div>
-                                </div>
-                            </ul>
-                        </div>
-                    </li>
-
-                </ul>
-
+                    </ul>
+                  </div>
+                  <div class="UserDropDownLink">
+                    <h4>Other Links</h4>
+                    <ul>
+                      <li
+                        (click)="onSettings()"
+                        data-toggle="collapse"
+                        data-target=".navbar-collapse.show"
+                      >
+                        <a class="d-flex"
+                          ><span
+                            ><img src="assets/settingIcon.svg" alt=""
+                          /></span>
+                          <strong>Setting</strong></a
+                        >
+                      </li>
+                      <li
+                        (click)="logout()"
+                        data-toggle="collapse"
+                        data-target=".navbar-collapse.show"
+                      >
+                        <a class="d-flex"
+                          ><span><img src="assets/Logout.svg" alt="" /></span>
+                          <strong>Logout</strong></a
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="MiSymbol">
+                    <img src="assets/LogoSymbol.svg" alt="" />
+                  </div>
+                </div>
+              </ul>
             </div>
-        </nav>
-    </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 
-    <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+  <p-confirmDialog
+    header="Confirmation"
+    icon="pi pi-exclamation-triangle"
+  ></p-confirmDialog>
+</header>
