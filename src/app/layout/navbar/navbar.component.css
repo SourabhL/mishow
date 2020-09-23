@@ -132,7 +132,10 @@ header .navbar .NavDropDown p{ color:#fff; text-align:center;}
 // .navbar-expand-lg .navbar-nav.How-Work a:hover{ background:transparent; color:#fff;}
 // .navbar-expand-lg .navbar-nav .nav-item a.nav-link{ padding:14px 28px; display:block; color:#fff;line-height:20px;font-family:'Cerebri Sans'; font-weight:400;}
 // .navbar-expand-lg .navbar-nav.ml-auto:before{ content:''; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%); background:#F6F6F6; width:2px; height:18px;} */
-@media  only screen and (min-device-width : 300px) and (max-device-width : 400px) {
- 
-
+@media  only screen and (min-width : 400px) and (max-width : 1024px) {
+  header .navbar ul.navbar-nav li .btn-group{padding-left:90px;}
+  header .navbar ul.navbar-nav li a strong{ margin-left:0px;}
+  header .navbar ul.navbar-nav .post-link {padding-left:46px;}
+  header .navbar ul.navbar-nav li .my-profile {padding-left:0px;padding-top:10px;}
+  .UserNav .dropdown-toggle::after{ padding-left: 22px;}
 }

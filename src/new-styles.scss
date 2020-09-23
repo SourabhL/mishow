@@ -1089,6 +1089,8 @@ header .nav-item small.CountNotification{ position:relative; right:0; left:5px;l
 .noteDescription { font-size:1.2rem; margin:0 0 .5rem;}
 
 // .noteDescription{font-size: 2rem;}
+
+
 .suggestionCreator{position: fixed !important;right: 0;}
 @media  only screen and (min-device-width : 300px) and (max-device-width : 400px) {
   .ProfileTimline ul{
@@ -1135,6 +1137,13 @@ header .nav-item small.CountNotification{ position:relative; right:0; left:5px;l
   }
   header .navbar .navbar-brand {margin:0 106px 0 15px !important;}
   .AllPostIcon{display: flex;justify-content: center;}
+}
+@media screen and (min-width: 400px) and (max-width: 1024px){
+  .recent-post{
+  max-width: 100% !important;
+  flex: 0 0 100% !important;
+  }
+  .suggestionCreator{position: relative !important;}
 }
 @media screen and (max-width: 900px) {
   .ProfileTimline ul{

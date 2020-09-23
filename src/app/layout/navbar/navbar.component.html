@@ -69,7 +69,7 @@
                         </div>
 
                     </li>
-                    <li class="nav-item" *ngIf="isCreator" [routerLink]="['/creator/allpost']"><a
+                    <li class="nav-item post-link" *ngIf="isCreator" [routerLink]="['/creator/allpost']"><a
                             class="nav-link d-flex"><span><img src="assets/CreatPost.svg" alt="" /></span>
                             <strong>Create Post</strong></a></li>
 
@@ -83,7 +83,7 @@
                             <button class="btn btn-secondary dropdown-toggle d-flex" type="button" dropdownToggle
                                 (click)="ondropdownClick()">
                                 <span><img src="assets/UserWhite.svg" alt="" /></span>
-                                <strong>My profile <small>{{displayName}}</small></strong>
+                                <strong class="my-profile">My profile <small>{{displayName}}</small></strong>
                             </button>
 
                             <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right"
