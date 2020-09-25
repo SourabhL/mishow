@@ -562,8 +562,8 @@
 <!-- modal for tier -->
 
 <!-- Modal for calendar -->
-<ng-template #templateCalendar id="calendar">
-    <div class="CalendarPopup">
+<ng-template #templateCalendar>
+    <div class="CalendarPopup" id="calendar">
         <div class="modal-header">
             <!-- <h2>Card Details</h2> -->
             <button class=" close"><img src="assets/CloseBlue.svg" (click)="close(timepickerWithButtons)"
@@ -581,29 +581,21 @@
         </div>
         <div class="ml-auto CalendarPopupButton">
 
-            <button [ngxTimepicker]="timepickerWithButtons" (click)="modalRef.hide()" id="closeBtn">
+            <button [ngxTimepicker]="timepickerWithButtons" id="closeBtn">
                 OK
             </button>
+            <ngx-material-timepicker (timeChanged)="timeChanged($event)" [defaultTime]="schedule_time"
+              [confirmBtnTmpl]="confirmBtn" #timepickerWithButtons [minutesGap]="5">
+              <div class="ml-auto CalendarPopupButton">
+                <ng-template #confirmBtn>
+                    <button type="button" class="confirmBtn" (click)="timeChanged(timepickerWithButtons)">Ok</button>
+                </ng-template>
+              </div>
+            </ngx-material-timepicker>
             <button (click)="modalRef.hide()">Cancel</button>
-
-
-
         </div>
     </div>
 </ng-template>
-
-<div class="timepickerPopup" id="timer">
-
-    <ngx-material-timepicker (timeChanged)="timeChanged($event)" [defaultTime]="schedule_time"
-        [confirmBtnTmpl]="confirmBtn" #timepickerWithButtons [minutesGap]="5">
-        <div class="ml-auto CalendarPopupButton">
-            <ng-template #confirmBtn>
-                <button type="button" (click)="timeChanged(timepickerWithButtons)">Ok</button>
-            </ng-template>
-        </div>
-    </ngx-material-timepicker>
-</div>
-
 
 <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
 

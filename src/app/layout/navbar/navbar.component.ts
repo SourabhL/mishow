@@ -10,6 +10,8 @@ import Swal from 'sweetalert2';
 import * as moment from 'moment';
 import { ConfirmationService, MenuItem } from 'primeng/api';
 import * as _ from 'lodash';
+import * as $ from 'jquery';
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -105,6 +107,14 @@ export class NavbarComponent implements OnInit {
     } else {
       this.notLogin = false;
     }
+
+      $(document).click(function (event) {
+          var clickover = $(event.target);
+          var _opened = $(".navbar-collapse").hasClass("navbar-collapse collapse show");
+          if (_opened === true && !clickover.hasClass("navbar-toggler")) {
+              $("button.navbar-toggler").click();
+          }
+      });
 
 
     this.commonservice.getUser.subscribe(res => {

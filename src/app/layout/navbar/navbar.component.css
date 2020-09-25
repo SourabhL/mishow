@@ -86,6 +86,7 @@ padding: 0;position: relative;margin: 0}
 .UserNav .dropdown-toggle::after{ position:absolute; top:50%; right:0; transform:translateY(-50%);
 background:url(/assets/downArrowWhite.svg) no-repeat 0 0; border:0; width:13px; height:7px; display:block;}
 
+
 .btn-secondary:not(:disabled):not(.disabled).active:focus,
 .btn-secondary:not(:disabled):not(.disabled):active:focus,
 .show>.btn-secondary.dropdown-toggle:focus{ box-shadow:none;}
@@ -120,6 +121,7 @@ header .navbar .NavDropDown .UserDropDownLink ul li a>.d-flex{ align-items: cent
 header .navbar .NavDropDown .UserDropDownLink ul li a strong{ margin-left:0;}
 header .navbar .NavDropDown .UserDropDownLink ul li a p{ font-weight:400;}
 header .navbar .NavDropDown p{ color:#fff; text-align:center;}
+header .navbar ul li.nav-item:hover > a::before{ background:none !important;}
 
 /* // **** Header ****
 // header{background: linear-gradient(90deg, #2E84BC -0.76%, #74B7DE 94.64%); padding:26px 70px 107px;}

@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, Directive } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { CommonService } from 'src/app/service/common.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap';
 import * as moment from 'moment';
@@ -1149,10 +1149,7 @@ export class AllPostComponent implements OnInit {
       this.isScheduleFalse = true;
       this.scheduleMessage = "This post is scheduled for " + moment(this.scheduleDate).format('MMMM DD ,YYYY') + ' at ' + moment(this.scheduleTime, 'kk:mm;ss').format('hh:mm A');
     }
-    let t = document.getElementById('timer');
-    t.remove();
-    let d = document.getElementById('calendar');
-    d.remove();
+    this.modalRef.hide();
   }
 
 
